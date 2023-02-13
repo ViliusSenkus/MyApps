@@ -1,0 +1,14 @@
+{
+  "name": "backend_training",
+  "version": "1.0.0",
+  "description": "Training on node.js from scratch to create backend app with express and react npm'sTraining on node.js from scratch to create backend app with express and react npm's.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vilius Senkus",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

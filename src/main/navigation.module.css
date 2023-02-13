@@ -1,0 +1,21 @@
+.navigation{
+    border-top: 2px solid white;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    list-style-type: none;
+    padding-inline-start: 0;
+    padding: 2em 0;
+  }
+  
+.navigation i{
+    font-size: 2.5em;
+    color:white;
+    transition: all 0.3s;
+  }
+
+.navigation i:hover{
+    color:#ff9e30;
+    transform: translateY(-5px);
+    
+  }
