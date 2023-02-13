@@ -23,4 +23,4 @@ Here is a list of ideas to keep in this repositorium:
 
 ### Latest Build:
 
-+ [public/index.html](My works)
++ [My works](public/index.html)
