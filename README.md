@@ -21,3 +21,6 @@ Here is a list of ideas to keep in this repositorium:
   * [HTML JS REACT training on site](https://viliussenkus.github.io/Prima/)
 + [PHP - training](https://github.com/ViliusSenkus/PHP-training)
 
+### Latest Build:
+
++ [public/index.html](My works)
