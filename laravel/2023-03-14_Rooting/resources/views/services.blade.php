@@ -1,4 +1,3 @@
-<a href="/">Home</a>
 <div>
       @foreach($services as $serv)
       <h2>{{$serv}}</h2>

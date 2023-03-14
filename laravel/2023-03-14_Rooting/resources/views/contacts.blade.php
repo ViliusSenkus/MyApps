@@ -1,4 +1,3 @@
-<a href="/">Home</a>
 <h2>Contact us</h2>
 
 <div>

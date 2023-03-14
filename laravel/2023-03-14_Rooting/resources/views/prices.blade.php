@@ -1,4 +1,3 @@
-<a href="/">Home</a>
 <h2>Choose your product</h2>
 
 <div style="display:flex; flex-direction:row; justify-content:space-between">

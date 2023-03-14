@@ -1,4 +1,3 @@
-<a href="/">Home</a>
 <h2>We was Noticed</h2>
 
 <div style="display:flex; flex-direction:row; justify-content:space-between">
