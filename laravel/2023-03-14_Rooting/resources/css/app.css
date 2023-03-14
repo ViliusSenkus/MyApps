@@ -9,3 +9,9 @@ body{
       padding:0;
       background-color: rgb(226, 66, 66);
 }
+
+h2,
+h3,
+h4{
+color:red;
+}

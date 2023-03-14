@@ -17,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 $nav=array("Home", "Services", "Why us", "Our Works", "We are noticed", "Recomendations", "Prices", "Contacts");
 
-Route::get('/', function () {
-    return view('header', ["navigationLinks"=>["Home", "Services", "Why us", "Our Works", "We are noticed", "Recomendations", "Prices", "Contacts"]]);
-});
+// Route::get('/', function () {
+//     return view('header', ["navigationLinks"=>["Home", "Services", "Why us", "Our Works", "We are noticed", "Recomendations", "Prices", "Contacts"]]);
+// });
 
+Route::get('/', function (){
+    return view('home');
+});
 Route::get('/Home', function (){
-    return view('header', ["navigationLinks"=>["Home", "Services", "Why us", "Our Works", "We are noticed", "Recomendations", "Prices", "Contacts"]]);
+    return view('home');
 });
 
 Route::get('/Services', function (){
