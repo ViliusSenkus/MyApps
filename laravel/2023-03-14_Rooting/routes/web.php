@@ -28,11 +28,13 @@ Route::get('/', function (){
     global $nav;
     return view('home', ["hhh"=>$nav]);
 });
-Route::get('/Home', function (){
-    $menu=new Menu();
-    $menu->getMenu();
-    return view('home');
-});
+
+
+// Route::get('/Home', function (){
+//     $menu=new Menu();
+//     $menu->getMenuByIndex();
+//     return view('home');
+// });
 
 Route::get('/Services', function (){
     return view('services', ["services"=>["Simple page", "Landing page","SPA","Complex page"]]);

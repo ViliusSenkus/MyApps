@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MenuItem;
 use Illuminate\Http\Request;
 
 class Menu extends Controller
 {
-    public function getMenu(){
-        $name=print_r($_GET);
-        return "<h2>Va - $name<h2>";
+
+    public function getMenuByIndex(){
+       $menu = MenuItem::find(1);
     }
 }
