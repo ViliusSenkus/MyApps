@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('main')
+
 <h2>We was Noticed</h2>
 
 <div style="display:flex; flex-direction:row; justify-content:space-between">
@@ -11,3 +15,5 @@
             </div>
       @endforeach
 </div>
+
+@stop

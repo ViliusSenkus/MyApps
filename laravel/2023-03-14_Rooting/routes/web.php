@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Menu;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,15 @@ $nav=array("Home", "Services", "Why us", "Our Works", "We are noticed", "Recomen
 //     return view('header', ["navigationLinks"=>["Home", "Services", "Why us", "Our Works", "We are noticed", "Recomendations", "Prices", "Contacts"]]);
 // });
 
+// Route::get('/Home', [Menu::class, 'getMenu']);
+
 Route::get('/', function (){
-    return view('home');
+    global $nav;
+    return view('home', ["hhh"=>$nav]);
 });
 Route::get('/Home', function (){
+    $menu=new Menu();
+    $menu->getMenu();
     return view('home');
 });
 

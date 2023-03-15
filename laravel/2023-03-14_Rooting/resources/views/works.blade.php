@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('main')
+
 <div>
       <h2>Our latest projects</h2>
        <div class="d-flex justify-content-between">
@@ -11,3 +15,5 @@
             @endforeach
       </div>
 </div>
+
+@stop

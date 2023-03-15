@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('main')
+
 <h2>Contact us</h2>
 
 <div>
@@ -8,3 +12,5 @@
             </div>
       @endforeach
 </div>
+
+@stop

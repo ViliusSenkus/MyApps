@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('main')
+
 <h2>Choose your product</h2>
 
 <div style="display:flex; flex-direction:row; justify-content:space-between">
@@ -17,3 +21,5 @@
             </div>
       @endforeach
 </div>
+
+@stop
