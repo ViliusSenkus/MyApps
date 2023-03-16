@@ -2,7 +2,7 @@
 
 ## About mokorgas
 
-Mokorgas is a web application created to organise self-learning process. Main aims of this app are:
+Mokorgas is a web application created to organise self-learning process. Aims of this app are:
 - to manage learning resources;
 - to create learning paterns;
 - to organise learning timeline;
