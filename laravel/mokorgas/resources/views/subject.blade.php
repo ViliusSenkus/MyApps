@@ -1,6 +1,6 @@
-@extends("layouts.main")
+@extends("layouts.child")
 
-@section("input-block")
+@section("child")
 <div>
       <form method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
