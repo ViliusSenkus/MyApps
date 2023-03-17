@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __('Įsitikinkite, kad slaptažodis saugus (ilgas, sudarytas iš skirtingų raidžių, skaičių ir simbolių, bei neiskartoja kituose puslapiuose).') }}
+            {{ __('Įsitikinkite, kad slaptažodis saugus (pakankamai ilgas, sudarytas iš skirtingų raidžių, skaičių ir simbolių, bei neiskartoja kituose puslapiuose).') }}
         </p>
     </header>
 
@@ -41,7 +41,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Išsaugota.') }}</p>
             @endif
         </div>
     </form>
