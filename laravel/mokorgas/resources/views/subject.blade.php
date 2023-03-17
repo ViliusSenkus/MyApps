@@ -1,4 +1,4 @@
-@extends("layouts.child")
+@extends("views.newEntry")
 
 @section("child")
 <div>

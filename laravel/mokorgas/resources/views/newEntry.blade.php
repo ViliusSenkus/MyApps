@@ -22,4 +22,4 @@
 </div>
 @stop
 
-@yield('new-form')
+@yield('child')

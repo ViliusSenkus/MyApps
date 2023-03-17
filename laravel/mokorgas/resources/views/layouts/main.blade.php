@@ -14,7 +14,7 @@
                   <h1>Mokorgas - mokymosi organaizeris</h1>
             </div>
 
-            @yield ('subject')
+{{-- žemiau einantis kodas turi kartotis pagal turimų subjektų skaičių --}}
             
             <nav style="display:flex; flex-direction:row; justify-content:space-between;">
                   <a href="/">
@@ -22,9 +22,10 @@
                         Pagrindinis
                         </li>
                   </a>
+                  {{-- linkas turi būti paimamas iš paduodamų kintamųjų reikšmių (subject) --}}
                   <a href="/new-entry">
                         <li>
-                        Naujas įrašas
+                        Subjektas
                         </li>
                   </a>
                   <a href="/about">
