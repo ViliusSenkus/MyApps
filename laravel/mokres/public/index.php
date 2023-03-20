@@ -4,6 +4,10 @@ use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
+/*
+define funkcija integruota į Laravel, nustato laravel aplikacijos paleidimo laiką ir priskiria jį LARAVEL_START konstantai.
+*/ 
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +28,7 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 |--------------------------------------------------------------------------
 | Register The Auto Loader
 |--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader for
-| this application. We just need to utilize it! We'll simply require it
-| into the script here so we don't need to manually load our classes.
-|
 */
-
 require __DIR__.'/../vendor/autoload.php';
 
 /*

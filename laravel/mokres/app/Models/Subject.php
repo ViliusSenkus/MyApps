@@ -12,4 +12,8 @@ class Subject extends Model
     protected $fillable = [
         'subject_name',
     ];
+
+    public function users(){
+        return $this->hasOne(User::class);
+    }
 }
