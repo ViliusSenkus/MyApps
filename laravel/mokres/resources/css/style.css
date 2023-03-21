@@ -1,3 +1,5 @@
 body{
-      /* color: red !important; */
+      all: unset; 
+      color: red !important;
+     
 }
