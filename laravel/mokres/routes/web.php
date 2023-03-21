@@ -35,8 +35,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Route::get('/dashboard', 'SubjectController@getSubjects');
-// Route::view('/dashboard', 'resources', ["kazkas"=>"khgfkflhoh;oh"]);
+Route::get('/{id}', function($id){
+    $subjects = new SubjectController();
+    $subjects = $subjects->getSubjects();
+    return view('subject', ["id"=>$id, "subjects"=>$subjects]); 
+})->middleware(['auth', 'verified'])->name('subject');
+
 
  
  
