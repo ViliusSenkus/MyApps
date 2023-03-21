@@ -9,4 +9,4 @@
                 </x-nav-link>
                 </div>
             @endforeach
-      <c-navigationSlot>
+            </x-navigationSlot>

@@ -12,8 +12,6 @@ class SubjectController extends Controller
 
     public function addSubject(Request $request)
     {
-
-        dd($user)
         /*
         |--------------------------|
         | A L G O R I T M A S :    |
@@ -73,7 +71,7 @@ class SubjectController extends Controller
 
     public function getSubjects(){
         $allSubjects = Subject::all();
-        return view('resources', $allSubjects);
+        return $allSubjects;
     }
 
   

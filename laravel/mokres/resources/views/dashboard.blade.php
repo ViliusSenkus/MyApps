@@ -2,9 +2,21 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Pagrindinis puslapis') }}
+            
         </h2>
 
         @yield('subject-navigation')
+
+    </x-slot>
+
+    <x-slot name="navigacija">
+        @foreach ( $subjects as $subject)
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <x-nav-link :href="$subject->subject_name" :active="request()->routeIs('subject')">
+                {{ $subject->subject_name }}
+            </x-nav-link>
+            </div>
+        @endforeach
     </x-slot>
 
     {{-- <div class="py-6">
@@ -48,7 +60,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    @include('resources')
+                    Čia kažką reikia pridėti, gal paskutinius įrašus?
+                    Kai sugalvosiu pildyti dashboard.blade.php failą.
                 </div>
             </div>
         </div>

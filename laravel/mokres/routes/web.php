@@ -20,7 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $subjects = new SubjectController();
+    $subjects = $subjects->getSubjects();
+    return view('dashboard', ["subjects"=>$subjects]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -33,8 +35,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/dashboard', 'SubjectController@getSubjects');
-Route::view('/dashboard', 'resources', ["kazkas"=>"khgfkflhoh;oh"]);
+// Route::get('/dashboard', 'SubjectController@getSubjects');
+// Route::view('/dashboard', 'resources', ["kazkas"=>"khgfkflhoh;oh"]);
 
  
  
