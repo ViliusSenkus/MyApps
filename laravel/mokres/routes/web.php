@@ -35,13 +35,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/{id}', function($id){
+Route::get('subject/{id}', function($id){
     $subjects = new SubjectController();
     $subjects = $subjects->getSubjects();
     return view('subject', ["id"=>$id, "subjects"=>$subjects]); 
 })->middleware(['auth', 'verified'])->name('subject');
 
-
+// Route::get('subject/{id}', [SubjectController::class, 'prepareSubjectInfo'])->middleware(['auth', 'verified'])->name('subject');  su šitu rautu nepersiduoda id.
  
  
 

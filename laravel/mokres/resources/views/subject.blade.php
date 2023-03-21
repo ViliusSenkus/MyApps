@@ -12,6 +12,8 @@
       @dump(auth()->user()->email)
 
 
+      Patekome į {{$id}} subjektą - {{$subjects[$id-1]->subject_name}}
+
       <div class="flex flex-wrap justify-center">
 
             <div id="Notes" class="py-4 sm:px-6 lg:px-8 bg-white shadow-sm sm:rounded-lg m-3 w-2/5">

@@ -12,7 +12,7 @@
     <x-slot name="navigacija">
         @foreach ( $subjects as $subject)
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-            <x-nav-link :href="$subject->subject_name" :active="request()->routeIs('subject')">
+            <x-nav-link :href="route('subject', $subject)" :active="request()->routeIs('subject')">
                 {{ $subject->subject_name }}
             </x-nav-link>
             </div>

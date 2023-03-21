@@ -68,11 +68,13 @@ class SubjectController extends Controller
         return view ('dashboard', ["subjects"=>$allSubjects]);
     }
 
-
     public function getSubjects(){
         $allSubjects = Subject::all();
         return $allSubjects;
     }
 
-  
+    // public function prepareSubjectInfo(){
+    //     return view('subject', ["id"=>$id, "subjects"=>$subjects]); 
+    // }
+    
 }
