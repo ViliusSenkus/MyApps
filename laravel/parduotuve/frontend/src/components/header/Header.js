@@ -13,13 +13,13 @@ function Header(){
                         <li><Link to="/admin" className="nav-link px-2 text-white">Administruoti</Link></li>
                         </ul>
 
-                        <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                        <form className="col-12 col-lg-5 mb-3 mb-lg-0 me-lg-3" role="search">
                         <input type="search" className="form-control form-control-dark" placeholder="Search..." aria-label="Search" />
                         </form>
 
                         <div className="text-end">
-                        <button type="button" className="btn btn-outline-light me-2">Login</button>
-                        <button type="button" className="btn btn-warning">Sign-up</button>
+                        <button type="button" className="btn btn-secondary me-2">Login</button>
+                        <button type="button" className="btn btn-outline-secondary">Sign-up</button>
                         </div>
                         </div>
                   </div>

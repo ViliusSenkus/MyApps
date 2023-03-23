@@ -16,10 +16,11 @@ class ProductController extends Controller
     public function delete($id){
         try{
             Product::find($id)->delete();
-            return response("$id produktas sėkmingai ištintas");
+            return "produktas sėkmingai ištintas";
         }
         catch(\Exception $e){
-            return response("Ištrinti nepavyko, įvyko klaida", 500);
+            return response("$e Ištrinti nepavyko, įvyko klaida", 500);
         }
     }
+
 }

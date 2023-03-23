@@ -20,8 +20,8 @@ use \App\Http\Controllers\ProductController;
 // });
 
 Route::group(['prefix' => 'products'], function () { 
-    Route::get('/', [ProductController::class, 'index']);  
-    Route::delete('/{$id}', [ProductController::class, 'delete'])->where('id', '[0-9]+');  
+    Route::get('/', [ProductController::class, 'index']);
+    Route::delete('/{id}', [ProductController::class, 'delete'])->where('id', '[0-9]+');  
 });
 
 

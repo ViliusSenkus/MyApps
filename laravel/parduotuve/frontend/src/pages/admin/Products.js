@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function Products() {
       const [data, setData] = useState([]);
+      const [alert, setAlert] =  useState(false);
 
       useEffect(() => {
       //   fetch('http://localhost:8000/api/')
@@ -13,18 +14,28 @@ function Products() {
     
         axios.get('http://localhost:8000/api/products')
         .then(resp => setData(resp.data));
-      }, []);
+      }, [alert]);
       
     
       const handleDelete = (id) => {
-        axios.delete('http://localhost:8000/api/products' + id)
-        .then(resp => console.log(resp.data));
+        axios.delete('http://localhost:8000/api/products/' + id)
+        .then(resp => setAlert(resp.data));
+      }
 
+      const handleEdit = (id) => {
+        axios.put('http://localhost:8000/api/products/' + id)
+        .then(resp => setAlert(resp.data));
       }
     
+      const handleCrete = (id) => {
+        axios.post('http://localhost:800/appi/products')
+        .then (resp => setAlert (resp.data));
+      }
+
       return (
         <>
         <h1 className="py-2">Administravimo erdvė</h1>
+        {alert && <div className="alert alert-success">{alert}</div>}
         <table className="table">
           <thead>
             <tr>
@@ -49,18 +60,24 @@ function Products() {
               <td className="text-end">{product.sku}</td>
               <td><img src={'http://localhost:8000'+product.photo} alt={product.name} /></td>
               <td className="text-end">{product.warehouse_qnt}</td>
-              <td className="text-end">{product.price} €</td>
+              <td className="text-end">{product.price}€</td>
               <td className="text-end">{product.status ? "Pardavime" : "Neparduodamas"}</td>
               <td>{(new Date(product.created_at)).toLocaleString('lt-LT')}</td>
               <td>
                 <button type="button" className="btn btn-danger" onClick={()=>handleDelete(product.id)}>
                   Delete
                 </button>
+                <button type="button" className="btn btn-warning" onClick={()=>handleEdit(product.id)}>
+                  Edit
+                </button>
               </td>
             </tr>
             )}
           </tbody>
         </table>
+        <button type="button" className="btn btn-success" onClick={()=>handleCrete()}>
+                  Create
+        </button>
         </>
       )
    
