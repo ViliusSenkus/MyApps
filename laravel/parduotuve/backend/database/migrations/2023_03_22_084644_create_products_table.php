@@ -21,6 +21,8 @@ return new class extends Migration
             $table->float('price', 12, 2, true);
             $table->boolean('status')->default(true);
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

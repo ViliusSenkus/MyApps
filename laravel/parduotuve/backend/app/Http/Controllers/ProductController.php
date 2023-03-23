@@ -23,4 +23,17 @@ class ProductController extends Controller
         }
     }
 
+    public function update($id, $array){
+        try{
+            $product = Product::find($id);
+            foreach($array as $key=>$value){
+                $product->update([
+                    $key => $value
+                ]);
+            }
+        }
+        catch(\Exception $e){
+            return response("$e Pakeisti nepavyko, įvyko klaida", 500);
+        }
+    }
 }
