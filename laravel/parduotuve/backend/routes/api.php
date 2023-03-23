@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/', [\App\Http\Controllers\ProductController::class, 'index']);
+Route::group(['prefix' => 'products'], function () { 
+    Route::get('/', [ProductController::class, 'index']);  
+    Route::delete('/{$id}', [ProductController::class, 'delete'])->where('id', '[0-9]+');  
+});
+
+
