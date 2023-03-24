@@ -1,5 +1,7 @@
 function Loading(loading){
       
+      console.log(loading);
+
       return(
             loading && 
             <div className="loader-container loading">
