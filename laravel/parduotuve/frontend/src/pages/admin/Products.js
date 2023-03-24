@@ -56,7 +56,7 @@ function Products() {
 
         {/* 2ia dedame lauderi su salyga loader && div....lauderio. */}
         <h1 className="py-2">Administravimo erdvė - Produktų sąrašas</h1>
-        <Alert alert={alert} />
+        {alert &&<Alert alert={alert} />}
         <table className="table">
           <thead>
             <tr>

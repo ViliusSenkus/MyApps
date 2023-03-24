@@ -1,7 +1,7 @@
-function Alert(){
+function Alert(props){
 
       return(
-            alert && <div className="alert alert-success">{}</div>
+            <div className="alert alert-success">{props.alert}</div>
       )
 }
 
