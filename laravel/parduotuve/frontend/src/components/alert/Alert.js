@@ -1,7 +1,7 @@
-function Alert(alert){
+function Alert(){
 
       return(
-            alert && <div className="alert alert-success">{alert}</div>
+            alert && <div className="alert alert-success">{}</div>
       )
 }
 

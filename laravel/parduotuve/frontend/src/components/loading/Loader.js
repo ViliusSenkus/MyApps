@@ -1,12 +1,11 @@
-function Loading(loading){
+function Loading(){
       
-      console.log(loading);
+      console.log();
 
-      return(
-            loading && 
+      return( 
             <div className="loader-container loading">
                   <span className="loader"></span>
-            </div>            
+            </div>
       )
 }
 

@@ -51,7 +51,7 @@ function Products() {
 
       return (
         <>
-        <Loading show={loading} />
+        {loading && <Loading />}
 
 
         {/* 2ia dedame lauderi su salyga loader && div....lauderio. */}
