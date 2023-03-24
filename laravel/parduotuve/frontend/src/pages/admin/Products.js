@@ -1,31 +1,48 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { Link } from "react-router-dom";
+import Loading from '../../components/loading/Loader';
+import Alert from '../../components/alert/Alert';
+
 
 function Products() {
       const [data, setData] = useState([]);
       const [alert, setAlert] =  useState(false);
+      const [refresh, setRefresh] = useState(false);
+      const [loading, setLoading] = useState(false);
 
       useEffect(() => {
+        setLoading('true');
+
       //   fetch('http://localhost:8000/api/')
       //   .then(resp => resp.json())
       //   .then(resp => {
       //     setData(resp);
       //   });
-    
+
         axios.get('http://localhost:8000/api/products')
-        .then(resp => setData(resp.data));
-      }, [alert]);
+        .then(resp => {
+                setData(resp.data);
+        })
+        .finally( () => setLoading(false));
+      }, [refresh]);
       
     
       const handleDelete = (id) => {
+        setLoading(true);
+        
         axios.delete('http://localhost:8000/api/products/' + id)
-        .then(resp => setAlert(resp.data));
+        .then(resp => {
+          setAlert(resp.data);
+          setRefresh(!refresh);
+        })
+        .finally(()=>setLoading(false));
       }
 
-      const handleEdit = (id) => {
-        axios.put('http://localhost:8000/api/products/' + id)
-        .then(resp => setAlert(resp.data));
-      }
+      // const handleEdit = (id) => {
+      //   axios.put('http://localhost:8000/api/products/' + id)
+      //   .then(resp => setAlert(resp.data));
+      // }
     
       const handleCrete = (id) => {
         axios.post('http://localhost:800/appi/products')
@@ -34,8 +51,12 @@ function Products() {
 
       return (
         <>
-        <h1 className="py-2">Administravimo erdvė</h1>
-        {alert && <div className="alert alert-success">{alert}</div>}
+        <Loading show={loading} />
+
+
+        {/* 2ia dedame lauderi su salyga loader && div....lauderio. */}
+        <h1 className="py-2">Administravimo erdvė - Produktų sąrašas</h1>
+        <Alert alert={alert} />
         <table className="table">
           <thead>
             <tr>
@@ -67,9 +88,9 @@ function Products() {
                 <button type="button" className="btn btn-danger" onClick={()=>handleDelete(product.id)}>
                   Delete
                 </button>
-                <button type="button" className="btn btn-warning" onClick={()=>handleEdit(product.id)}>
+                {/* <button type="button" className="btn btn-warning" onClick={()=>handleEdit(product.id)}>
                   Edit
-                </button>
+                </button> */}
               </td>
             </tr>
             )}

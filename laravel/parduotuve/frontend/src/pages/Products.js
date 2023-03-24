@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 
 function Products() {
@@ -18,9 +18,6 @@ function Products() {
     // console.log(resp);
   }, []);
   
-
-  
-
   return (
    <>
       <h1 className="py-2">Mūsų produktai</h1>

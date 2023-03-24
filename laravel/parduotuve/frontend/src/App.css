@@ -3,3 +3,34 @@
 img{
   max-width: 100%;
 }
+.loader-container{
+  width:100vw;
+  height:100vh;
+  position: absolute;
+  top:0;
+  left:0;
+  background-color: rgba(117, 117, 117, 0.5);
+}
+.loader {
+  position: absolute;
+  top:50vh;
+  left:50vw;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 5px solid #ff4848cf;
+  border-right: 5px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

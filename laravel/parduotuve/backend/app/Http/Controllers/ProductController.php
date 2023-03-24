@@ -13,6 +13,24 @@ class ProductController extends Controller
         return $data;
     }
 
+
+    public function create(Request $request){
+        try{
+            Product::create([
+                'name' => $request -> name,
+                'description' => $request -> description,
+                'sku' => $request -> sku,
+                'photo' => $request -> photo,
+                'warehouse_qnt' => $request -> warehouse_qnt,
+                'price' => $request -> price,
+                'status' => $request -> status,
+            ]);
+            return "Produktas sukurtas sėkmingai";
+        }
+        catch(\Exception $e ){
+            return response("$e Naujo produkto sukurti nepavyko, įvyko klaida", 500);
+        }
+    }
     public function delete($id){
         try{
             Product::find($id)->delete();
