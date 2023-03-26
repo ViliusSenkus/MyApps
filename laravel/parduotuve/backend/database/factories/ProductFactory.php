@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use GuzzleHttp\Client;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
@@ -17,10 +19,26 @@ class ProductFactory extends Factory
     public function definition(): array
     {
 
+
+       
+
+
+
+
+
         // paruošiame nuotraukų folderį, parsisiunčiam foto ir persiduodam kaip kintamąjį į lentelę
-        $photo_path = fake()->image(storage_path('/app/public'), 1024, 1024, 'products', true, true, 'electronics', true, 'jpg');
-        $photo_path = pathinfo($photo_path);
-        $photo_path = '/photos/' . $photo_path['basename'];
+        $client = new Client(['allow_redirects' => ['track_redirects' => true]]);
+        $response  = $client->get('https://api.lorem.space/image/shoes?w=600&h=900');
+        $headersRedirect = $response->getHeader(\GuzzleHttp\RedirectMiddleware::HISTORY_HEADER);
+        $image_url = $headersRedirect[0];  //URL
+
+        $url_pathinfo = pathinfo($image_url);  
+        $image_name = $url_pathinfo['filename'].'.'.$url_pathinfo['extension']; //FILE NAME
+
+        $photo_path = '/photos/'.$image_name;
+        file_put_contents ($photo_path, file_get_contents($image_url));
+       
+       
         return [
             'name' => fake()->sentence(3),
             'description' => fake()->sentence(rand(25,50)),
