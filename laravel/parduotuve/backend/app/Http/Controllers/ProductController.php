@@ -25,7 +25,7 @@ class ProductController extends Controller
                 'price' => $request -> price,
                 'status' => $request -> status,
             ]);
-            return "Produktas sukurtas sėkmingai";
+            return "Produktas - $request->name, su id - $request->id, sukurtas sėkmingai";
         }
         catch(\Exception $e ){
             return response("$e Naujo produkto sukurti nepavyko, įvyko klaida", 500);
@@ -39,6 +39,13 @@ class ProductController extends Controller
         catch(\Exception $e){
             return response("$e Ištrinti nepavyko, įvyko klaida", 500);
         }
+    }
+
+    // žemiau esančios funkcijos dar nenagrinėjau.
+    // Reikalinga update funkcionalumui.
+    public function getProduct($id){
+        Product::find($id)->where('id'== $id);
+        return "Papuoliau į backendp dalį su tokiu $id";
     }
 
     public function update($id, $array){

@@ -1,8 +1,7 @@
 function Alert(props){
 
-      return(
-            <div className="alert alert-success">{props.alert}</div>
-      )
+      return props.alert &&  <div className="alert alert-success">{props.alert}</div>
+      
 }
 
 export default Alert;

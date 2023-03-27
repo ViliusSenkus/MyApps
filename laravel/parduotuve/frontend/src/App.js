@@ -5,6 +5,8 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import MainLayout from './layouts/Main';
 import Products from './pages/Products';
 import AdminProducts from './pages/admin/Products';
+import AdminProductEdit from './pages/admin/Edit';
+import AdminNewProduct from './pages/admin/NewProduct';
 
 
 // function App() {
@@ -50,6 +52,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/admin" element={<AdminProducts />} />
+          <Route path="/admin/edit/:id" element={<AdminProductEdit />} />
+          <Route path="/admin/newProduct" element={<AdminNewProduct />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

@@ -10,6 +10,7 @@ function Products() {
       const [alert, setAlert] =  useState(false);
       const [refresh, setRefresh] = useState(false);
       const [loading, setLoading] = useState(false);
+      const [showUpdateForm, setShowUpdateForm] = useState('none');
 
       useEffect(() => {
         setLoading('true');
@@ -30,33 +31,31 @@ function Products() {
     
       const handleDelete = (id) => {
         setLoading(true);
-        
         axios.delete('http://localhost:8000/api/products/' + id)
         .then(resp => {
           setAlert(resp.data);
           setRefresh(!refresh);
         })
+        .catch(err=>console.log(err.response.data))
         .finally(()=>setLoading(false));
-      }
-
-      // const handleEdit = (id) => {
-      //   axios.put('http://localhost:8000/api/products/' + id)
-      //   .then(resp => setAlert(resp.data));
-      // }
-    
-      const handleCrete = (id) => {
-        axios.post('http://localhost:800/appi/products')
-        .then (resp => setAlert (resp.data));
       }
 
       return (
         <>
         {loading && <Loading />}
 
-
-        {/* 2ia dedame lauderi su salyga loader && div....lauderio. */}
+       {/* 2ia dedame lauderi su salyga loader && div....lauderio. */}
         <h1 className="py-2">Administravimo erdvė - Produktų sąrašas</h1>
-        {alert && <Alert alert={alert} />}
+        
+        <div className="container text-end mb-2">
+          <Link to={"/admin/newProduct"} className="btn btn-success">
+            Add new product
+          </Link>
+        </div>
+
+        {<Alert alert={alert} />}
+
+
         <table className="table">
           <thead>
             <tr>
@@ -84,21 +83,20 @@ function Products() {
               <td className="text-end">{product.price}€</td>
               <td className="text-end">{product.status ? "Pardavime" : "Neparduodamas"}</td>
               <td>{(new Date(product.created_at)).toLocaleString('lt-LT')}</td>
+
               <td>
                 <button type="button" className="btn btn-danger" onClick={()=>handleDelete(product.id)}>
                   Delete
                 </button>
-                {/* <button type="button" className="btn btn-warning" onClick={()=>handleEdit(product.id)}>
-                  Edit
-                </button> */}
+
+                <Link to={'/admin/edit/'+product.id} className="btn btn-warning nav-link px-2 text-white py-1 my-2">
+                    Edit
+                </Link>
               </td>
             </tr>
             )}
           </tbody>
         </table>
-        <button type="button" className="btn btn-success" onClick={()=>handleCrete()}>
-                  Create
-        </button>
         </>
       )
    
