@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -35,15 +35,15 @@ class ProductFactory extends Factory
         $url_pathinfo = pathinfo($image_url);  
         $image_name = $url_pathinfo['filename'].'.'.$url_pathinfo['extension']; //FILE NAME
 
-        $photo_path = '/photos/'.$image_name;
-        file_put_contents ($photo_path, file_get_contents($image_url));
+        file_put_contents ('./storage/app/public/' . $image_name, file_get_contents($image_url));
+        // Storage::disk('public')->put($image_url, $image_name);
        
        
         return [
             'name' => fake()->sentence(3),
             'description' => fake()->sentence(rand(25,50)),
             'sku' => fake()->ean13(),
-            'photo' => $photo_path,
+            'photo' => $image_name,
             'warehouse_qnt' => rand(0, 30),
             'price' => rand(0, 5000) . '.' . rand(10, 99)
         ];

@@ -79,7 +79,7 @@ function Products() {
               <td>{product.name}</td>
               <td>{product.description}</td>
               <td className="text-end">{product.sku}</td>
-              <td><img src={'http://localhost:8000'+product.photo} alt={product.name} /></td>
+              <td><img src={'http://localhost:8000/photos/'+product.photo} alt={product.name} /></td>
               <td className="text-end">{product.warehouse_qnt}</td>
               <td className="text-end">{product.price}€</td>
               <td className="text-end">{product.status ? "Pardavime" : "Neparduodamas"}</td>

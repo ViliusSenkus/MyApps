@@ -24,10 +24,9 @@ function Products() {
       <div className='row'>
         {data.map(product =>
         <div className='col-2' key={product.id}>
-          <img src={'http://localhost:8000'+product.photo} alt={product.name} />
+          <img src={'http://localhost:8000/photos/'+product.photo} alt={product.name} />
           <div className="text-danger-emphasis text-end">{product.price} EUR </div>
           <h5>{product.name}</h5>
-          
         </div>)}
       </div>
       </>
