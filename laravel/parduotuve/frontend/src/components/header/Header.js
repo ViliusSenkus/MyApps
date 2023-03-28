@@ -1,7 +1,32 @@
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import Loading from '../loading/Loader';
+import Alert from '../alert/Alert';
 
-function Header(){
+function Header({setData}){
+
+      const [loader, setLoader] = useState(false);
+      const [alert, setAlert] = useState();
+
+      const handleSearch = (e) =>{
+            setLoader(true);
+            const search=e.target.value;
+            if(e.target.value===""){
+                  axios.get('http://localhost:8000/api/products/')
+                  .then((resp)=>setData(resp.data))
+                  .catch((err)=>setAlert({m:err.response, s:"danger"}))
+                  .finally(setLoader(false));
+                  return;
+            }
+            axios.get('http://localhost:8000/api/products/search/'+ search)
+                  .then((resp)=>setData(resp.data))
+                  .catch((err)=>setAlert({m:err.response, s:"danger"}))
+                  .finally(setLoader(false));
+      }
       return(
+            <>
+            {loader && <Loading />}
             <header>
                   <div className="text-bg-dark py-3 px-5">
                         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -15,7 +40,7 @@ function Header(){
                         </ul>
 
                         <form className="col-12 col-lg-5 mb-3 mb-lg-0 me-lg-3" role="search">
-                        <input type="search" className="form-control form-control-dark" placeholder="Search..." aria-label="Search" />
+                        <input type="search" className="form-control form-control-dark" placeholder="Search..." aria-label="Search" onKeyUp={handleSearch} />
                         </form>
 
                         <div className="text-end">
@@ -25,6 +50,8 @@ function Header(){
                         </div>
                   </div>
             </header>
+            {alert && <Alert alert={alert} />}
+            </>
       )
 }
 

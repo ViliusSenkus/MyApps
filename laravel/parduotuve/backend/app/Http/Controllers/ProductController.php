@@ -71,4 +71,19 @@ class ProductController extends Controller
         }
     }
 
+
+// -----------------------------END OF CRUD FUNCTIONS-----------------------------
+
+
+    public function search($s){
+        try{
+            return Product::where('name', 'LIKE', '%'.$s.'%')->get();
+            // return "gera raidė $s";
+        }catch(\Exception $e){
+            return response ("Paieškos klaida ~~~~~~~~~~~~~~~~ $e", 500);
+        }
+    }
+
+
+
 }

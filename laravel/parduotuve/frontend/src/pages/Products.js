@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Header from '../components/header/Header';
 // import axios from 'axios';
 
 
@@ -20,6 +21,7 @@ function Products() {
   
   return (
    <>
+    <Header setData={setData}/>
       <h1 className="py-2">Mūsų produktai</h1>
       <div className='row'>
         {data.map(product =>
