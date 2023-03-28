@@ -1,42 +1,35 @@
 import Loading from "../../components/loading/Loader";
 import axios from "axios";
 import Alert from "../../components/alert/Alert";
-import { useState } from "react";
-import { json, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function NewProduct(){
 
       const [alert, setAlert] =  useState(false);
-      
+      const [loading, setLoading] = useState(false);
+
+      useEffect(()=>{
+
+      })
+
       const handleCrete = (e) => {
             e.preventDefault();
-            
+            setLoading(true);
+
             const data=new FormData(e.target);
 
             axios.post('http://localhost:8000/api/products', data)
-            .then (resp =>console.log(resp))
-            .catch((error)=>console.log(error.response));
-            // .then (resp => setAlert (resp));
+            .then (resp => setAlert (resp.data))
+            .catch((error)=>setAlert(error.response))
+            .finally(()=>setLoading(false));
           }
-
-
-            axios.get('http://localhost:8000/api/products')
-                  .then((res)=>console.log(res));
-                  
-         
-            // axios.get('https://api.lorem.space/image/shoes?w=600&h=900', {mode: 'no-cors', headers:{header:'http://localhost'}})
-            //       .then((res)=>console.log(res));
-
-            // fetch('https://api.lorem.space/image/shoes?w=600&h=900', {mode: 'cors'})
-            //       .then(resp => resp.json())
-            //       .then(resp => console.log(resp));
 
       return(
             <>
-            {/* {loading && <Loading />} */}
-
+            {loading && <Loading />}
             <h1 className="py-2">Administravimo erdvė - Naujo Produkto pridėjimas</h1>
-                 
+            {alert && <Alert alert={alert} />}
             <form onSubmit={handleCrete}>
                   <label className="form-label">
                         Name:
@@ -73,8 +66,6 @@ function NewProduct(){
                         Or Picture Link
                   </label>
                   <input className="form-control" type="text" name="photo" />
-                  
-                  
 
                   <div className="mt-3 d-flex flex-row justify-content-between">
                         <Link to="/admin" className="btn btn-secondary " >
@@ -87,8 +78,6 @@ function NewProduct(){
             </form>
             </>
       )
-
-
 }
 
 export default NewProduct;

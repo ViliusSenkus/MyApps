@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import { Link, useParams} from "react-router-dom";
-import Loading from '../../components/loading/Loader';
-import Alert from '../../components/alert/Alert';
-import Products from "./Products";
+import { useParams} from "react-router-dom";
+// import Loading from '../../components/loading/Loader';
+// import Alert from '../../components/alert/Alert';
+// import Products from "./Products";
 
 function Edit() {
 
@@ -21,15 +21,20 @@ function Edit() {
             axios.get('http://localhost:8000/api/products/'+id)
             .then ((resp)=> setData(resp))
             .catch((resp) => console.log('Klaida'+ resp))
-            .finally((resp)=>console.log(resp, data))
+            .finally((resp)=>console.log(resp))
 
       },[]);
                   
+      
+      // const handleField = (e) => {
+      //       setData({...data, [e.target.name] : e.target.value});
+      // }
       
       return (
 
             <div className="container">
                   {id}
+                  {data}
                   
                   
             {/* {data.map(prod => <div>{prod.id}</div>)} */}

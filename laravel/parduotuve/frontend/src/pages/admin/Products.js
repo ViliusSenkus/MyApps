@@ -13,8 +13,7 @@ function Products() {
       const [showUpdateForm, setShowUpdateForm] = useState('none');
 
       useEffect(() => {
-        setLoading('true');
-
+      // setLoading('true');
       //   fetch('http://localhost:8000/api/')
       //   .then(resp => resp.json())
       //   .then(resp => {
@@ -25,7 +24,7 @@ function Products() {
         .then(resp => {
                 setData(resp.data);
         })
-        .finally( () => setLoading(false));
+        // .finally( () => setLoading(false));
       }, [refresh]);
       
     
