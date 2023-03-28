@@ -37,20 +37,20 @@ function Edit() {
 
             const data=new FormData(e.target);
 
-           
-            // for (const x of data) {
-            //       // for (const y of x)
-            //       //  console.log(x[0]);
-
-            //        let property=x[0];
-            //        let value=x[1];
-            //       //  data.append(property, value);
-            // }
-            // console.log(data);    
-            // return;
-
-            data.append("_method", "put");
-            axios.post('http://localhost:8000/api/products/' + id, data)
+           let list={}
+            for (const x of data) {
+                  // for (const y of x)
+                  //  console.log(x[0]);
+                  //  data.append(property, value);
+                  list={...list, [x[0]] : x[1]};
+            }
+            
+            // Laravelis nepriima PUT metodu per FormData paimtų duomenų, todėl galima apeiti taip:
+            // 
+            // data.append("_method", "put");
+            // axios.post('http://localhost:8000/api/products/' + id, data)
+            
+            axios.put('http://localhost:8000/api/products/' + id, list)
             .then (resp => setAlert (resp.data))
             .catch((error)=>setAlert({m: error.response.data, s: "danger"}))
             .finally(()=>setLoader(false));
