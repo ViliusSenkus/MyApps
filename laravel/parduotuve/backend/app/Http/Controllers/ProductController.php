@@ -48,7 +48,7 @@ class ProductController extends Controller
         $product->description = $request -> description;
         $product->sku = $request->sku;
         $product->photo = $request->photo;
-        $product->warehouse_qty = $request->warehouse_qty;
+        $product->warehouse_qnt = $request->warehouse_qty;
         $product->price = $request->price;
         $product->status = $request->status;
 
@@ -56,7 +56,7 @@ class ProductController extends Controller
         return 'Prekė sėkmingai atnaujinta';
         }
         catch(\Exception $e){
-            return response("Pakeisti nepavyko, įvyko klaida \/n $e", 500);
+            return response("Pakeisti nepavyko, įvyko klaida ------ $e", 500);
         }
     }
    

@@ -25,8 +25,6 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/{id}', [ProductController::class, 'getProduct'])->where('id', '[0-9]+');
     Route::put('/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+');
     Route::delete('/{id}', [ProductController::class, 'delete'])->where('id', '[0-9]+');
-    
-    
 });
 
 

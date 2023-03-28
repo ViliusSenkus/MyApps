@@ -7,7 +7,7 @@ import Alert from '../../components/alert/Alert';
 
 function Products() {
       const [data, setData] = useState([]);
-      const [alert, setAlert] =  useState(false);
+      const [alert, setAlert] =  useState();
       const [refresh, setRefresh] = useState(false);
       const [loading, setLoading] = useState(false);
       const [showUpdateForm, setShowUpdateForm] = useState('none');
@@ -32,10 +32,10 @@ function Products() {
         setLoading(true);
         axios.delete('http://localhost:8000/api/products/' + id)
         .then(resp => {
-          setAlert(resp.data);
+          setAlert({m:resp.data, s:"success"});
           setRefresh(!refresh);
         })
-        .catch(err=>console.log(err.response.data))
+        .catch(err=>setAlert({m:err.response.data, s:"danger"}))
         .finally(()=>setLoading(false));
       }
 

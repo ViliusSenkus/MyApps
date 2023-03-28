@@ -6,22 +6,22 @@ import { Link } from "react-router-dom";
 
 function NewProduct(){
 
-      const [alert, setAlert] =  useState(false);
+      const [alert, setAlert] =  useState();
       const [loading, setLoading] = useState(false);
 
       useEffect(()=>{
 
       })
 
-      const handleCrete = (e) => {
+      const handleCreate = (e) => {
             e.preventDefault();
             setLoading(true);
 
             const data=new FormData(e.target);
 
             axios.post('http://localhost:8000/api/products', data)
-            .then (resp => setAlert (resp.data))
-            .catch((error)=>setAlert(error.response))
+            .then (resp => setAlert ({m:resp.data, s:"success"}))
+            .catch((error)=>setAlert({m:error.response, s:"danger"}))
             .finally(()=>setLoading(false));
           }
 
@@ -30,7 +30,7 @@ function NewProduct(){
             {loading && <Loading />}
             <h1 className="py-2">Administravimo erdvė - Naujo Produkto pridėjimas</h1>
             {alert && <Alert alert={alert} />}
-            <form onSubmit={handleCrete}>
+            <form onSubmit={handleCreate}>
                   <label className="form-label">
                         Name:
                   </label>
