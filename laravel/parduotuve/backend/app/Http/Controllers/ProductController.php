@@ -22,7 +22,7 @@ class ProductController extends Controller
             return "Produktas $request->name, sukurtas sėkmingai";
         }
         catch(\Exception $e ){
-            return response("$e Naujo produkto sukurti nepavyko, įvyko klaida", 500);
+            return response("Naujo produkto sukurti nepavyko, įvyko klaida ~~~~~~~~~~~~~~ $e", 500);
         }
     }
     
@@ -35,7 +35,7 @@ class ProductController extends Controller
         try{
             return Product::find($id);
         } catch (\Exception $e){
-            return response("Produkto gauti nepavyko $e", 500);
+            return response("Produkto gauti nepavyko ~~~~~~~~~~ $e", 500);
         }
         
     }
@@ -48,7 +48,7 @@ class ProductController extends Controller
         $product->description = $request -> description;
         $product->sku = $request->sku;
         $product->photo = $request->photo;
-        $product->warehouse_qnt = $request->warehouse_qty;
+        $product->warehouse_qnt = $request->warehouse_qnt;
         $product->price = $request->price;
         $product->status = $request->status;
 
@@ -56,7 +56,8 @@ class ProductController extends Controller
         return 'Prekė sėkmingai atnaujinta';
         }
         catch(\Exception $e){
-            return response("Pakeisti nepavyko, įvyko klaida ------ $e", 500);
+            $product = Product::find($id);
+            return response("Pakeisti nepavyko, įvyko klaida ~~~~~~~~ $e", 500);
         }
     }
    
@@ -66,7 +67,7 @@ class ProductController extends Controller
             return "produktas sėkmingai ištintas";
         }
         catch(\Exception $e){
-            return response("$e Ištrinti nepavyko, įvyko klaida", 500);
+            return response("Ištrinti nepavyko, įvyko klaida ~~~~~~~~~ $e ", 500);
         }
     }
 

@@ -11,6 +11,7 @@ function Edit() {
       const [data, setData] = useState([]);
       const [loader, setLoader] = useState(false);
       const [alert, setAlert] = useState();
+      const [formList, setFormList] = useState();
       const {id} = useParams();
 
       useEffect(() => {
@@ -29,14 +30,27 @@ function Edit() {
 
             setLoader(false);
       },[]);
-                  
+               
       const handleSubmit = (e) =>{
             e.preventDefault();
             setLoader(true);
 
             const data=new FormData(e.target);
+
            
-            axios.put('http://localhost:8000/api/products/' + id, data)
+            // for (const x of data) {
+            //       // for (const y of x)
+            //       //  console.log(x[0]);
+
+            //        let property=x[0];
+            //        let value=x[1];
+            //       //  data.append(property, value);
+            // }
+            // console.log(data);    
+            // return;
+
+            data.append("_method", "put");
+            axios.post('http://localhost:8000/api/products/' + id, data)
             .then (resp => setAlert (resp.data))
             .catch((error)=>setAlert({m: error.response.data, s: "danger"}))
             .finally(()=>setLoader(false));
