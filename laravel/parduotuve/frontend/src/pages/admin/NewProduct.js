@@ -1,17 +1,13 @@
-import Loading from "../../components/loading/Loader";
+import Loading from "../../components/loading/Loading";
 import axios from "axios";
 import Alert from "../../components/alert/Alert";
-import { useEffect, useState } from "react";
+import { useContext,} from "react";
 import { Link } from "react-router-dom";
+import MainContext from "../../context/MainContext";
 
 function NewProduct(){
 
-      const [alert, setAlert] =  useState();
-      const [loading, setLoading] = useState(false);
-
-      useEffect(()=>{
-
-      })
+      const {alert, setAlert, loading, setLoading} = useContext(MainContext);
 
       const handleCreate = (e) => {
             e.preventDefault();

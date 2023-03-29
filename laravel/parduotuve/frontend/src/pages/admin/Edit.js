@@ -1,21 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import { useParams} from "react-router-dom";
-import Loading from '../../components/loading/Loader';
+import Loading from '../../components/loading/Loading';
 import {Link} from "react-router-dom";
 import Alert from '../../components/alert/Alert';
-// import Products from "./Products";
+import MainContext from "../../context/MainContext";
 
 function Edit() {
 
-      const [data, setData] = useState([]);
-      const [loader, setLoader] = useState(false);
-      const [alert, setAlert] = useState();
+      const {data, setData, loading, setLoading, alert, setAlert} = useContext(MainContext);
       const [formList, setFormList] = useState();
       const {id} = useParams();
 
       useEffect(() => {
-            setLoader(true);
+            setLoading(true);
             // fetch('http://localhost:8000/api/products/'+id)
             // .then(resp => resp.json())
             // .then(resp => {
@@ -28,12 +26,12 @@ function Edit() {
             .catch((resp) => console.log('Klaida'+ resp))
             .finally((resp)=>console.log(resp))
 
-            setLoader(false);
+            setLoading(false);
       },[]);
                
       const handleSubmit = (e) =>{
             e.preventDefault();
-            setLoader(true);
+            setLoading(true);
 
             const data=new FormData(e.target);
 
@@ -53,7 +51,7 @@ function Edit() {
             axios.put('http://localhost:8000/api/products/' + id, list)
             .then (resp => setAlert (resp.data))
             .catch((error)=>setAlert({m: error.response.data, s: "danger"}))
-            .finally(()=>setLoader(false));
+            .finally(()=>setLoading(false));
           }
       
       
@@ -63,7 +61,7 @@ function Edit() {
       
       return (
             <>
-            {loader && <Loading />}
+            {loading && <Loading />}
             <div className="container">
                   <h2 className="py-3">Admin panel - Product edit</h2>
                   {alert && <Alert alert={alert} />}

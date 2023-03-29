@@ -1,18 +1,23 @@
-import { useEffect, useState } from 'react';
-import Header from '../components/header/Header';
+import { useEffect, useContext } from 'react';
+import Loading from '../components/loading/Loading';
+import MainContext from '../context/MainContext';
+
 // import axios from 'axios';
 
 
 function Products() {
 
-  const [data, setData] = useState([]);
+  const {data, setData, loading, setLoading} = useContext(MainContext);
 
   useEffect(() => {
+    setLoading(true);
+
     fetch('http://localhost:8000/api/products')
     .then(resp => resp.json())
     .then(resp => {
       setData(resp);
-    });
+    })
+    .finally(()=>setLoading(false));
 
     // axios.get('http://localhost:8000/api/products')
     // .then(resp => setData(resp.data));
@@ -21,7 +26,7 @@ function Products() {
   
   return (
    <>
-    <Header setData={setData}/>
+    {loading && <Loading />}
       <h1 className="py-2">Mūsų produktai</h1>
       <div className='row'>
         {data.map(product =>

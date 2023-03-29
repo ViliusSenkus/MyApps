@@ -1,6 +1,11 @@
-function Alert(props){
+import { useContext } from "react";
+import MainContext from "../../context/MainContext";
 
-      return props.alert &&  <div className={'alert alert-'+props.alert.s}>{props.alert.m}</div>
+function Alert(){
+
+      const{alert}=useContext(MainContext);
+
+      return alert &&  <div className={'alert alert-'+ alert.s}>{alert.m}</div>
       
 }
 

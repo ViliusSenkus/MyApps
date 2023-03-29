@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import Loading from '../../components/loading/Loader';
-import Alert from '../../components/alert/Alert';
+import MainContext from "../../context/MainContext";
+import Loading from "../../components/loading/Loading";
+import Alert from "../../components/alert/Alert";
 
 
 function Products() {
-      const [data, setData] = useState([]);
-      const [alert, setAlert] =  useState();
-      const [refresh, setRefresh] = useState(false);
-      const [loading, setLoading] = useState(false);
-      const [showUpdateForm, setShowUpdateForm] = useState('none');
+
+      const {data, setData, alert, setAlert, refresh, setRefresh, loading, setLoading} = useContext(MainContext);
+
 
       useEffect(() => {
-      // setLoading('true');
+      setLoading(true);
+      setAlert(false)
       //   fetch('http://localhost:8000/api/')
       //   .then(resp => resp.json())
       //   .then(resp => {
@@ -24,7 +24,7 @@ function Products() {
         .then(resp => {
                 setData(resp.data);
         })
-        // .finally( () => setLoading(false));
+        .finally( () => setLoading(false));
       }, [refresh]);
       
     
@@ -43,7 +43,6 @@ function Products() {
         <>
         {loading && <Loading />}
 
-       {/* 2ia dedame lauderi su salyga loader && div....lauderio. */}
         <h1 className="py-2">Administravimo erdvė - Produktų sąrašas</h1>
         
         <div className="container text-end mb-2">
@@ -52,7 +51,7 @@ function Products() {
           </Link>
         </div>
 
-        {<Alert alert={alert} />}
+        {alert && <Alert />}
 
 
         <table className="table">

@@ -1,32 +1,32 @@
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useState } from 'react';
-import Loading from '../loading/Loader';
+import { useContext } from 'react';
+import Loading from '../loading/Loading';
 import Alert from '../alert/Alert';
+import MainContext from '../../context/MainContext';
 
-function Header({setData}){
+function Header(){
 
-      const [loader, setLoader] = useState(false);
-      const [alert, setAlert] = useState();
+      const {loading, setLoading, alert, setAlert, setData} =useContext(MainContext);
 
       const handleSearch = (e) =>{
-            setLoader(true);
+            setLoading(true);
             const search=e.target.value;
             if(e.target.value===""){
                   axios.get('http://localhost:8000/api/products/')
                   .then((resp)=>setData(resp.data))
                   .catch((err)=>setAlert({m:err.response, s:"danger"}))
-                  .finally(setLoader(false));
+                  .finally(setLoading(false));
                   return;
             }
             axios.get('http://localhost:8000/api/products/search/'+ search)
                   .then((resp)=>setData(resp.data))
                   .catch((err)=>setAlert({m:err.response, s:"danger"}))
-                  .finally(setLoader(false));
+                  .finally(setLoading(false));
       }
       return(
             <>
-            {loader && <Loading />}
+            {loading && <Loading />}
             <header>
                   <div className="text-bg-dark py-3 px-5">
                         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -35,22 +35,21 @@ function Header({setData}){
                         </Link>
 
                         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><Link to="/" className="nav-link px-2 text-white">Pagrindinis</Link></li>
-                        <li><Link to="/admin" className="nav-link px-2 text-white">Administruoti</Link></li>
+                              <li><Link to="/" className="nav-link px-2 text-white">Pagrindinis</Link></li>
+                              <li><Link to="/admin" className="nav-link px-2 text-white">Administruoti</Link></li>
                         </ul>
 
                         <form className="col-12 col-lg-5 mb-3 mb-lg-0 me-lg-3" role="search">
-                        <input type="search" className="form-control form-control-dark" placeholder="Search..." aria-label="Search" onKeyUp={handleSearch} />
+                              <input type="search" className="form-control form-control-dark" placeholder="Search..." aria-label="Search" onKeyUp={handleSearch} />
                         </form>
 
                         <div className="text-end">
-                        <button type="button" className="btn btn-secondary me-2">Login</button>
-                        <button type="button" className="btn btn-outline-secondary">Sign-up</button>
+                              <button type="button" className="btn btn-secondary me-2">Login</button>
+                              <button type="button" className="btn btn-outline-secondary">Sign-up</button>
                         </div>
                         </div>
                   </div>
             </header>
-            {alert && <Alert alert={alert} />}
             </>
       )
 }

@@ -3,7 +3,7 @@ import Header from "../components/header/Header";
 function MainLayout(props){
       return (
             <>
-            {/* <Header /> */}
+            <Header />
             <div className="container">
                   {props.children}
             </div>

@@ -77,7 +77,10 @@ class ProductController extends Controller
 
     public function search($s){
         try{
-            return Product::where('name', 'LIKE', '%'.$s.'%')->get();
+            return Product::where('name', 'LIKE', '%'.$s.'%')
+                            ->orwhere('description', 'LIKE', '%'.$s.'%' )
+                            ->orwhere(['sku' => $s])
+                            ->get();
             // return "gera raidė $s";
         }catch(\Exception $e){
             return response ("Paieškos klaida ~~~~~~~~~~~~~~~~ $e", 500);

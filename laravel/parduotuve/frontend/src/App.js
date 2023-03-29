@@ -7,6 +7,9 @@ import Products from './pages/Products';
 import AdminProducts from './pages/admin/Products';
 import AdminProductEdit from './pages/admin/Edit';
 import AdminNewProduct from './pages/admin/NewProduct';
+// Kontekstas
+import MainContext from './context/MainContext';
+import { useState } from 'react';
 
 
 // function App() {
@@ -45,17 +48,27 @@ import AdminNewProduct from './pages/admin/NewProduct';
 
 function App() {
 
+  const [data, setData] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState();
+
+
+  const contextValues = {data, setData, refresh, setRefresh, loading, setLoading, alert, setAlert };
+
   return(
     <>
     <BrowserRouter>
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={<Products />} />
-          <Route path="/admin" element={<AdminProducts />} />
-          <Route path="/admin/edit/:id" element={<AdminProductEdit />} />
-          <Route path="/admin/newProduct" element={<AdminNewProduct />} />
-        </Routes>
-      </MainLayout>
+      <MainContext.Provider value={contextValues}>
+        <MainLayout>
+          <Routes>
+            <Route path="/" element={<Products />} />
+            <Route path="/admin" element={<AdminProducts />} />
+            <Route path="/admin/edit/:id" element={<AdminProductEdit />} />
+            <Route path="/admin/newProduct" element={<AdminNewProduct />} />
+          </Routes>
+        </MainLayout>
+      </MainContext.Provider>
     </BrowserRouter>
     </>
   )
