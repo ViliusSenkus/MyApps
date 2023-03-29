@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProductController;
+use \App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,15 @@ Route::group(['prefix' => 'products'], function () {
     Route::put('/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+');
     Route::delete('/{id}', [ProductController::class, 'delete'])->where('id', '[0-9]+');
     Route::get('/search/{search}', [ProductController::class, 'search']);
+});
+
+Route::group(['prefix' => 'categories'], function () { 
+    Route::post('/',  [CategoryController::class, 'create']);
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::get('/{id}', [CategoryController::class, 'getCategory'])->where('id', '[0-9]+');
+    Route::put('/{id}', [CategoryController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('/{id}', [CategoryController::class, 'delete'])->where('id', '[0-9]+');
+    // Route::get('/search/{search}', [CategoryController::class, 'search']);
 });
 
 

@@ -13,4 +13,8 @@ class Product extends Model
 
     protected $table='products';
     protected $guarded = false;
+
+    public function categories() {
+        return $this->belongsToMany(Category::class, 'products_categories');
+    }
 }
