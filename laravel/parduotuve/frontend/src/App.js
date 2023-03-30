@@ -5,11 +5,14 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import MainLayout from './layouts/Main';
 import Products from './pages/Products';
 import AdminProducts from './pages/admin/Products';
-import AdminProductEdit from './pages/admin/Edit';
-import AdminNewProduct from './pages/admin/NewProduct';
+import AdminProductEdit from './pages/admin/ProductEdit';
+import AdminNewProduct from './pages/admin/ProductNew';
 // Kontekstas
 import MainContext from './context/MainContext';
 import { useState } from 'react';
+import Categories from './pages/admin/Categories';
+import NewCategory from './pages/admin/CategoryNew';
+import EditCategory from './pages/admin/CategoryEdit';
 
 
 // function App() {
@@ -63,9 +66,14 @@ function App() {
         <MainLayout>
           <Routes>
             <Route path="/" element={<Products />} />
-            <Route path="/admin" element={<AdminProducts />} />
-            <Route path="/admin/edit/:id" element={<AdminProductEdit />} />
-            <Route path="/admin/newProduct" element={<AdminNewProduct />} />
+            <Route path="/admin" >
+              <Route index element={<AdminProducts />} />
+              <Route path="edit/:id" element={<AdminProductEdit />} />
+              <Route path="newProduct" element={<AdminNewProduct />} />
+              <Route path="categories/" element={<Categories />} />
+              <Route path="editCategory/:id" element={<EditCategory />} />
+              <Route path="newCategory" element={<NewCategory />} />
+            </Route>
           </Routes>
         </MainLayout>
       </MainContext.Provider>

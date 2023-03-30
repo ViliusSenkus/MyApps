@@ -7,7 +7,7 @@ import MainContext from '../../context/MainContext';
 
 function Header(){
 
-      const {loading, setLoading, alert, setAlert, setData} =useContext(MainContext);
+      const {loading, setLoading, setAlert, setData} =useContext(MainContext);
 
       const handleSearch = (e) =>{
             setLoading(true);
@@ -36,7 +36,8 @@ function Header(){
 
                         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                               <li><Link to="/" className="nav-link px-2 text-white">Pagrindinis</Link></li>
-                              <li><Link to="/admin" className="nav-link px-2 text-white">Administruoti</Link></li>
+                              <li><Link to="/admin" className="nav-link px-2 text-white">Products</Link></li>
+                              <li><Link to="/admin/categories" className="nav-link px-2 text-white">Categories</Link></li>
                         </ul>
 
                         <form className="col-12 col-lg-5 mb-3 mb-lg-0 me-lg-3" role="search">

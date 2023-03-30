@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
-import { useParams} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import Loading from '../../components/loading/Loading';
 import {Link} from "react-router-dom";
 import Alert from '../../components/alert/Alert';
@@ -9,10 +9,12 @@ import MainContext from "../../context/MainContext";
 function Edit() {
 
       const {data, setData, loading, setLoading, alert, setAlert} = useContext(MainContext);
-      const [formList, setFormList] = useState();
       const {id} = useParams();
 
+      console.log("funkcijos pradzia ");
+
       useEffect(() => {
+            console.log("use effect pradžia, data reikšmė - ");
             setLoading(true);
             // fetch('http://localhost:8000/api/products/'+id)
             // .then(resp => resp.json())
@@ -22,9 +24,11 @@ function Edit() {
             
 
             axios.get('http://localhost:8000/api/products/'+id)
+            .then((resp)=>console.log("axios viduje data.name reiksme yra - " + resp.data.name))
             .then ((resp)=> setData(resp.data))
             .catch((resp) => console.log('Klaida'+ resp))
             .finally((resp)=>console.log(resp))
+
 
             setLoading(false);
       },[]);
@@ -33,10 +37,10 @@ function Edit() {
             e.preventDefault();
             setLoading(true);
 
-            const data=new FormData(e.target);
+            const formData=new FormData(e.target);
 
            let list={}
-            for (const x of data) {
+            for (const x of formData) {
                   // for (const y of x)
                   //  console.log(x[0]);
                   //  data.append(property, value);
@@ -61,6 +65,7 @@ function Edit() {
       
       return (
             <>
+            {console.log('returno vidus - ' + data.name)}
             {loading && <Loading />}
             <div className="container">
                   <h2 className="py-3">Admin panel - Product edit</h2>
