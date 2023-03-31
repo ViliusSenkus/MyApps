@@ -23,10 +23,12 @@ function Header(){
                   .then((resp)=>setData(resp.data))
                   .catch((err)=>setAlert({m:err.response, s:"danger"}))
                   .finally(setLoading(false));
-      }
+      }   
+
       return(
             <>
             {loading && <Loading />}
+
             <header>
                   <div className="text-bg-dark py-3 px-5">
                         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
