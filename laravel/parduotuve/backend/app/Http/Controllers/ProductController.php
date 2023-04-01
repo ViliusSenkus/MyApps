@@ -10,15 +10,29 @@ class ProductController extends Controller
 {
      public function create(Request $request){
         try{
-            Product::create([
-                'name' => $request -> name,
-                'description' => $request -> description,
-                'sku' => $request -> sku,
-                'photo' => $request -> photo,
-                'warehouse_qnt' => $request -> warehouse_qnt,
-                'price' => $request -> price,
-                // 'status' => $request -> status,
-            ]);
+            // Product::create([
+            //     'name' => $request -> name,
+            //     'description' => $request -> description,
+            //     'sku' => $request -> sku,
+            //     'photo' => $request -> photo,
+            //     'warehouse_qnt' => $request -> warehouse_qnt,
+            //     'price' => $request -> price,
+            //     // 'status' => $request -> status,
+            // ]);
+
+            $product = new Product;
+            
+            $product->name = $request -> name;
+            $product->description = $request -> description;
+            $product->sku = $request -> sku;
+            $product->photo = $request -> photo;
+            $product->warehouse_qnt = $request -> warehouse_qnt;
+            $product->price = $request -> price;
+
+            $product->save();
+
+            $product->categories()->attach([1,3]);
+            
             return "Produktas $request->name, sukurtas sėkmingai";
         }
         catch(\Exception $e ){
@@ -27,13 +41,14 @@ class ProductController extends Controller
     }
     
     public function index(){
-        $data = Product::all();
+        // $data = Product::all();
+        $data=Product::with('categories')->get();
         return $data;
     }
 
     public function getProduct($id){
         try{
-            return Product::find($id);
+            return Product::with('categories')->find($id);
         } catch (\Exception $e){
             return response("Produkto gauti nepavyko ~~~~~~~~~~ $e", 500);
         }

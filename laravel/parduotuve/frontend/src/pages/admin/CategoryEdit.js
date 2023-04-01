@@ -8,8 +8,8 @@ import MainContext from "../../context/MainContext";
 
 function EditCategory() {
 
-      const {data, setData, loading, setLoading, alert, setAlert} = useContext(MainContext);
-      // const [cat, setCat] = useState();
+      const {data, loading, setLoading, alert, setAlert} = useContext(MainContext);
+      const [cat, setCat] = useState(data);
       const {id} = useParams();
 
       useEffect(() => {
@@ -22,9 +22,8 @@ function EditCategory() {
             
 
             axios.get('http://localhost:8000/api/categories/'+id)
-            .then ((resp)=> setData(resp.data))
+            .then ((resp)=> setCat(resp.data))
             .catch((resp) => console.log('Klaida'+ resp))
-            .finally((resp)=>console.log(resp))
 
             setLoading(false);
       },[]);
@@ -49,7 +48,7 @@ function EditCategory() {
             // axios.post('http://localhost:8000/api/products/' + id, data)
             
             axios.put('http://localhost:8000/api/categories/' + id, list)
-            .then (resp => setAlert (resp.data))
+            .then (resp => setAlert ({m: resp.data, s: "success"}))
             .catch((error)=>setAlert({m: error.response.data, s: "danger"}))
             .finally(()=>setLoading(false));
           }
@@ -77,12 +76,12 @@ function EditCategory() {
                                     Name:
                               </label>
                               <div className="col-sm-10">
-                                    <input className="form-control" type="text" name="name" defaultValue={data.name} />
+                                    <input className="form-control" type="text" name="name" defaultValue={cat.name} />
                               </div>
                         </div>
 
                         <div className="mt-3 d-flex flex-row justify-content-between">
-                              <Link to="/admin" className="btn btn-secondary px-5" >
+                              <Link to="/admin/categories" className="btn btn-secondary px-5" >
                                     Return
                               </Link>
 

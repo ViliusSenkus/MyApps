@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
-import { useNavigate, useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Loading from '../../components/loading/Loading';
 import {Link} from "react-router-dom";
 import Alert from '../../components/alert/Alert';
@@ -8,13 +8,11 @@ import MainContext from "../../context/MainContext";
 
 function Edit() {
 
-      const {data, setData, loading, setLoading, alert, setAlert} = useContext(MainContext);
+      const {data, loading, setLoading, alert, setAlert} = useContext(MainContext);
+      const [item, setItem] = useState(data);
       const {id} = useParams();
 
-      console.log("funkcijos pradzia ");
-
       useEffect(() => {
-            console.log("use effect pradžia, data reikšmė - ");
             setLoading(true);
             // fetch('http://localhost:8000/api/products/'+id)
             // .then(resp => resp.json())
@@ -24,11 +22,8 @@ function Edit() {
             
 
             axios.get('http://localhost:8000/api/products/'+id)
-            .then((resp)=>console.log("axios viduje data.name reiksme yra - " + resp.data.name))
-            .then ((resp)=> setData(resp.data))
-            .catch((resp) => console.log('Klaida'+ resp))
-            .finally((resp)=>console.log(resp))
-
+            .then ((resp)=> setItem(resp.data))
+            .catch((resp) => console.log('Klaida'+ resp));
 
             setLoading(false);
       },[]);
@@ -65,7 +60,6 @@ function Edit() {
       
       return (
             <>
-            {console.log('returno vidus - ' + data.name)}
             {loading && <Loading />}
             <div className="container">
                   <h2 className="py-3">Admin panel - Product edit</h2>
@@ -82,7 +76,7 @@ function Edit() {
                                     Name:
                               </label>
                               <div className="col-sm-10">
-                                    <input className="form-control" type="text" name="name" defaultValue={data.name} />
+                                    <input className="form-control" type="text" name="name" defaultValue={item.name} />
                               </div>
                         </div>
 
@@ -91,7 +85,7 @@ function Edit() {
                                     Description:
                               </label>
                               <div className="col-sm-10">
-                                    <textarea className="form-control" name="description" defaultValue={data.description}>
+                                    <textarea className="form-control" name="description" defaultValue={item.description}>
                                     </textarea>
                               </div>
                         </div>
@@ -101,7 +95,7 @@ function Edit() {
                                     SKU:
                               </label>
                               <div className="col-sm-10">
-                                    <input className="form-control" type="text" name="sku" defaultValue={data.sku} />
+                                    <input className="form-control" type="text" name="sku" defaultValue={item.sku} />
                               </div>
                         </div>
 
@@ -110,7 +104,7 @@ function Edit() {
                                     Price:
                               </label>
                               <div className="col-sm-10">
-                                    <input className="form-control" type="number" step="0.01" name="price" defaultValue={data.price} />
+                                    <input className="form-control" type="number" step="0.01" name="price" defaultValue={item.price} />
                               </div>
                         </div>
 
@@ -119,7 +113,7 @@ function Edit() {
                                     warehouse_qnt
                               </label>
                               <div className="col-sm-10">
-                                    <input className="form-control" type="number" step="1" name="warehouse_qnt" defaultValue={data.warehouse_qnt} />
+                                    <input className="form-control" type="number" step="1" name="warehouse_qnt" defaultValue={item.warehouse_qnt} />
                               </div>
                         </div>
                         
@@ -128,7 +122,7 @@ function Edit() {
                                     Status
                               </label>
                               <div className="col-sm-10">
-                                    <input className="form-control" type="text" name="status" defaultValue={data.status} />
+                                    <input className="form-control" type="text" name="status" defaultValue={item.status} />
                               </div>
                         </div>
 
@@ -137,7 +131,7 @@ function Edit() {
                                     Picture
                               </label>
                               <div className="col-sm-10">
-                                    <img src="prduct.photo" alt={data.name} />
+                                    <img src="prduct.photo" alt={item.name} />
                               </div>
                         </div>
 

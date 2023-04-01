@@ -33,7 +33,7 @@ function NewCategory(){
                   <input className="form-control" type="text" name="name" required />
 
                   <div className="mt-3 d-flex flex-row justify-content-between">
-                        <Link to="/admin" className="btn btn-secondary " >
+                        <Link to="/admin/categories" className="btn btn-secondary " >
                               Return
                         </Link>
 
