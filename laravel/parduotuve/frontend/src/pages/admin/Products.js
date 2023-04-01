@@ -57,16 +57,17 @@ function Products() {
         <table className="table">
           <thead>
             <tr>
-              <th>id</th>
-              <th>name</th>
-              <th>description</th>
-              <th>sku</th>
-              <th>photo</th>
-              <th>quantity in Warehouse</th>
-              <th>price</th>
-              <th>status</th>
-              <th>created at</th>
-              <th>control</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Sku</th>
+              <th>Photo</th>
+              <th>In Warehouse</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Categories</th>
+              <th>Created at</th>
+              <th>Control</th>
             </tr>
           </thead>
           <tbody>
@@ -80,6 +81,7 @@ function Products() {
               <td className="text-end">{product.warehouse_qnt}</td>
               <td className="text-end">{product.price}€</td>
               <td className="text-end">{product.status ? "Pardavime" : "Neparduodamas"}</td>
+              <td className="text-end">{product.categories.map(cat=>cat.name).join(", ")}</td>
               <td>{(new Date(product.created_at)).toLocaleString('lt-LT')}</td>
 
               <td>

@@ -28,10 +28,9 @@ class ProductController extends Controller
             $product->photo = $request -> photo;
             $product->warehouse_qnt = $request -> warehouse_qnt;
             $product->price = $request -> price;
-
             $product->save();
 
-            $product->categories()->attach([1,3]);
+            $product->categories()->attach($request->categories);
             
             return "Produktas $request->name, sukurtas sėkmingai";
         }
@@ -68,6 +67,9 @@ class ProductController extends Controller
         $product->status = $request->status;
 
         $product->save();
+
+        $product->categories()->sync($request->categories);
+
         return 'Prekė sėkmingai atnaujinta';
         }
         catch(\Exception $e){
@@ -78,7 +80,9 @@ class ProductController extends Controller
    
     public function delete($id){
         try{
-            Product::find($id)->delete();
+            $product = Product::find($id);
+            $product->categories()->detach();
+            $product->delete();
             return "produktas sėkmingai ištintas";
         }
         catch(\Exception $e){
