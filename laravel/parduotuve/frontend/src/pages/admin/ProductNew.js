@@ -1,13 +1,24 @@
 import Loading from "../../components/loading/Loading";
 import axios from "axios";
 import Alert from "../../components/alert/Alert";
-import { useContext,} from "react";
+import { useContext, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../../context/MainContext";
 
 function NewProduct(){
 
       const {alert, setAlert, loading, setLoading} = useContext(MainContext);
+
+      const [cat, setCat] = useState([]);
+
+      useEffect(()=>{
+            setLoading(true);
+            axios.get('http://localhost:8000/api/categories')
+            .then((resp) => setCat(resp.data))
+            .catch((error)=> setAlert({m: error.data, s:'danger'}))
+            .finally(setLoading(false));
+      },[])
+
 
       const handleCreate = (e) => {
             e.preventDefault();
@@ -62,6 +73,16 @@ function NewProduct(){
                         Or Picture Link
                   </label>
                   <input className="form-control" type="text" name="photo" />
+
+                  <div className="form-label">
+                        Categories
+                        {cat.map(item => 
+                              <div key={item.id}>
+                                    <input type="checkbox" name="categories[]" className="form-check-input mt-2" value={item.id} />
+                                    <label className="ms-2 mt-1">{item.name}</label> 
+                              </div>
+                              )}
+                  </div>
 
                   <div className="mt-3 d-flex flex-row justify-content-between">
                         <Link to="/admin" className="btn btn-secondary " >

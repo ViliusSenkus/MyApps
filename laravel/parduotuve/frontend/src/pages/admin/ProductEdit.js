@@ -5,6 +5,7 @@ import Loading from '../../components/loading/Loading';
 import {Link} from "react-router-dom";
 import Alert from '../../components/alert/Alert';
 import MainContext from "../../context/MainContext";
+import CategoriesList from "../../components/CategoriesList";
 
 function Edit() {
 
@@ -12,6 +13,7 @@ function Edit() {
       const [item, setItem] = useState(data);
       const {id} = useParams();
 
+      const [cat, setCat] = useState([]);
       useEffect(() => {
             setLoading(true);
             // fetch('http://localhost:8000/api/products/'+id)
@@ -24,6 +26,11 @@ function Edit() {
             axios.get('http://localhost:8000/api/products/'+id)
             .then ((resp)=> setItem(resp.data))
             .catch((resp) => console.log('Klaida'+ resp));
+            
+            axios.get('http://localhost:8000/api/categories')
+            .then((resp) => setCat(resp.data))
+            .catch((error)=> setAlert({m: error.data, s:'danger'}))
+
 
             setLoading(false);
       },[]);
@@ -36,9 +43,14 @@ function Edit() {
 
            let list={}
             for (const x of formData) {
+                  console.log(x);
                   // for (const y of x)
                   //  console.log(x[0]);
                   //  data.append(property, value);
+
+                  // if (x[0]=="categories[]"){
+                  //       list={...list, "categories" : [x[1]]}
+                  // }
                   list={...list, [x[0]] : x[1]};
             }
             
@@ -126,14 +138,34 @@ function Edit() {
                               </div>
                         </div>
 
-                        <div className="form-group row py-2">
+                        {/* <div className="form-group row py-2">
                               <label className="col-sm-2 col-form-label">
                                     Picture
                               </label>
                               <div className="col-sm-10">
-                                    <img src="prduct.photo" alt={item.name} />
+                                    <img src={'http://localhost:8000/photos/'+item.photo} alt={item.name} className="h-25" />
                               </div>
+                        </div> */}
+
+                        <div className="form-label">
+                        Categories
                         </div>
+
+                        {cat.map(item => 
+
+                        <CategoriesList cat={item.name} list={item.categories}/>
+                        // {item.categories.map(cat=>{
+                        //       let checked="";
+                        //       (cat.name == item.name) ? checked="checked" : checked="";
+                        
+                        // <div key={item.id}>
+                        //       <input type="checkbox" className="form-check-input mt-2" name="categories[]"  value={item.id} />
+                        //       <label className="ms-2 mt-1">{item.name}</label> 
+                        // </div>
+                        //       }
+                        // )}
+                        )}
+                        
 
                         <div className="mt-3 d-flex flex-row justify-content-between">
                               <Link to="/admin" className="btn btn-secondary px-5" >
