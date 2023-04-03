@@ -1,6 +1,6 @@
 import './App.css';
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import MainLayout from './layouts/Main';
 import Products from './pages/Products';
@@ -9,7 +9,7 @@ import AdminProductEdit from './pages/admin/ProductEdit';
 import AdminNewProduct from './pages/admin/ProductNew';
 // Kontekstas
 import MainContext from './context/MainContext';
-import { useState } from 'react';
+
 import Categories from './pages/admin/Categories';
 import NewCategory from './pages/admin/CategoryNew';
 import EditCategory from './pages/admin/CategoryEdit';
@@ -55,10 +55,18 @@ function App() {
   const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState();
+  const [categories, setCategories] = useState([]);
 
 
-  const contextValues = {data, setData, refresh, setRefresh, loading, setLoading, alert, setAlert };
+  const contextValues = {data, setData, refresh, setRefresh, loading, setLoading, alert, setAlert, categories, setCategories };
 
+  useEffect(()=>{
+    setLoading(true);
+    axios.get('http://localhost:8000/api/categories')
+    .then((resp) => setCategories(resp.data))
+    .catch((error)=> setAlert({m: error.data, s:'danger'}))
+    .finally(setLoading(false));
+  }, [])
   return(
     <>
     <BrowserRouter>

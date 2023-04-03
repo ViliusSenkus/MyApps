@@ -9,11 +9,11 @@ import CategoriesList from "../../components/CategoriesList";
 
 function Edit() {
 
-      const {data, loading, setLoading, alert, setAlert} = useContext(MainContext);
+      const {data, loading, setLoading, alert, setAlert, categories} = useContext(MainContext);
       const [item, setItem] = useState(data);
       const {id} = useParams();
-
-      const [cat, setCat] = useState([]);
+      let itemCat=[];
+      
       useEffect(() => {
             setLoading(true);
             // fetch('http://localhost:8000/api/products/'+id)
@@ -21,18 +21,18 @@ function Edit() {
             // .then(resp => {
             //   setData(resp);
             // });
-            
 
             axios.get('http://localhost:8000/api/products/'+id)
             .then ((resp)=> setItem(resp.data))
             .catch((resp) => console.log('Klaida'+ resp));
-            
-            axios.get('http://localhost:8000/api/categories')
-            .then((resp) => setCat(resp.data))
-            .catch((error)=> setAlert({m: error.data, s:'danger'}))
-
 
             setLoading(false);
+
+            setTimeout(()=>{
+                  console.log(item);
+                  item.categories.map(cat=>{
+                  itemCat.push(cat.name)}
+                  )}, 2000);
       },[]);
                
       const handleSubmit = (e) =>{
@@ -65,11 +65,11 @@ function Edit() {
             .finally(()=>setLoading(false));
           }
       
-      
       // const handleField = (e) => {
       //       setData({...data, [e.target.name] : e.target.defaultValue});
       // }
-      
+          
+
       return (
             <>
             {loading && <Loading />}
@@ -77,10 +77,6 @@ function Edit() {
                   <h2 className="py-3">Admin panel - Product edit</h2>
                   {alert && <Alert alert={alert} />}
                   <h5>Product id {id} </h5>
-                  
-                  
-            {/* {data.map(prod => <div>{prod.id}</div>)} */}
-            
                   
                   <form onSubmit={handleSubmit}>
                         <div className="form-group row py-2">
@@ -148,23 +144,15 @@ function Edit() {
                         </div> */}
 
                         <div className="form-label">
-                        Categories
-                        </div>
-
-                        {cat.map(item => 
-
-                        <CategoriesList cat={item.name} list={item.categories}/>
-                        // {item.categories.map(cat=>{
-                        //       let checked="";
-                        //       (cat.name == item.name) ? checked="checked" : checked="";
+                              Categories
                         
-                        // <div key={item.id}>
-                        //       <input type="checkbox" className="form-check-input mt-2" name="categories[]"  value={item.id} />
-                        //       <label className="ms-2 mt-1">{item.name}</label> 
-                        // </div>
-                        //       }
-                        // )}
-                        )}
+                              {categories.map(cat => 
+                                    <div key={cat.id}>
+                                          <CategoriesList catId={cat.id} catName={cat.name} itemCat={itemCat}/>
+                                    </div>
+                              )}
+                              
+                        </div>
                         
 
                         <div className="mt-3 d-flex flex-row justify-content-between">

@@ -1,22 +1,26 @@
+import {useContext } from "react";
+import MainContext from "../context/MainContext";
 
+const CategoriesList=(catId, catName, itemCat)=>{
 
-const CategoriesList=(cat, list)=>{
+      const {categories} = useContext(MainContext);
 
-      return(
+      itemCat.map(cat => {
+            if (categories.name == cat)
+                  return (
+                        <div>
+                              <input type="checkbox" className="form-check-input mt-2" name="categories[]"  value={catId} checked/>
+                              <label className="ms-2 mt-1">{catName}</label> 
+                        </div>
+                        );
+            
+            })
 
+      return(           
             <div>
-                  {cat}
+                  <input type="checkbox" className="form-check-input mt-2" name="categories[]"  value={catId} />
+                  <label className="ms-2 mt-1">{catName}</label> 
             </div>
-      // {item.categories.map(cat=>{
-      //                         let checked="";
-      //                         (cat == item.name) ? checked="checked" : checked="";
-                        
-      //                   <div key={item.id}>
-      //                         <input type="checkbox" className="form-check-input mt-2" name="categories[]"  value={item.id} />
-      //                         <label className="ms-2 mt-1">{item.name}</label> 
-      //                   </div>
-      //                         }
-      //                   )}
       )
 }
 

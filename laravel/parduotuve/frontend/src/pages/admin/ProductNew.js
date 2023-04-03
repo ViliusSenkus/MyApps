@@ -1,24 +1,13 @@
 import Loading from "../../components/loading/Loading";
 import axios from "axios";
 import Alert from "../../components/alert/Alert";
-import { useContext, useEffect, useState} from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../../context/MainContext";
 
 function NewProduct(){
 
-      const {alert, setAlert, loading, setLoading} = useContext(MainContext);
-
-      const [cat, setCat] = useState([]);
-
-      useEffect(()=>{
-            setLoading(true);
-            axios.get('http://localhost:8000/api/categories')
-            .then((resp) => setCat(resp.data))
-            .catch((error)=> setAlert({m: error.data, s:'danger'}))
-            .finally(setLoading(false));
-      },[])
-
+      const {alert, setAlert, loading, setLoading, categories} = useContext(MainContext);
 
       const handleCreate = (e) => {
             e.preventDefault();
@@ -76,7 +65,7 @@ function NewProduct(){
 
                   <div className="form-label">
                         Categories
-                        {cat.map(item => 
+                        {categories.map(item => 
                               <div key={item.id}>
                                     <input type="checkbox" name="categories[]" className="form-check-input mt-2" value={item.id} />
                                     <label className="ms-2 mt-1">{item.name}</label> 
