@@ -156,7 +156,7 @@ function Edit() {
                                     <input className="form-check-input mt-2"
                                           type="checkbox"                                           name="categories[]"
                                           value={cat.id}
-                                          onchage={handleChange}
+                                          // onchage={handleChange}
                                           checked={item.categories.find(el => el.id === cat.id)} />
                                     <label className="ms-2 mt-1">{cat.name}</label> 
                               </div>
