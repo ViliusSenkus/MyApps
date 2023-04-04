@@ -30,15 +30,18 @@ function Edit() {
             .catch((resp) => console.log('Klaida'+ resp))
             .finally(setLoading(false));
       },[]);
-               
+           
       const handleSubmit = (e) =>{
             e.preventDefault();
             setLoading(true);
 
             const formData=new FormData(e.target);
-
-           let list={}
+            
+            let array =[];
+            let list={}
             for (const x of formData) {
+                  
+                  
                   // for (const y of x)
                   //  console.log(x[0]);
                   //  data.append(property, value);
@@ -46,7 +49,16 @@ function Edit() {
                   // if (x[0]=="categories[]"){
                   //       list={...list, "categories" : [x[1]]}
                   // }
+                  
                   list={...list, [x[0]] : x[1]};
+                  
+                  // if ([x[0]] == "categories[]"){
+                  //       array.push([x[1]]);
+                  //       list={...list, "categories[]" : array}
+                  //       console.log("masyvas - "+array)
+                  // }
+                  // console.log(list);
+                  
             }
             
             // Laravelis nepriima PUT metodu per FormData paimtų duomenų, todėl galima apeiti taip:
@@ -55,22 +67,14 @@ function Edit() {
             // axios.post('http://localhost:8000/api/products/' + id, data)
             
             axios.put('http://localhost:8000/api/products/' + id, list)
-            .then (resp => setAlert (resp.data))
+            .then (resp => setAlert ({m:resp.data, s:"success"}))
             .catch((error)=>setAlert({m: error.response.data, s: "danger"}))
             .finally(()=>setLoading(false));
           }
 
-      const handleField = (e) => {
-            if(e.target.checked) {
-                  item.categories.push(e.target.value);
-            } else {
-                  const index = item.categories.indexOf(e.target.value);
-                  item.categories.splice(index, 1);
-            }
-            return setItem({...item});
-      }
-            
-        
+      //     const handleChange = (event) => {
+      //       formData=({ ...formData, [event.target.name]: event.target.checked });
+      //     };
 
       return (
             <>
@@ -152,7 +156,7 @@ function Edit() {
                                     <input className="form-check-input mt-2"
                                           type="checkbox"                                           name="categories[]"
                                           value={cat.id}
-                                          // onChange={handleField}
+                                          onchage={handleChange}
                                           checked={item.categories.find(el => el.id === cat.id)} />
                                     <label className="ms-2 mt-1">{cat.name}</label> 
                               </div>
