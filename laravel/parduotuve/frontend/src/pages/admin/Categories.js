@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import MainContext from "../../context/MainContext";
@@ -8,8 +8,10 @@ import Alert from "../../components/alert/Alert";
 
 function Categories() {
 
-      const {data, setData, alert, setAlert, refresh, setRefresh, loading, setLoading} = useContext(MainContext);
+      const {alert, setAlert, refresh, setRefresh, loading, setLoading} = useContext(MainContext);
 
+
+      const [data, setData] = useState([]);
 
       useEffect(() => {
       setLoading(true);

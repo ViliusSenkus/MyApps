@@ -5,34 +5,30 @@ import Loading from '../../components/loading/Loading';
 import {Link} from "react-router-dom";
 import Alert from '../../components/alert/Alert';
 import MainContext from "../../context/MainContext";
-import CategoriesList from "../../components/CategoriesList";
+
 
 function Edit() {
 
-      const {data, loading, setLoading, alert, setAlert, categories} = useContext(MainContext);
-      const [item, setItem] = useState(data);
+      const {categories, loading, setLoading, alert, setAlert} = useContext(MainContext);
+
+      const [item, setItem] = useState(
+            {name: '',
+            description: '',
+            sku: '',
+            photo: '',
+            warehouse_qnt: '',
+            price: '',
+            categories: []});
+
       const {id} = useParams();
-      let itemCat=[];
       
       useEffect(() => {
             setLoading(true);
-            // fetch('http://localhost:8000/api/products/'+id)
-            // .then(resp => resp.json())
-            // .then(resp => {
-            //   setData(resp);
-            // });
 
             axios.get('http://localhost:8000/api/products/'+id)
             .then ((resp)=> setItem(resp.data))
-            .catch((resp) => console.log('Klaida'+ resp));
-
-            setLoading(false);
-
-            setTimeout(()=>{
-                  console.log(item);
-                  item.categories.map(cat=>{
-                  itemCat.push(cat.name)}
-                  )}, 2000);
+            .catch((resp) => console.log('Klaida'+ resp))
+            .finally(setLoading(false));
       },[]);
                
       const handleSubmit = (e) =>{
@@ -43,7 +39,6 @@ function Edit() {
 
            let list={}
             for (const x of formData) {
-                  console.log(x);
                   // for (const y of x)
                   //  console.log(x[0]);
                   //  data.append(property, value);
@@ -64,11 +59,18 @@ function Edit() {
             .catch((error)=>setAlert({m: error.response.data, s: "danger"}))
             .finally(()=>setLoading(false));
           }
-      
-      // const handleField = (e) => {
-      //       setData({...data, [e.target.name] : e.target.defaultValue});
-      // }
-          
+
+      const handleField = (e) => {
+            if(e.target.checked) {
+                  item.categories.push(e.target.value);
+            } else {
+                  const index = item.categories.indexOf(e.target.value);
+                  item.categories.splice(index, 1);
+            }
+            return setItem({...item});
+      }
+            
+        
 
       return (
             <>
@@ -143,18 +145,20 @@ function Edit() {
                               </div>
                         </div> */}
 
-                        <div className="form-label">
-                              Categories
-                        
-                              {categories.map(cat => 
-                                    <div key={cat.id}>
-                                          <CategoriesList catId={cat.id} catName={cat.name} itemCat={itemCat}/>
-                                    </div>
+                        <div>
+                              Categories:                    
+                              { categories.map( cat =>
+                              <div className="form-label" key={cat.id}>
+                                    <input className="form-check-input mt-2"
+                                          type="checkbox"                                           name="categories[]"
+                                          value={cat.id}
+                                          // onChange={handleField}
+                                          checked={item.categories.find(el => el.id === cat.id)} />
+                                    <label className="ms-2 mt-1">{cat.name}</label> 
+                              </div>
                               )}
-                              
                         </div>
-                        
-
+                       
                         <div className="mt-3 d-flex flex-row justify-content-between">
                               <Link to="/admin" className="btn btn-secondary px-5" >
                                     Return
