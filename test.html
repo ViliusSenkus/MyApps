@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>    
+      <style>
+            :root {
+            --outerColor: magenta;
+            --innerColor: lightgreen;
+            text-align: center;
+            }
+            div {
+            margin: 5%;
+            padding: 10%;
+            background-color: var(--innerColor);
+            border: 2px groove var(--outerColor);
+            }
+      </style>
+</head>
+<body>
+      <h1>CSS kintamųjų pasiekimo iš JS pavyzdys</h1>
+      <div onmouseover="showColor()" onmouseout="changeColor()">
+            <p></p>
+      </div>
+</body>
+<script>
+      let ele = document.querySelector(':root');
+      let para = document.querySelector('p');
+      function showColor() {
+      let cs = getComputedStyle(ele);
+      para.textContent = ("Previously " + cs.getPropertyValue('--innerColor') + " color");
+      }
+      function changeColor() {
+      let item = document.querySelector('div');
+      item.style.setProperty('--innerColor', 'magenta')
+      }
+</script>
+</html>
