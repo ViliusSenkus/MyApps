@@ -11,7 +11,7 @@
             --innerColor: lightgreen;
             text-align: center;
             }
-            div {
+            .example > div {
             margin: 5%;
             padding: 10%;
             background-color: var(--innerColor);
@@ -20,10 +20,37 @@
       </style>
 </head>
 <body>
-      <h1>CSS kintamųjų pasiekimo iš JS pavyzdys</h1>
-      <div onmouseover="showColor()" onmouseout="changeColor()">
-            <p></p>
+      <div class="example">
+            <h2>CSS kintamųjų pasiekimo iš JS pavyzdys</h2>
+            <div onmouseover="showColor()" onmouseout="changeColor()">
+                  <p></p>
+            </div>
       </div>
+
+      <h2>Media for different screens examples:</h2>
+      <div>
+            <p>
+                  /* Extra small devices (phones, 600px and down) */ <br />
+                  @media only screen and (max-width: 600px) {...}
+            </p>
+            <p style="font-size:20; color:(red, green)">
+                  /* Small devices (portrait tablets and large phones, 600px and up) */ <br />
+                  @media only screen and (min-width: 600px) {...}
+            </p>
+            <p>
+                  /* Medium devices (landscape tablets, 768px and up) */ <br />
+                  @media only screen and (min-width: 768px) {...}
+            </p>
+            <p>
+                  /* Large devices (laptops/desktops, 992px and up) */ <br />
+                  @media only screen and (min-width: 992px) {...}
+            </p>
+            <p>
+                  /* Extra large devices (large laptops and desktops, 1200px and up) */ <br />
+                  @media only screen and (min-width: 1200px) {...}
+            </p>
+      </div>
+
 </body>
 <script>
       let ele = document.querySelector(':root');
