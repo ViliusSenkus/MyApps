@@ -1,8 +1,13 @@
 class Item {
 
-      constructor (id, name){
-           this.name = name;
+      constructor (id, name, price, discountedPrice){
            this.id = id;
+           this.name = name;
+
+           //toliau einancias savybes reikia kelti prie pirkimo arba dar toliau --- galvoti kur padėti.
+           this.price = price;
+           this.discountedPrice = discountedPrice;
+           this.discount = discountedPrice*100/price;
       }
 
       showName(){
@@ -14,18 +19,23 @@ class Item {
       }
 
       get(){
-            return this
+            return this;
+      }
+      put(name){
+            //kreipimasis į db, įdėjimas ir id priskyrimas, surišimas su užsakymu, dabro baru ir t.t.
       }
 
 }
 
 class Purchase {
-      constructor (id, purchaseDate, purchasePlace, totalSum, paymentMethod){
+
+      constructor (id, purchaseDate, purchasePlaceID, totalSum, paymentMethodID, purchaseItemsIDs){
             this.id = id;
             this.purchaseDate = purchaseDate;
-            this.purchasePlace = purchasePlace;
             this.totalSum = totalSum;
-            this.paymentMethod = paymentMethod;
+            this.purchasePlace = purchasePlaceID;
+            this.paymentMethod = paymentMethodID;
+            this.purchaseItems = purchaseItemsIDs;
       }
 
       showPurchase(id){
@@ -33,5 +43,22 @@ class Purchase {
                   return this
             }
             return "no such purchase have been commited"
+      }
+
+      get(){
+            return this;
+      }
+
+      getPurchaseItemsIds(){
+            //gaunami visi pirkiniai
+      }
+
+}
+
+class PurchasePlace {
+
+      constructor (id, purchasePlace){
+            this.id = id;
+            this.purchasePlace = purchasePlace;
       }
 }
