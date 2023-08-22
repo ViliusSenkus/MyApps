@@ -9,16 +9,14 @@ return new class extends Migration
     
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
 
-    //this table holds generall information of products ever purchased in any quantities from any vendor. Just general information about product related to all purchases is stored here. This table is to notice, that  the product overall existed in project.
+        //this table holds generall information of servicess ever purchased in any way from any provider. Just general information about service related to all purchases is stored here. This table is to notice, that the service overall was used in a project.
 
             $table->id();
             $table->string('name', 255);
             $table->text('description')->nullable();
-            $table->string('photo', 255)->nullable();
-            $table->string('measurement_unit', 50);
-
+            
             // $table->integer('warehouse_qty')->default(0);
             // $table->float('price', 12, 2)->unsigned();
             // $table->boolean('status')->default(true);
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('services');
     }
 };
