@@ -17,14 +17,9 @@ return new class extends Migration
             $table->string('name', 255);
             $table->text('description')->nullable();
             $table->string('photo', 255)->nullable();
-            $table->string('measurement_unit', 50);
-
-            // $table->integer('warehouse_qty')->default(0);
-            // $table->float('price', 12, 2)->unsigned();
-            // $table->boolean('status')->default(true);
-            
-            $table->timestamps();
-            $table->softDeletes()->invisible();
+            $table->string('measurement_unit', 50);           
+            $table->timestamps();                   //date record created or edited at
+            $table->softDeletes()->invisible();     //date record deleted at
         });
     }
 

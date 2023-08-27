@@ -11,18 +11,13 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
 
-        //this table holds generall information of servicess ever purchased in any way from any provider. Just general information about service related to all purchases is stored here. This table is to notice, that the service overall was used in a project.
+    //this table holds generall information of servicess ever purchased in any way from any provider. Just general information about service related to all purchases is stored here. This table is to notice, that the service overall was used in a project.
 
             $table->id();
             $table->string('name', 255);
             $table->text('description')->nullable();
-            
-            // $table->integer('warehouse_qty')->default(0);
-            // $table->float('price', 12, 2)->unsigned();
-            // $table->boolean('status')->default(true);
-            
-            $table->timestamps();
-            $table->softDeletes()->invisible();
+            $table->timestamps();               //date record created or edited at
+            $table->softDeletes()->invisible(); //date record deleted at
         });
     }
 
