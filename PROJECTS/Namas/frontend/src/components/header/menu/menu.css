@@ -1,0 +1,18 @@
+ul{
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+}
+li{
+      padding: 4px 12px;
+      box-shadow: 5px 5px 15px grey;
+      color: white;
+      font-weight: bold;
+      background-color: black;
+}
+li:hover{
+      cursor: pointer;
+      box-shadow: 5px 5px 15px red;
+}
+
