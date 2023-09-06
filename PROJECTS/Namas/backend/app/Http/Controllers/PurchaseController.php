@@ -14,10 +14,10 @@ class PurchaseController extends Controller
       public function index()
       {
           try{
-            return "viskas OK";
+            return Purchase::all();
           }
           catch(\Exception $e){
-            return "nieko gero, klaidos".$e;
+            return response("nieko gero, klaidos".$e, 500);
           }
       }
   

@@ -1,24 +1,22 @@
-// import axios from 'axios';
+import { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
 import './PurchaseList.css';
+
+import MainContext from '../../../MainContext.js';
 
 function PurchaseList() {
 
-  const foo1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const foo2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'edit, delete']
+  const {pusrchaseData, setPurchaseData, setLoader} = useContext(MainContext);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
+  useEffect(()=>{
+    setLoader(true);
 
-  //   axios.post('http://localhost:8000/api/purchases', data)
-  //   .then(resp => {
-  //   setMessage({m: resp.data, s: 'success'});
-  //   setTimeout(() => navigate('/admin'), 2000);
-  //   })
-  //   .catch(error => {
-  //   setMessage({m: error.response.data, s: 'danger'})
-  //   })
-  //   .finally(() => setLoading(false));
-  // }
+    axios.get('http://localhost:8000/api/purchases')
+    .then(resp => {setPurchaseData(resp.data)})
+    .finally(() => setLoader(false));
+  }, [])
+    
+
 
   return (
     <table>
@@ -40,14 +38,28 @@ function PurchaseList() {
         </tr>
       </thead>
       <tbody>
-        {foo1.map(numbers =>
-          <tr key={numbers}>
-            <td>{numbers}</td>
-            {foo2.map(text =>
-              <td key={text}>{text}</td>
-            )}
+        { pusrchaseData.map(item =>
+          <tr key={item.id}>
+            <td>{item.id}</td>
+            <td>{item.purchase_date}</td>
+            <td>{item.purchase_place}</td>
+            <td>{item.payment_method}</td>
+            <td>{item.offer_doc}</td>
+            <td>{item.purchase_doc}</td>
+            <td>{item.prepay_doc}</td>
+            <td>{item.final_payment_doc}</td>
+            <td>{item.invoice}</td>
+            <td>{item.other_docs}</td>
+            <td>{item.coments}</td>
+            <td>{item.finished}</td>
+            <td>
+              <button>Edit</button>
+              <button>Delete</button>
+            </td>
+            
           </tr>
-        )}
+          
+        ) }
       </tbody>
     </table>
   )

@@ -1,7 +1,13 @@
 import axios from 'axios';
+
+import { useContext } from 'react';
+import MainContext from '../../../MainContext';
+
 import './PurchaseNew.css';
 
 function PurchaseNew() {
+
+  const {setLoader} = useContext(MainContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,8 +22,7 @@ function PurchaseNew() {
       data.set('finished', 0);
     }
 
-    console.log(data.get('finished'));
-
+    setLoader(true)
 
     axios.post('http://localhost:8000/api/purchases', data)
     .then(resp => {
@@ -26,6 +31,7 @@ function PurchaseNew() {
     // .catch(error => {
     // console.log(error.resp.data);
     // })
+    .finally(()=>{setLoader(false)});
   }
 
   return (
