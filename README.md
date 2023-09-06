@@ -1,20 +1,19 @@
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
 # My
-## My personal web apps repositorium
+## My personal training repositorium
 
-Repositorium is created to keep my personal CV, job offer pages and pages which is being developed out of my ideas or under my iniciative.
+Repositorium is created to train according some tutorials or create some self intended projects.
 
 ### Access granted to:
-- Vilius Senkus
+- Me and everybody
 
 
 ### Ideas
 Here is a list of ideas to keep in this repositorium:
-1. Personal CV page - could be as separete page, or in one page with 2nd point.
-2. Web developement servicess offering page.
-3. My photo page.
-4. Some primary orders (from relatives???).
-5. Some game.
+1. Personal CV page.
+2. My personal hoby pages.
+3. Some games.
+4. usefull everyday apps.
 
 ### My other repositoriums:
 
