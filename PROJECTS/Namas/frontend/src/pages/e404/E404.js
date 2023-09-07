@@ -2,7 +2,7 @@ function E404() {
   
   return (
     <>
-      <h1>Page doesn't exists</h1>
+      <h2>Page doesn't exists</h2>
       <div>Error 404</div>
     </>
   )
