@@ -15,25 +15,26 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('/', function () {
-    return Controller::homePage();
-    return view('home');
+    return view('layouts.main');
+    // return Controller::homePage();
+    // return view('home');
 });
 
-// Route::get('new-entry', function (){
-//     return view('newEntry');
-// });
+Route::get('new-entry', function (){
+    return view('newEntry');
+});
 
-// Route::get('about', function(){
-//     return view('about');
-// });
+Route::get('about', function(){
+    return view('about');
+});
 
-// Route::post('new-entry', function(){
-//     return view('search');
-// });
+Route::post('new-entry', function(){
+    return view('search');
+});
 
-// Route::get('new-subject', function(){
-//     return view('subject');
-// });
+Route::get('new-subject', function(){
+    return view('subject');
+});
 
 // Route::post('new-subject', function(){
 //     return "Sėkmingai prideta";

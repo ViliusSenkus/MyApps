@@ -14,8 +14,10 @@ class Controller extends BaseController
 
     public static function homePage(){
         $subject = Subject::all();
-        if (count($subject)<1)
-            return "Informacija iš konteinerio - jokių įrašų dar nėra, reikia peradresuoti į nulinį puslapį";
+        $suma = count($subject);
+        if (count($subject)>0)
+            
+            return "Informacija iš konteinerio - jokių įrašų dar nėra, reikia peradresuoti į nulinį puslapį".$suma;
         
             return view('userHome');
     }
