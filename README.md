@@ -5,7 +5,7 @@
 Repositorium is a collection of self training projects. Usually it's tutorial based or self iniciated project. No aim to create any final comercial product, just to train an gain experience in different methods, techniques and technologies.
 
 ### Access granted to:
-- VMe and anyone.
+- Me and anyone.
 
 ### List of projects within:
 - e-shop prototypes [Laravel, React]
