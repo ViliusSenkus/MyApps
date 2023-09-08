@@ -31,3 +31,7 @@ Here is a list of product to commit in this repositorium:
 1. Personal CV page.
 2. My hobby page.
 3. Some game apps
+
+### NOTE!!!
+
+DB of laravel.parduotuve is also used among other apps (here -  laravel.internetinė-parduotuve and Projects.shop)
