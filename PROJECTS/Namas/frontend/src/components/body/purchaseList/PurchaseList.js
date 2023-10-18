@@ -5,7 +5,7 @@ import MainContext from '../../../MainContext.js';
 
 function PurchaseList() {
 
-  const {pusrchaseData} = useContext(MainContext);
+  const {purchaseData} = useContext(MainContext);
 
   return (
     <table>
@@ -27,7 +27,7 @@ function PurchaseList() {
         </tr>
       </thead>
       <tbody>
-        { pusrchaseData && pusrchaseData.map(item =>
+        { purchaseData && purchaseData.map(item =>
           <tr key={item.id}>
             <td>{item.id}</td>
             <td>{item.purchase_date}</td>

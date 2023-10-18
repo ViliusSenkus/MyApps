@@ -40,7 +40,7 @@ function App() {
     <BrowserRouter>
       <MainContext.Provider value={contextValues}>
         <MainLayout>
-          <Back_request><h2>Backo užklausos</h2></Back_request>
+          {/* <Back_request><h2>Backo užklausos</h2></Back_request> */}
           <Routes>
             <Route path="/" element={<PurchaseList />} />
             <Route path="/new/" element={<PurchaseNew />} />

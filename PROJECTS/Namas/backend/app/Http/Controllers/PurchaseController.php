@@ -63,7 +63,7 @@ class PurchaseController extends Controller
        */
       public function show(Purchase $purchase)
       {
-          //
+
       }
   
       /**
@@ -88,5 +88,14 @@ class PurchaseController extends Controller
       public function destroy(Purchase $purchase)
       {
           //
+      }
+
+      // my functions:
+      public function getByid($id){
+        try {
+          return Purchase::find($id);
+        } catch(\Exception $e) {
+          return response('Nepavyko gauti produkto duomenų', 500);
+        }
       }
 }
