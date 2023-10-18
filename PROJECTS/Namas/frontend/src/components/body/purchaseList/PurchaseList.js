@@ -1,22 +1,11 @@
-import { useEffect, useContext } from 'react';
-import axios from 'axios';
+import {useContext } from 'react';
 import './PurchaseList.css';
 
 import MainContext from '../../../MainContext.js';
 
 function PurchaseList() {
 
-  const {pusrchaseData, setPurchaseData, setLoader} = useContext(MainContext);
-
-  useEffect(()=>{
-    setLoader(true);
-
-    axios.get('http://localhost:8000/api/purchases')
-    .then(resp => {setPurchaseData(resp.data)})
-    .finally(() => setLoader(false));
-  }, [])
-    
-
+  const {pusrchaseData} = useContext(MainContext);
 
   return (
     <table>
@@ -38,7 +27,7 @@ function PurchaseList() {
         </tr>
       </thead>
       <tbody>
-        { pusrchaseData.map(item =>
+        { pusrchaseData && pusrchaseData.map(item =>
           <tr key={item.id}>
             <td>{item.id}</td>
             <td>{item.purchase_date}</td>
