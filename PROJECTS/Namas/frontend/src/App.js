@@ -23,7 +23,7 @@ function App() {
   useEffect(()=>{
     setLoader(true);
 
-    axios.get('http://localhost:8000/api/purchases')
+    axios.get('http://localhost:8000/api/purchase')
     .then(resp => {setPurchaseData(resp.data)})
     .finally(() => setLoader(false));
   }, [])

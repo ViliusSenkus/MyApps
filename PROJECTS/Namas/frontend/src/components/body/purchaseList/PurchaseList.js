@@ -1,5 +1,6 @@
 import {useContext } from 'react';
 import './PurchaseList.css';
+import axios from 'axios';
 
 import MainContext from '../../../MainContext.js';
 
@@ -7,6 +8,13 @@ function PurchaseList() {
 
   const {purchaseData} = useContext(MainContext);
 
+  const handleDelete = (id) =>{
+    axios.delete(`http://localhost:8000/api/purchase/${id}`)
+    .then (resp => console.log(resp.data))
+    .catch (error => {console.log('Klaida', error)})
+    .finally (console.log('finally ištrinta'))
+  }
+  
   return (
     <table>
       <thead>
@@ -43,7 +51,7 @@ function PurchaseList() {
             <td>{item.finished}</td>
             <td>
               <button>Edit</button>
-              <button>Delete</button>
+              <button onClick={()=>handleDelete(item.id)}>Delete</button>
             </td>
             
           </tr>

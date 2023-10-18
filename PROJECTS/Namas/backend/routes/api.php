@@ -23,11 +23,13 @@ use Laravel\Sanctum\Sanctum;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::resource('purchase', PurchaseController::class)->only(['index','store', 'show', 'update','destroy']);
+Route::apiResource('product', ProductController::class); // API (html) Resource Route destroy
 
-Route::group(['prefix' => 'purchases'], function(){
-    Route::get('/', [PurchaseController::class, 'index']);
-    Route::get('/{product}', [PurchaseController::class, 'getByid']);
-    Route::post('/', [PurchaseController::class, 'create']);
+// Route::group(['prefix' => 'purchases'], function(){
+//     Route::get('/', [PurchaseController::class, 'index']);
+//     Route::get('/{product}', [PurchaseController::class, 'getByid']);
+//     Route::post('/', [PurchaseController::class, 'create']);
 
     // Route::middleware('auth:sanctum')->post('/', [PurchaseController::class, 'create']);
-});
+// });

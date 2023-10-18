@@ -24,7 +24,7 @@ function PurchaseNew() {
 
     setLoader(true)
 
-    axios.post('http://localhost:8000/api/purchases', data)
+    axios.post('http://localhost:8000/api/purchase', data)
     .then(resp => {
     console.log(resp.data);
     })
