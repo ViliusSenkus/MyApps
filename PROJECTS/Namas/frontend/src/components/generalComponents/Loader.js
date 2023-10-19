@@ -1,14 +1,12 @@
 import './loader.css';
-import { useContext } from "react";
-import MainContext from "../../MainContext";
 
 function Loader() {
 
-  const { loader } = useContext(MainContext);
-  
-  return
-  loader && 
-                  <h1>Kraunama...</h1>
+  return (
+    <div className="modal-window">
+      <img src="https://cdn4.iconfinder.com/data/icons/abstract-elements/96/09-dark-cycle-loop-adapt-modify-process-turn-next-1024.png" alt='laoding page' />
+    </div>
+  )
 }
 
 export default Loader;

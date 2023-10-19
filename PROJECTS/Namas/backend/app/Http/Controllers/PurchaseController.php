@@ -60,7 +60,7 @@ class PurchaseController extends Controller
           return 'Purchase added successfully';
         } 
         catch (\Exception $e) {
-          return response('Error while creating Purchase ocured. Details : '.$e, 500);
+          return response('Error while creating Purchase occured. Details : '.$e, 500);
         }
       }
   

@@ -13,7 +13,12 @@ class ProductController extends Controller
        */
       public function index()
       {
-        //
+        try{
+            return Product::all();
+          }
+          catch(\Exception $e){
+            return response("atsitiko serverio klaida".$e, 500);
+          }
       }
   
       /**
@@ -27,9 +32,24 @@ class ProductController extends Controller
       /**
        * Store a newly created resource in storage.
        */
-      public function store()
+      public function store(Request $request)
       {
-          //
+
+        try {
+            $data = new Product;
+  
+            $data->name = $request->name;
+            $data->description = $request->description;
+            $data->photo = $request->photo;
+            $data->measurement_unit = $request->measurement_unit;
+
+            $data->save();
+            
+            return ('Product added successfully');
+          } 
+          catch (\Exception $e) {
+            return response('Error while creating Product occured. Details : '.$e, 500);
+          }
       }
   
       /**
@@ -37,7 +57,7 @@ class ProductController extends Controller
        */
       public function show(Product $product)
       {
-          //
+          return Product::show($product) ;
       }
   
       /**
@@ -61,6 +81,7 @@ class ProductController extends Controller
        */
       public function destroy(Product $product)
       {
-          //
+        $product->delete();
+        return response('ištrinta sėkmingai', 200);
       }
 }

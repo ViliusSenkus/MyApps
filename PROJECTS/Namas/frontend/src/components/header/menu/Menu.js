@@ -1,16 +1,26 @@
 import './menu.css'
 
-function Menu(){
-      return (
-            <nav>
-                  <ul>
-                        <li>naujas pirkimas</li>
-                        <li>pirkimų lentelė</li>
-                        <li>paieška</li>
-                  </ul>
-                        
-            </nav>
-      )
+import { Link } from 'react-router-dom';
+
+function Menu() {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">pirkimų lentelė</Link>
+        </li>
+        <li>
+          <Link to="/new">naujas pirkimas</Link>
+        </li>
+        <li>
+          <Link to="/products">produktų sąrašas</Link>
+        </li>
+        <li>
+          <Link to="/products/new">naujas produktas</Link>
+        </li>
+      </ul>
+    </nav>
+  )
 }
 
 export default Menu;
