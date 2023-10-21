@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('exact_products', function (Blueprint $table) {
 
-    //this table contains information on all separatly purchased servicess (if service is purchased more than onces, all records of each separate purchase is here): inforation on service specifics, ammount/time it was used, etc.
+    //this table contains information on all separatly purchased servicess (if service is purchased more than onces, all records of each separate purchase is here): information on service specifics, ammount/time it was used, etc.
 
             $table->id();
             $table->text('detailed_description')->nullable();   //characteristics not including in generall description. Such as color, dimentions, etc.

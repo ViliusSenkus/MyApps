@@ -37,7 +37,8 @@ class ProductController extends Controller
 
         try {
             $data = new Product;
-  
+
+            $data->manufacturer = $request->manufacturer;
             $data->name = $request->name;
             $data->description = $request->description;
             $data->photo = $request->photo;
