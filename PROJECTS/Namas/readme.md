@@ -1,7 +1,5 @@
 # ToDo
 
-- iš produkto išimti paveiksliuką (nebent palikti įmomės ir konkretaus gaminio tipo logotopą) ir matavimo vienetus
-
 - sukurti produkto serijos aprašymą, į jį įdedant (matavimo vienetų tipą, kiekį, nuotrauką).
 
 - sukurti produktų/paslaugų kategorijų / subkategorijų DB (vienas ar keli table????):
