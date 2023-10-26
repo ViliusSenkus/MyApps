@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::resource('purchase', PurchaseController::class)->only(['index','store', 'show', 'update','destroy']);
 Route::apiResource('product', ProductController::class); // API (html) Resource Route destroy
+Route::get('/series/{product}', [ProductController::class, 'show_SerieProducts']);
 
 // Route::group(['prefix' => 'purchases'], function(){
 //     Route::get('/', [PurchaseController::class, 'index']);

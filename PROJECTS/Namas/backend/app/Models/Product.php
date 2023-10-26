@@ -12,4 +12,8 @@ class Product extends Model
     use SoftDeletes;
     protected $table = 'products';
     protected $guarded = false;
+
+    public function serieProduct(){
+        return $this->hasMany(SerieProduct::class);
+    }
 }

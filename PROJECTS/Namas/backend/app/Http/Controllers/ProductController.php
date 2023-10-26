@@ -58,7 +58,7 @@ class ProductController extends Controller
        */
       public function show(Product $product)
       {
-          return Product::show($product) ;
+        return Product::find($product);
       }
   
       /**
@@ -84,5 +84,20 @@ class ProductController extends Controller
       {
         $product->delete();
         return response('ištrinta sėkmingai', 200);
+      }
+
+      // MY FUNCTIONS
+
+      public function show_SerieProducts(Product $product)
+      {
+        try{
+          $data = [];
+          array_push($data, Product::find($product));
+          array_push($data, $product->serieProduct);
+          return $data;
+        }
+        catch ( \Exception $e){
+          return response('Server error on creating list of related products--- '.$e, 500);
+        }  
       }
 }
