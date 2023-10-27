@@ -90,14 +90,18 @@ class ProductController extends Controller
 
       public function show_SerieProducts(Product $product)
       {
-        try{
-          $data = [];
-          array_push($data, Product::find($product));
-          array_push($data, $product->serieProduct);
-          return $data;
-        }
-        catch ( \Exception $e){
-          return response('Server error on creating list of related products--- '.$e, 500);
-        }  
+        //returning object
+        return Product::with('serieProduct')->find($product->id);
+
+        //older version:
+        // try{
+        //   $data = [];
+        //   array_push($data, Product::find($product));
+        //   array_push($data, $product->serieProduct);
+        //   return $data;
+        // }
+        // catch ( \Exception $e){
+        //   return response('Server error on creating list of related products--- '.$e, 500);
+        // }  
       }
 }
