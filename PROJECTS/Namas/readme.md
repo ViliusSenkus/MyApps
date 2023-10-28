@@ -1,17 +1,8 @@
 # ToDo
 
-- sukurti produktų/paslaugų kategorijų / subkategorijų DB (vienas ar keli table????):
-      
-      ETAPAI
-      * sklypas
-      * projektavimas
-      * statyba
-      * įvadai/inžinerija
-      * apdaila
-      * įrengimas
-      * visi/kita
+- sukurti application scope subkategorijų lentelę :
 
-      PANAUDOJIMO VIETA
+      SCOPE: SUBSCOPE
       * sklypas/teritorija: žemės darbai, apželdinimas, laistymas....
       * pamatai: konstrukcija, apšiltinimas ...
       * sienos: -//-
@@ -23,6 +14,10 @@
       - pridėti langą kuriame matysis visi sukrauti pirkiniai
       - pridėti mygtukus (pridėti produktą, pridėti paslaugą)
       - naujo produkto/paslaugos įvedimo laukelyje teikti automatizuotus pasiųlymus filtruojant jau esamus produktus arba siūlyti sukurti naują.
+# Notes on DB
+
+- produktai susieti su building_phases elementais 'apdaila', papildomai gali būti susieti ir su 'inžinerija' arba 'galutinė apdaila' elementais.
+
 
 # <i>Personall note</i>
 

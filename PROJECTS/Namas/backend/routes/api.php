@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApplicationScopeController;
+use App\Http\Controllers\BuildingPhaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -8,6 +10,7 @@ use App\Http\Controllers\ExactServiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ServiceController;
+use App\Models\ApplicationScope;
 use Laravel\Sanctum\Sanctum;
 
 /*
@@ -19,13 +22,14 @@ use Laravel\Sanctum\Sanctum;
 | be assigned to the "api" middleware group.
 |
 */
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::resource('purchase', PurchaseController::class)->only(['index','store', 'show', 'update','destroy']);
 Route::apiResource('product', ProductController::class); // API (html) Resource Route destroy
 Route::get('/series/{product}', [ProductController::class, 'show_SerieProducts']);
+Route::apiResource('/phase', BuildingPhaseController::class);
+Route::apiResource('/scope', ApplicationScopeController::class);
 
 // Route::group(['prefix' => 'purchases'], function(){
 //     Route::get('/', [PurchaseController::class, 'index']);
