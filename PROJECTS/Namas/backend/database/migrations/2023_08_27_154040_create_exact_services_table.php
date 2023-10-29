@@ -6,31 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('exact_services', function (Blueprint $table) {
 
-    //this table contains information on all separatly purchased servicess (if service is purchased more than onces, all records of each separate purchase is here): information on service specifics, ammount/time it was used, etc.
+            //this table contains information on all separatly purchased servicess (if service is purchased more than onces, all records of each separate purchase is here): information on service specifics, ammount/time it was used, etc.
 
             $table->id();
-            $table->text('detailed_description')->nullable();   //characteristics not including in generall description. Such as color, dimentions, etc.
-            $table->string('picture', 255)->nullable();         //picture of rented item or associative pic.
+            $table->foreignId('service_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->nullable(false)->comment('Id of Service');
+            $table->text('description')->nullable()->comment('Detailed descrription of service, characteristics not including in generall description. Such as color, dimentions, period, etc.');
+            $table->string('picture', 255)->nullable()->comment('Link to picture of rented item or associative pic.');
             $table->float('standart_price_at_a_moment', 8, 2)->unsigned();
-            $table->float('price_paid', 8, 2)->unsigned();
-            $table->string('discount_enabler', 255)->nullable();//discount card name, etc.
-            $table->string('documents', 255)->nullable();       //links to any electronic documents avialable
-            $table->float('quantity', 8, 2)->unsigned();        //just positive numbers in SQL accepted.
-            $table->timestamps();               //date record created or edited at
-            $table->softDeletes()->invisible(); //date record deleted at
+            $table->float('price_paid', 8, 2)->unsigned()->nullable(false);
+            $table->string('discount_enabler', 50)->nullable()->comment('discount card name, App name, etc.');
+            $table->string('documents', 255)->nullable()->comment('links to any electronic documents avialable, such as guqrantees, instructions, offers, etc.');
+            $table->float('quantity', 8, 2)->unsigned()->nullable(false);
+            $table->timestamps();
+            $table->softDeletes()->invisible();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('exact_services');

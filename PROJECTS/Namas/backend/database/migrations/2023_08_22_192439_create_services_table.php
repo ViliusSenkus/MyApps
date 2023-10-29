@@ -6,24 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     public function up(): void
     {
         Schema::create('services', function (Blueprint $table) {
 
-    //this table holds generall information of servicess ever purchased in any way from any provider. Just general information about service related to all purchases is stored here. This table is to notice, that the service overall was used in a project.
+            //this table holds generall information of servicess ever purchased in any way from any provider. Just general information about service related to all purchases is stored here. This table is to notice, that the service overall was used in a project.
 
             $table->id();
-            $table->string('name', 255);
-            $table->text('description')->nullable();
-            $table->timestamps();               //date record created or edited at
-            $table->softDeletes()->invisible(); //date record deleted at
+            $table->string('type, 255')->nullable(false)->comment('Type of service. ex: rent, drive');
+            $table->string('provider', 255)->nullable(false)->comment('Provider of service. Company or private person');
+            $table->text('description')->nullable()->comment('General information on bunch of this service type. Just common information to all types');
+            $table->timestamps();
+            $table->softDeletes()->invisible();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('services');

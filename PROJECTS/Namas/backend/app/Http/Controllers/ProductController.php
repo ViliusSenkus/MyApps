@@ -41,8 +41,7 @@ class ProductController extends Controller
             $data->manufacturer = $request->manufacturer;
             $data->name = $request->name;
             $data->description = $request->description;
-            $data->photo = $request->photo;
-            $data->measurement_unit = $request->measurement_unit;
+            $data->logo = $request->logo;
 
             $data->save();
             

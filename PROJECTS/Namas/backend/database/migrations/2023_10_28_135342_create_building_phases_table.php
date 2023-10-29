@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('building_phases', function (Blueprint $table) {
             $table->id();
-            $table->string('phase', 255);
-            $table->text('description')->nullable();
+            $table->string('phase', 50)->nullable(false)->comment('Name of building phase');
+            $table->text('description')->nullable()->comment('Short generall description, limitation of phase');
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes()->invisible();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('building_phases');

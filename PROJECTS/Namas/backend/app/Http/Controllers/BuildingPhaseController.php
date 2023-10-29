@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BuildingPhase;
 use Illuminate\Http\Request;
+use App\Models\BuildingPhase;
+
+use Illuminate\Support\Facades\DB;
 
 class BuildingPhaseController extends Controller
 {

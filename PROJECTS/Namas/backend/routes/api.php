@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationScopeController;
+use App\Http\Controllers\ApplicationSubScopeController;
 use App\Http\Controllers\BuildingPhaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +28,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::resource('purchase', PurchaseController::class)->only(['index','store', 'show', 'update','destroy']);
 Route::apiResource('product', ProductController::class); // API (html) Resource Route destroy
-Route::get('/series/{product}', [ProductController::class, 'show_SerieProducts']);
-Route::apiResource('/phase', BuildingPhaseController::class);
-Route::apiResource('/scope', ApplicationScopeController::class);
+Route::get('/product/{product}/serie', [ProductController::class, 'show_SerieProducts']);
+Route::apiResource('phase', BuildingPhaseController::class);
+Route::apiResource('scope', ApplicationScopeController::class);
+Route::apiResource('subscope', ApplicationSubScopeController::class);
 
 // Route::group(['prefix' => 'purchases'], function(){
 //     Route::get('/', [PurchaseController::class, 'index']);

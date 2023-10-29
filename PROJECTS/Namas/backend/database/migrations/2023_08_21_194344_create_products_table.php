@@ -6,26 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
 
-    //this table holds generall information of products ever purchased in any quantities from any vendor. Just general information about product related to all purchases is stored here. This table is to notice, that  the product overall existed in project.
+            //this table holds generall information of products ever purchased in any quantities from any vendor. Just general information about product related to all purchases is stored here. This table is to notice, that  the product overall existed in project.
 
             $table->id();
-            $table->string('name', 255);
-            $table->text('description')->nullable();
-            $table->string('photo', 255)->nullable();
-            $table->string('measurement_unit', 50);           
-            $table->timestamps();                   //date record created or edited at
-            $table->softDeletes()->invisible();     //date record deleted at
+            $table->string('manufacturer', 50)->nullable(false)->comment('Producer of product');
+            $table->string('brand', 255)->nullable()->comment('Brand name, serie name of product');
+            $table->text('description')->nullable()->comment('Just generall information related to bunch of this product');
+            $table->string('logo', 255)->nullable()->comment('Link to manufacturer and/or brand logo in one file');
+            $table->timestamps();
+            $table->softDeletes()->invisible();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('products');

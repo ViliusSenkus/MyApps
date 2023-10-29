@@ -1,6 +1,10 @@
 # ToDo
 
-- sukurti application scope subkategorijų lentelę :
+- sukurti relation'us tarp exact product ir serie product, application scope ir application sub scope.
+
+- prodėti stulpelį arba per papildomą lentelę sukurti relation'us tarp purchase ir exact product.
+
+- sukurti application sub scope (subkategorijų) lentelę, arba pervardinti migracijose į enum tipą:
 
       SCOPE: SUBSCOPE
       * sklypas/teritorija: žemės darbai, apželdinimas, laistymas....
