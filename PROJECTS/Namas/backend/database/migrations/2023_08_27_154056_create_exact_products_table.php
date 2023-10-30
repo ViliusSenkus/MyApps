@@ -15,6 +15,7 @@ return new class extends Migration
 
             $table->id();
             $table->foreignId('serie_product_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->nullable(false)->comment('Id of Exact product description');
+            $table->foreignId('purchase_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->nullable(false)->comment('Id of Purchase');
             $table->text('description')->nullable()->comment('Detailed descrription of product characteristics not including in general description. Such as color, dimentions, etc.');
             $table->string('picture', 255)->nullable()->comment('Link to picture of product if differ from general product');
             $table->float('standart_price_at_a_moment', 8, 2)->unsigned();

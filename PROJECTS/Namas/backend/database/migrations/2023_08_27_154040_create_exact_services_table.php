@@ -15,6 +15,7 @@ return new class extends Migration
 
             $table->id();
             $table->foreignId('service_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->nullable(false)->comment('Id of Service');
+            $table->foreignId('purchase_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->nullable(false)->comment('Id of Purchase');
             $table->text('description')->nullable()->comment('Detailed descrription of service, characteristics not including in generall description. Such as color, dimentions, period, etc.');
             $table->string('picture', 255)->nullable()->comment('Link to picture of rented item or associative pic.');
             $table->float('standart_price_at_a_moment', 8, 2)->unsigned();
