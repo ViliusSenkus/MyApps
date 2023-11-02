@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ApplicationScope extends Model
@@ -12,4 +13,9 @@ class ApplicationScope extends Model
     use SoftDeletes;
     protected $table = "application_scopes";
     protected $guarded = false;
+
+    public function applicationSubScope(): HasMany
+    {
+        return $this->hasMany(ApplicationSubScope::class);
+    }
 }

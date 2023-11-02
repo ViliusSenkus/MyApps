@@ -6,19 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
+   
     public function up(): void
     {
-        Schema::create('building_phase_exact_service', function (Blueprint $table) {
+        Schema::create('spaces', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('building_phase_id')->constrained()->onDelete('cascade');
-            $table->foreignId('exact_service_id')->constrained()->onDelete('cascade');
+            $table->string('name')->unique()->comment('name of room, or part of the yard, etc.');
+            $table->text('description');
             $table->timestamps();
+            $table->softDeletes()->invisible();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('building_phase_exact_service');
+        Schema::dropIfExists('spaces');
     }
 };

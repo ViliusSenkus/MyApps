@@ -7,49 +7,46 @@ use Illuminate\Http\Request;
 
 class ApplicationScopeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        try{
-            return ApplicationScope::all();
-        }
-        catch(\Exception $e){
-            return response('error on collecting scopes from DB '.$e);
-        }
-    }
+   public function index()
+   {
+      try {
+         return ApplicationScope::all();
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+   public function store(Request $request)
+   {
+      try {
+         ApplicationScope::create($request->all());
+         return response('Application scope ' . $request->name . ' created successfully', 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ApplicationScope $applicationScope)
-    {
-        return ApplicationScope::findOrFail($applicationScope->id);
-    }
+   public function show(ApplicationScope $applicationScope)
+   {
+      try {
+         return ApplicationScope::find($applicationScope);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ApplicationScope $applicationScope)
-    {
-        //
-    }
+   public function update(Request $request, ApplicationScope $applicationScope)
+   {
+      //
+   }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ApplicationScope $applicationScope)
-    {
-        ApplicationScope::destroy($applicationScope->id);
-        return response('scope with id '.$applicationScope->id.' deleted successfully');
-    }
+   public function destroy(ApplicationScope $applicationScope)
+   {
+      try {
+         ApplicationScope::destroy($applicationScope);
+         return response('Scope ' . $applicationScope->name . ' deleted successfully', 200);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 }

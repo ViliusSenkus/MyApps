@@ -1,10 +1,8 @@
 # ToDo
 
-- sukurti relation'us tarp exact product ir serie product, application scope ir application sub scope.
+- prie building phase, spaces, appScope prideti galimybe matyti bunch of foto ar schemų ar pan.
 
-- prodėti stulpelį arba per papildomą lentelę sukurti relation'us tarp purchase ir exact product.
-
-- sukurti application sub scope (subkategorijų) lentelę, arba pervardinti migracijose į enum tipą:
+- sukurti application scope (subkategorijų) lentelę, arba pervardinti migracijose į enum tipą:
 
       SCOPE: SUBSCOPE
       * sklypas/teritorija: žemės darbai, apželdinimas, laistymas....
@@ -18,6 +16,7 @@
       - pridėti langą kuriame matysis visi sukrauti pirkiniai
       - pridėti mygtukus (pridėti produktą, pridėti paslaugą)
       - naujo produkto/paslaugos įvedimo laukelyje teikti automatizuotus pasiųlymus filtruojant jau esamus produktus arba siūlyti sukurti naują.
+
 # Notes on DB
 
 - produktai susieti su building_phases elementais 'apdaila', papildomai gali būti susieti ir su 'inžinerija' arba 'galutinė apdaila' elementais.

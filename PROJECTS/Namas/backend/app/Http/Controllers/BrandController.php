@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
-use App\Models\Service;
-
-class ServiceController extends Controller
+class BrandController extends Controller
 {
+
    public function index()
    {
       try {
-         return Service::all();
+         return Brand::all();
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
@@ -20,32 +20,32 @@ class ServiceController extends Controller
    public function store(Request $request)
    {
       try {
-         Service::create(request()->all());
-         return response('Service ' . $request->type . ' ' . $request->name . ' created successfully', 201);
+         Brand::create($request->all());
+         return response('Brand ' . $request->name . ' created successfully', 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function show(Service $service)
+   public function show(Brand $brand)
    {
       try {
-         return Service::find($service);
+         return Brand::find($brand);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function update(Request $request, Service $service)
+   public function update(Request $request, Brand $brand)
    {
       //
    }
 
-   public function destroy(Service $service)
+   public function destroy(Brand $brand)
    {
       try {
-         Service::destroy($service);
-         return response('Service ' . $service->name . ' deleted successfully', 200);
+         Brand::destroy($brand);
+         return response('Brand ' . $brand->name . ' deleted successfully', 200);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

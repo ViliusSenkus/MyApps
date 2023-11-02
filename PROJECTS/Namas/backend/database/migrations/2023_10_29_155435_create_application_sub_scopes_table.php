@@ -11,9 +11,9 @@ return new class extends Migration
     {
         Schema::create('application_sub_scopes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('applicatio_scope_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->nullable(false)->comment('Id number of application scope');
-            $table->string('subscope', 100)->nullable(false)->comment('Exact place of product or service is intended to be used');
+            $table->string('name', 100)->comment('Exact place of product or service is intended to be used');
             $table->text('description')->nullable()->comment('Description of intended use');
+            $table->foreignId('application_scope_id')->constrained()->onUpdate('cascade')->comment('Id number of application scope');    
             $table->timestamps();
             $table->softDeletes()->invisible();
         });

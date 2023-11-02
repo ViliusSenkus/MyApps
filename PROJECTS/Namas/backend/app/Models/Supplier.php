@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BuildingPhase extends Model
+class Supplier extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table = "building_phases";
-    protected $fillable = ['name', 'description'];
 
-    public function exactService(): HasMany
+    protected $table = "suppliers";
+
+    protected $fillable = ['name', 'logo', 'link'];
+
+    public function purchase() : HasMany
     {
         return $this->hasMany(Purchase::class);
     }

@@ -7,47 +7,45 @@ use Illuminate\Http\Request;
 
 class ApplicationSubScopeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-       try{
-        return ApplicationSubScope::all();
-       }catch(\Exception $e){
-            return response('error on collecting subscopes from DB '.$e);
-        }
-    }
+   public function index()
+   {
+      try {
+         return ApplicationSubScope::all();
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+   public function store(Request $request)
+   {
+      try {
+         ApplicationSubScope::create($request->all());
+         return response('Application sub scope ' . $request->name . ' created successfully', 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ApplicationSubScope $applicationSubScope){
-        return ApplicationSubScope::find($applicationSubScope);
-    }
+   public function show(ApplicationSubScope $applicationSubScope)
+   {
+      try {
+         return ApplicationSubScope::find($applicationSubScope);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ApplicationSubScope $applicationSubScope)
-    {
-        //
-    }
+   public function update(Request $request, ApplicationSubScope $applicationSubScope)
+   {
+   }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ApplicationSubScope $applicationSubScope)
-    {
-        ApplicationSubScope::destroy($applicationSubScope->id);
-        return response('Application sub scope, with ID'. $applicationSubScope->id.' deleted successfully');
-    }
+   public function destroy(ApplicationSubScope $applicationSubScope)
+   {
+      try {
+         ApplicationSubScope::destroy($applicationSubScope);
+         return response('Application sub scope ' . $applicationSubScope->name . ' deleted successfully');
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 }

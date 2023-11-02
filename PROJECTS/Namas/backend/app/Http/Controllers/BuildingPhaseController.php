@@ -9,46 +9,38 @@ use Illuminate\Support\Facades\DB;
 
 class BuildingPhaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        try{return BuildingPhase::all();}
-        catch(\Exception $e){return response('Error on collecting phases in database '.$e);}
-      
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+   public function index()
+   {
+      return BuildingPhase::all();
+   }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(BuildingPhase $buildingPhase)
-    {
-        return BuildingPhase::find($buildingPhase);
-    }
+   public function store(Request $request)
+   {
+      try {
+         BuildingPhase::create($request->all());
+         return response('Building phase ' . $request->name . ' created successfully', 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, BuildingPhase $buildingPhase)
-    {
-        //
-    }
+   public function show(BuildingPhase $buildingPhase)
+   {
+      return BuildingPhase::find($buildingPhase);
+   }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(BuildingPhase $buildingPhase)
-    {
-        BuildingPhase::destroy($buildingPhase);
-        return ($buildingPhase.'--- Deleted successfully ---');
-    }
+   public function update(Request $request, BuildingPhase $buildingPhase)
+   {
+      //
+   }
+   public function destroy(BuildingPhase $buildingPhase)
+   {
+      try {
+         BuildingPhase::destroy($buildingPhase);
+         return ('Building phase ' . $buildingPhase->name . ' deleted successfully');
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 }

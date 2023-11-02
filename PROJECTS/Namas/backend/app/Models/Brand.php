@@ -8,20 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Brand extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table = 'products';
-    protected $guarded = ['id', 'brand_id', 'created_at','updated_at', 'deleted_at'];
+    protected $table = 'brands';
+    protected $fillable = ['name','description','logo','link'];
 
-    public function purchase(): HasMany
+    public function manufacturer(): BelongsTo
     {
-        return $this->hasMany(Purchase::class);
+        return $this->belongsTo(Manufacturer::class);
     }
 
-    public function brand(): BelongsTo
+    public function product(): HasMany
     {
-        return $this->belongsTo(Brand::class);
+        return $this->hasMany(Product::class);
     }
 }

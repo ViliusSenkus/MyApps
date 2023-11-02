@@ -11,13 +11,16 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
 
-            //this table holds generall information of products ever purchased in any quantities from any vendor. Just general information about product related to all purchases is stored here. This table is to notice, that  the product overall existed in project.
-
             $table->id();
-            $table->string('manufacturer', 50)->nullable(false)->comment('Producer of product');
-            $table->string('brand', 255)->nullable()->comment('Brand name, serie name of product');
-            $table->text('description')->nullable()->comment('Just generall information related to bunch of this product');
-            $table->string('logo', 255)->nullable()->comment('Link to manufacturer and/or brand logo in one file');
+            $table->string('name')->comment('Generall naming of product, NOT related to brand or manufacturer. Ex.: cement, insulation wool, pipe, etc.');
+            $table->text('description')->nullable()->comment('Generall information related to this product of this brand but independently from package or other similar specific factors');
+            $table->foreign('brand_id')->constrained()->cascadeOnUpdate();
+            $table->string('package_type')->comment('ex: bucket, box, unpacked, etc.');
+            $table->string('measurement_units')->comment('ex: kg, l, m3, units, etc.');
+            $table->integer('ammount_in_unit')->unsigned()->nullable()->comment('Just number without the units. Measurement units mentioned in previous column');
+            $table->string('measurement_units2')->comment('ex: kg, l, m3, units, etc.');
+            $table->integer('ammount_in_unit2')->unsigned()->nullable()->comment('Just number without the units. Measurement units mentioned in previous column)');
+            $table->string('picture', 255)->nullable()->comment('Link to image from official product description');
             $table->timestamps();
             $table->softDeletes()->invisible();
         });

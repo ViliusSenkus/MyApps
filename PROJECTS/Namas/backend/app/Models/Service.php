@@ -11,5 +11,5 @@ class Service extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'services';
-    protected $guarded = false;
+    protected $guarded = ['id','created_at','updated_at','deleted_at'];
 }

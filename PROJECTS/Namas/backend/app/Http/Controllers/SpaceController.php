@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Space;
 use Illuminate\Http\Request;
 
-use App\Models\Service;
-
-class ServiceController extends Controller
+class SpaceController extends Controller
 {
    public function index()
    {
       try {
-         return Service::all();
+         return Space::all();
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
@@ -20,32 +19,31 @@ class ServiceController extends Controller
    public function store(Request $request)
    {
       try {
-         Service::create(request()->all());
-         return response('Service ' . $request->type . ' ' . $request->name . ' created successfully', 201);
+         Space::create($request->all());
+         return response('Space ' . $request->name . ' created successfully', 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function show(Service $service)
+   public function show(Space $space)
    {
       try {
-         return Service::find($service);
+         return Space::find($space);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function update(Request $request, Service $service)
+   public function update(Request $request, Space $space)
    {
-      //
    }
 
-   public function destroy(Service $service)
+   public function destroy(Space $space)
    {
       try {
-         Service::destroy($service);
-         return response('Service ' . $service->name . ' deleted successfully', 200);
+         Space::destroy($space);
+         return response('Space ' . $space->name . ' deleted successfully');
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

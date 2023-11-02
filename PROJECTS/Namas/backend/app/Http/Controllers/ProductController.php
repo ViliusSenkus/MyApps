@@ -3,104 +3,81 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Product;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
-      /**
-       * Display a listing of the resource.
-       */
-      public function index()
-      {
-        try{
-            return Product::all();
-          }
-          catch(\Exception $e){
-            return response("atsitiko serverio klaida".$e, 500);
-          }
+   public function index()
+   {
+      try {
+         return Product::all();
+      } catch (\Exception $e) {
+         return response("Server error -faux pas -" . $e, 500);
       }
-  
-      /**
-       * Show the form for creating a new resource.
-       */
-      public function create()
-      {
-          //
+   }
+   public function store(Request $request)
+   {
+      try {
+         Product::created($request->all());
+         return response('Product ' . $request->name . ' created successfully', 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
       }
-  
-      /**
-       * Store a newly created resource in storage.
-       */
-      public function store(Request $request)
-      {
+   }
+   public function show(Product $product)
+   {
+      try {
+         return Product::find($product);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-        try {
-            $data = new Product;
+   public function update(Request $request, Product $product)
+   {
+      //
+   }
 
-            $data->manufacturer = $request->manufacturer;
-            $data->name = $request->name;
-            $data->description = $request->description;
-            $data->logo = $request->logo;
+   public function destroy(Product $product)
+   {
+      try {
+         Product::destroy($product);
+         return response('Product ' . $product->name . ' deleted successfully', 200);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 
-            $data->save();
-            
-            return ('Product added successfully');
-          } 
-          catch (\Exception $e) {
-            return response('Error while creating Product occured. Details : '.$e, 500);
-          }
-      }
-  
-      /**
-       * Display the specified resource.
-       */
-      public function show(Product $product)
-      {
-        return Product::find($product);
-      }
-  
-      /**
-       * Show the form for editing the specified resource.
-       */
-      public function edit(Product $product)
-      {
-          //
-      }
-  
-      /**
-       * Update the specified resource in storage.
-       */
-      public function update(Product $product)
-      {
-          //
-      }
-  
-      /**
-       * Remove the specified resource from storage.
-       */
-      public function destroy(Product $product)
-      {
-        $product->delete();
-        return response('ištrinta sėkmingai', 200);
-      }
+   // MY FUNCTIONS
 
-      // MY FUNCTIONS
-
-      public function show_SerieProducts(Product $product)
-      {
-        //returning object
-        return Product::with('serieProduct')->find($product->id);
-
-        //older version:
-        // try{
-        //   $data = [];
-        //   array_push($data, Product::find($product));
-        //   array_push($data, $product->serieProduct);
-        //   return $data;
-        // }
-        // catch ( \Exception $e){
-        //   return response('Server error on creating list of related products--- '.$e, 500);
-        // }  
+   public function with_purchases(Product $product)
+   {
+      try {
+         return Product::with('purchase')->find($product->id);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
       }
+   }
+
+   //older version:
+   // try{
+   //   $data = [];
+   //   array_push($data, Product::find($product));
+   //   array_push($data, $product->serieProduct);
+   //   return $data;
+   // }
+   // catch ( \Exception $e){
+   //   return response('Server error on creating list of related products--- '.$e, 500);
+   // }  
+
+   public function with_brand(Product $product)
+   {
+      try {
+         $brand = Brand::find($product->brand_id);
+         return Brand::with('product')->find($brand->id);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 }

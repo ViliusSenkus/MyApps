@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
-use App\Models\Service;
-
-class ServiceController extends Controller
+class ManufacturerController extends Controller
 {
    public function index()
    {
       try {
-         return Service::all();
+         return Manufacturer::all();
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
@@ -20,32 +19,32 @@ class ServiceController extends Controller
    public function store(Request $request)
    {
       try {
-         Service::create(request()->all());
-         return response('Service ' . $request->type . ' ' . $request->name . ' created successfully', 201);
+         Manufacturer::create($request->all());
+         return response('Manufacturer ' . $request->name . ' created successfully', 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function show(Service $service)
+   public function show(Manufacturer $manufacturer)
    {
       try {
-         return Service::find($service);
+         return Manufacturer::find($manufacturer);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function update(Request $request, Service $service)
+   public function update(Request $request, Manufacturer $manufacturer)
    {
       //
    }
 
-   public function destroy(Service $service)
+   public function destroy(Manufacturer $manufacturer)
    {
       try {
-         Service::destroy($service);
-         return response('Service ' . $service->name . ' deleted successfully', 200);
+         Manufacturer::destroy($manufacturer);
+         return response('Manufacturer ' . $manufacturer->name . ' deleted successfully', 200);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
