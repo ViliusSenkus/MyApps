@@ -26,25 +26,32 @@ class ApplicationScopeController extends Controller
       }
    }
 
-   public function show(ApplicationScope $applicationScope)
+   public function show(String $id)
    {
       try {
-         return ApplicationScope::find($applicationScope);
+         return ApplicationScope::find($id);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function update(Request $request, ApplicationScope $applicationScope)
+   public function update(Request $request, string $id)
    {
-      //
+      // return ('atsakymas '.$id.' ir '.$request->name);
+      try {
+ApplicationScope::find($id)->update($request->all());
+
+         return response('Application Scope ' . $request->name . ' was changed successfully', 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
    }
 
-   public function destroy(ApplicationScope $applicationScope)
+   public function destroy(String $id)
    {
       try {
-         ApplicationScope::destroy($applicationScope);
-         return response('Scope ' . $applicationScope->name . ' deleted successfully', 200);
+         ApplicationScope::destroy($id);
+         return response('Scope ' . $id . ' deleted successfully', 200);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

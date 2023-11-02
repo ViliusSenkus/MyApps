@@ -2,36 +2,48 @@
 
 use App\Http\Controllers\ApplicationScopeController;
 use App\Http\Controllers\ApplicationSubScopeController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BuildingPhaseController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\ExactProductController;
-use App\Http\Controllers\ExactServiceController;
+use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ServiceController;
-use App\Models\ApplicationScope;
+use App\Http\Controllers\SpaceController;
+use App\Http\Controllers\SupplierController;
+use App\Models\Manufacturer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Sanctum;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group.
-|
-*/
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('purchase', PurchaseController::class)->only(['index','store', 'show', 'update','destroy']);
-Route::apiResource('product', ProductController::class); // API (html) Resource Route destroy
-Route::get('/product/{product}/serie', [ProductController::class, 'show_SerieProducts']);
-Route::apiResource('phase', BuildingPhaseController::class);
-Route::apiResource('scope', ApplicationScopeController::class);
-Route::apiResource('subscope', ApplicationSubScopeController::class);
+
+ Route::apiResource('/scope', ApplicationScopeController::class);
+ Route::apiResource('/subscope', ApplicationSubScopeController::class);
+ Route::apiResource('/brand', BrandController::class);
+ Route::apiResource('/phase', BuildingPhaseController::class);
+ Route::apiResource('/manufacturer', ManufacturerController::class);
+ Route::apiResource('/orders', OrderController::class);
+ Route::apiResource('/product', ProductController::class);
+ Route::apiResource('/purchase', PurchaseController::class);
+ Route::apiResource('/service', ServiceController::class);
+ Route::apiResource('/space', SpaceController::class);
+ Route::apiResource('/supplier', SupplierController::class);
+
+ 
+
+
+// Route::resource('purchase', PurchaseController::class)->only(['index','store', 'show', 'update','destroy']);
+// Route::apiResource('product', ProductController::class); // API (html) Resource Route destroy
+// Route::get('/product/{product}/serie', [ProductController::class, 'show_SerieProducts']);
+// Route::apiResource('phase', BuildingPhaseController::class);
+// Route::apiResource('scope', ApplicationScopeController::class);
+// Route::apiResource('subscope', ApplicationSubScopeController::class);
+
+
 
 // Route::group(['prefix' => 'purchases'], function(){
 //     Route::get('/', [PurchaseController::class, 'index']);

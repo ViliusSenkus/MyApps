@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('application_scopes', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255)->nullable(false)->comment('Idea where product or service intended to be used at, very generall');;
+            $table->string('name', 255)->nullable(false)->unique()->comment('Idea where product or service intended to be used at, very generall');;
             $table->text('description')->nullable()->comment('Short generall description');
             $table->timestamps();
             $table->softDeletes()->invisible();
