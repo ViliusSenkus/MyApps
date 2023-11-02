@@ -14,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->comment('Generall naming of product, NOT related to brand or manufacturer. Ex.: cement, insulation wool, pipe, etc.');
             $table->text('description')->nullable()->comment('Generall information related to this product of this brand but independently from package or other similar specific factors');
-            $table->foreign('brand_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('brand_id')->constrained()->cascadeOnUpdate();
             $table->string('package_type')->comment('ex: bucket, box, unpacked, etc.');
             $table->string('measurement_units')->comment('ex: kg, l, m3, units, etc.');
             $table->integer('ammount_in_unit')->unsigned()->nullable()->comment('Just number without the units. Measurement units mentioned in previous column');
