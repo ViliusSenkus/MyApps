@@ -13,7 +13,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100)->comment('Exact place of product or service is intended to be used');
             $table->text('description')->nullable()->comment('Description of intended use');
-            $table->foreignId('application_scope_id')->constrained()->onUpdate('cascade')->comment('Id number of application scope');    
+            $table->foreignId('application_scope_id')->constrained()->onUpdate('cascade')->nullable()->comment('Id number of application scope');  
+            //default value should be changed  
             $table->timestamps();
             $table->softDeletes()->invisible();
         });

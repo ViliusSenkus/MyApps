@@ -37,11 +37,9 @@ class ApplicationScopeController extends Controller
 
    public function update(Request $request, string $id)
    {
-      // return ('atsakymas '.$id.' ir '.$request->name);
       try {
-ApplicationScope::find($id)->update($request->all());
-
-         return response('Application Scope ' . $request->name . ' was changed successfully', 201);
+         ApplicationScope::find($id)->update($request->all());
+         return response('Application Scope was successfully changed to '. $request->name, 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

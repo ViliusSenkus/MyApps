@@ -15,7 +15,7 @@ class ApplicationSubScope extends Model
 
     protected $table = 'application_sub_scopes';
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'application_scope_id'];
 
     public function purchase(): HasMany
     {

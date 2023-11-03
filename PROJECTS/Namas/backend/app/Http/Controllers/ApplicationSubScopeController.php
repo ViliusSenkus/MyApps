@@ -35,15 +35,22 @@ class ApplicationSubScopeController extends Controller
       }
    }
 
-   public function update(Request $request, ApplicationSubScope $applicationSubScope)
-   {
-   }
-
-   public function destroy(ApplicationSubScope $applicationSubScope)
+   public function update(Request $request, String $id)
    {
       try {
-         ApplicationSubScope::destroy($applicationSubScope);
-         return response('Application sub scope ' . $applicationSubScope->name . ' deleted successfully');
+         ApplicationSubScope::find($id)->update($request->all());
+         return response('Application Sub Scope with id' . $id . 'updated successfully', 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
+
+   public function destroy(String $id)
+   {
+      try {
+         $name = ApplicationSubScope::where('id', $id)->first()->name;
+         ApplicationSubScope::destroy($id);
+         return response('Application sub scope ' . $name . ' deleted successfully');
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
