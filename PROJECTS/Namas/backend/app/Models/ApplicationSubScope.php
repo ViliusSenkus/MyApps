@@ -12,9 +12,7 @@ class ApplicationSubScope extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
     protected $table = 'application_sub_scopes';
-
     protected $fillable = ['name', 'description', 'application_scope_id'];
 
     public function purchase(): HasMany

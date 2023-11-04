@@ -38,14 +38,38 @@ class BrandController extends Controller
 
    public function update(Request $request, Brand $brand)
    {
-      //
+      try {
+         $old = $brand->name;
+         $brand->update($request->all());
+         return response('Brand name ' . $old . ' successfully changed to ' . $request->name, 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
    }
 
    public function destroy(Brand $brand)
    {
       try {
-         Brand::destroy($brand);
+         $brand->delete();
          return response('Brand ' . $brand->name . ' deleted successfully', 200);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
+   
+   public function withManufacturer($id)
+   {
+
+      try {
+         return Brand::find($id)->load('manufacturer');
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
+   public function withProduct($id)
+   {
+      try {
+         return Brand::with('product')->get()->find($id);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

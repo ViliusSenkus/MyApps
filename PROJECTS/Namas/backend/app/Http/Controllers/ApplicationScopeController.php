@@ -26,30 +26,41 @@ class ApplicationScopeController extends Controller
       }
    }
 
-   public function show(String $id)
+   public function show(ApplicationScope $scope)
    {
       try {
-         return ApplicationScope::find($id);
+         return $scope;
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function update(Request $request, string $id)
+   public function update(Request $request, ApplicationScope $scope)
    {
       try {
-         ApplicationScope::find($id)->update($request->all());
-         return response('Application Scope was successfully changed to '. $request->name, 201);
+         $old = $scope->name;
+         $scope->update($request->all());
+         return response('Application Scope with name ' . $old. ' was successfully changed to '. $request->name, 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   public function destroy(String $id)
+   public function destroy(ApplicationScope $scope)
    {
       try {
-         ApplicationScope::destroy($id);
-         return response('Scope ' . $id . ' deleted successfully', 200);
+         $scope->delete();
+         return response('Scope ' . $scope->name . ' deleted successfully', 200);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
+
+
+   public function withSubScope($id)
+   {
+      try {
+         return ApplicationScope::find($id)->with('applicationSubScope')->get();
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

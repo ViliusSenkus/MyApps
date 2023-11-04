@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('Name of brand');
-            $table->foreignId('manufacturer_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('manufacturer_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->string('description')->nullable()->comment('Description of brand');
             $table->string('logo')->nullable()->comment('Link to brand logo');
             $table->string('link')->nullable()->comment('Link to official manufactorer website of this brand products');

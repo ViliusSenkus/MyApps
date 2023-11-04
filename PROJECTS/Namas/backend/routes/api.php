@@ -33,7 +33,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::apiResource('/space', SpaceController::class);
  Route::apiResource('/supplier', SupplierController::class);
 
- 
+ Route::get('/brand/{id}/manufacturer', [BrandController::class,'withManufacturer']);
+ Route::get('/brand/{id}/product', [BrandController::class,'withProduct']);
+ Route::get('/scope/{id}/subScope', [ApplicationScopeController::class,'withSubScope']);
+ Route::get('/subscope/{id}/scope', [ApplicationSubScopeController::class,'withScope']);
+ Route::get('/subscope/{id}/purchase', [ApplicationSubScopeController::class,'withPurchase']);
 
 
 // Route::resource('purchase', PurchaseController::class)->only(['index','store', 'show', 'update','destroy']);

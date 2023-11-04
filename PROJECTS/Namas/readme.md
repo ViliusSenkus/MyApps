@@ -1,5 +1,5 @@
 # ToDo
-
+- kontroleriuose prie updatinimo per if ar switch padaryti skirtinga returno tekstą, priklausomai nuo to kas buvo pakeista. Vėliau galima bus sumesti viską į vieną funkciją visiems kontroleriams (pvz. middleware ar kitoje klasėje).
 - prie building phase, spaces, appScope prideti galimybe matyti bunch of foto ar schemų ar pan.
 
 - sukurti application scope (subkategorijų) lentelę, arba pervardinti migracijose į enum tipą:
