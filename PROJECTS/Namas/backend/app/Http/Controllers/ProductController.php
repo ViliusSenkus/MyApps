@@ -19,7 +19,7 @@ class ProductController extends Controller
    public function store(Request $request)
    {
       try {
-         Product::created($request->all());
+         Product::create($request->all());
          return response('Product ' . $request->name . ' created successfully', 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);

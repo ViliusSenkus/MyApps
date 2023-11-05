@@ -13,7 +13,7 @@ class Brand extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'brands';
-    protected $fillable = ['name','description','logo','link'];
+    protected $fillable = ['name', 'manufacturer_id', 'description','logo','link'];
 
     public function manufacturer(): BelongsTo
     {

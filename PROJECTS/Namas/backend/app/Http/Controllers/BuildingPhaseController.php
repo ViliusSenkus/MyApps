@@ -25,20 +25,26 @@ class BuildingPhaseController extends Controller
       }
    }
 
-   public function show(BuildingPhase $buildingPhase)
+   public function show(BuildingPhase $phase)
    {
-      return BuildingPhase::find($buildingPhase);
+      return BuildingPhase::find($phase);
    }
 
-   public function update(Request $request, BuildingPhase $buildingPhase)
-   {
-      //
-   }
-   public function destroy(BuildingPhase $buildingPhase)
+   public function update(Request $request, BuildingPhase $phase )
    {
       try {
-         BuildingPhase::destroy($buildingPhase);
-         return ('Building phase ' . $buildingPhase->name . ' deleted successfully');
+         $old = $phase->name;
+         $phase->update($request->all());
+         return response('Building phase ' . $old . ' successfully changed to ' . $phase->name , 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
+   public function destroy(BuildingPhase $phase)
+   {
+      try {
+         $phase->delete();
+         return ('Building phase ' . $phase->name . ' deleted successfully');
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

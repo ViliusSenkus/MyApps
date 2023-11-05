@@ -37,16 +37,48 @@ class ManufacturerController extends Controller
 
    public function update(Request $request, Manufacturer $manufacturer)
    {
-      //
+      try {
+         $old = $manufacturer->name;
+         $manufacturer->update($request->all());
+         return response('Manufacturer ' . $old . ' successfully changed to ' . $manufacturer->name , 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
    }
 
    public function destroy(Manufacturer $manufacturer)
    {
       try {
-         Manufacturer::destroy($manufacturer);
+         $manufacturer->delete();
          return response('Manufacturer ' . $manufacturer->name . ' deleted successfully', 200);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
+   }
+
+   public function withBrand($id)
+   {
+      try {
+         return Manufacturer::with('brand')->get()->find($id);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
+ 
+   public function full($id)
+   {
+      //reiki naudoti through reliacija.
+
+      // try {
+      //    $withBrand = Manufacturer::with('brand')->get()->find($id);
+      //    $brandProduct = [];
+      //    foreach ($withBrand as $key => $value) {
+      //       array_push($brandProduct, $key, $value);
+      //    }
+      //    return $brandProduct;
+      //    return Manufacturer::with('brand')->get()->find($id);
+      // } catch (\Exception $e) {
+      //    return response('Server error - faux pas - ' . $e, 500);
+      // }
    }
 }

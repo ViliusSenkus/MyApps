@@ -57,10 +57,10 @@ class ApplicationScopeController extends Controller
    }
 
 
-   public function withSubScope($id)
+   public function withSubScope(String $id)
    {
       try {
-         return ApplicationScope::find($id)->with('applicationSubScope')->get();
+         return ApplicationScope::find($id)->load('applicationSubScope');
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

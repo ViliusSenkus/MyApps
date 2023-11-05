@@ -35,6 +35,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
  Route::get('/brand/{id}/manufacturer', [BrandController::class,'withManufacturer']);
  Route::get('/brand/{id}/product', [BrandController::class,'withProduct']);
+ Route::get('/brand/{id}/full', [BrandController::class,'full']);
+
+ Route::get('/manufacturer/{id}/brand', [ManufacturerController::class,'withBrand']);
+ Route::get('/manufacturer/{id}/full', [ManufacturerController::class,'full']);
+
  Route::get('/scope/{id}/subScope', [ApplicationScopeController::class,'withSubScope']);
  Route::get('/subscope/{id}/scope', [ApplicationSubScopeController::class,'withScope']);
  Route::get('/subscope/{id}/purchase', [ApplicationSubScopeController::class,'withPurchase']);

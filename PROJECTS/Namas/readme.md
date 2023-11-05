@@ -1,17 +1,18 @@
 # ToDo
+- perdaryti scope ir subscope į manyToMany ryšį.
+- sukurti application scope - subscope ryšių lentelę:
+
+| SCOPE |  SUBSCOPE |
+| --- | --- |
+| sklypas/teritorija | žemės darbai, apželdinimas, laistymas.... |
+| pamatai | konstrukcija, apšiltinimas ... |
+| sienos | -//- |
+| stogas | -//- |
+| įvadai/inžinerija | vandentiekis, kanalizacija, elektra, šildymas, vėdinimas apsauga? |
+| apdaila | pagal kambarius ir vietą (siena, laiptai, grindys, lubos) |
+
 - kontroleriuose prie updatinimo per if ar switch padaryti skirtinga returno tekstą, priklausomai nuo to kas buvo pakeista. Vėliau galima bus sumesti viską į vieną funkciją visiems kontroleriams (pvz. middleware ar kitoje klasėje).
 - prie building phase, spaces, appScope prideti galimybe matyti bunch of foto ar schemų ar pan.
-
-- sukurti application scope (subkategorijų) lentelę, arba pervardinti migracijose į enum tipą:
-
-      SCOPE: SUBSCOPE
-      * sklypas/teritorija: žemės darbai, apželdinimas, laistymas....
-      * pamatai: konstrukcija, apšiltinimas ...
-      * sienos: -//-
-      * stogas: -//-
-      * įvadai/inžinerija: vandentiekis, kanalizacija, elektra, šildymas, vėdinimas, apsauga?
-      * apdaila: pagal kambarius ir vietą (siena, laiptai, grindys, lubos)
-
 - fronte, prie pirkimo pridėti visų vienu kartu įsigytų produktų / paslaugų sąrašą:
       - pridėti langą kuriame matysis visi sukrauti pirkiniai
       - pridėti mygtukus (pridėti produktą, pridėti paslaugą)
@@ -22,13 +23,15 @@
 - produktai susieti su building_phases elementais 'apdaila', papildomai gali būti susieti ir su 'inžinerija' arba 'galutinė apdaila' elementais.
 
 
-# <i>Personall note</i>
+# <i>Personall notes</i>
 
-## Roll Back & Migrate Using A Single Command:
+## Migration
+
+### Roll Back & Migrate Using A Single Command:
 
 The <code>migrate:refresh</code> command will roll back all of your migrations and then execute the migrate command. This command effectively re-creates your entire database:
 
-## Merging migrations:
+### Merging migrations:
 
 It is possible to merge multiple migrations for one table into one migration file, but it requires some <em>careful</em> steps to avoid losing information. Here is one possible way to do it:
 

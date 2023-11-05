@@ -74,4 +74,13 @@ class BrandController extends Controller
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
+
+   public function full($id)
+   {
+      try {
+         return Brand::with('product')->get()->find($id)->load('manufacturer');
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 }
