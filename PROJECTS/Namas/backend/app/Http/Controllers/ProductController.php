@@ -36,13 +36,18 @@ class ProductController extends Controller
 
    public function update(Request $request, Product $product)
    {
-      //
+      try {
+         $old = $product->name;
+         $product->update($request->all());
+         return response('Product ' . $old . ' successfully changed to ' . $product->name, 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
    }
-
    public function destroy(Product $product)
    {
       try {
-         Product::destroy($product);
+         $product -> delete();
          return response('Product ' . $product->name . ' deleted successfully', 200);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
@@ -51,31 +56,42 @@ class ProductController extends Controller
 
    // MY FUNCTIONS
 
-   public function with_purchases(Product $product)
+   public function withPurchase($id)
    {
       try {
-         return Product::with('purchase')->find($product->id);
+         return Product::with('purchase')->get()->find($id);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
 
-   //older version:
-   // try{
-   //   $data = [];
-   //   array_push($data, Product::find($product));
-   //   array_push($data, $product->serieProduct);
-   //   return $data;
-   // }
-   // catch ( \Exception $e){
-   //   return response('Server error on creating list of related products--- '.$e, 500);
-   // }  
-
-   public function with_brand(Product $product)
+   public function withBrand($id)
    {
       try {
-         $brand = Brand::find($product->brand_id);
-         return Brand::with('product')->find($brand->id);
+         return Product::with('brand')->find($id);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
+   public function withFullBrand($id)
+   {
+      try {
+
+         // nebaigta funkcija
+         $array = [];
+         foreach(Product::with('brand')->get() as $brand) {
+            array_push($array, Brand::with('manufacturer')->get()->find($brand));
+         }
+         return  $array;
+         // Product::with('brand')->with('manufacturer')->get()->find($id);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
+   public function full($id)
+   {
+      try {
+         return Product::with('brand')->get()->find($id)->load('purchase');
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

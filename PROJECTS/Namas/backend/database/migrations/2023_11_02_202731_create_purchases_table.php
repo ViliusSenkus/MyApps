@@ -18,14 +18,14 @@ return new class extends Migration
 
             $table->id();
 
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('supplier_id')->constrained()->cascadeOnUpdate()->comment('Shop, e-shop, company, person, etc. from where the purchase was made, or intended to be made');
-            $table->foreignId('building_phase_id')->constrained()->cascadeOnUpdate()->comment('Phase for which the purchase was made, or intended to be made');
-            $table->foreignId('application_sub_scope_id')->constrained()->cascadeOnUpdate()->comment('Building construction element for which the purchase was made, or intended to be made');
-            $table->foreignId('space_id')->constrained()->cascadeOnUpdate()->comment('One or more rooms for which the purchase was made, or intended to be made');
+            $table->foreignId('order_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('supplier_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('Shop, e-shop, company, person, etc. from where the purchase was made, or intended to be made');
+            $table->foreignId('building_phase_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('Phase for which the purchase was made, or intended to be made');
+            $table->foreignId('application_sub_scope_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('Building construction element for which the purchase was made, or intended to be made');
+            $table->foreignId('space_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('One or more rooms for which the purchase was made, or intended to be made');
             $table->enum('type',['product','service']);
-            $table->foreignId('product_id')->constrained()->cascadeOnUpdate()->comment('If Product is the purchasement')->nullable();
-            $table->foreignId('service_id')->constrained()->cascadeOnUpdate()->comment('If Service is the purchasement')->nullable();
+            $table->foreignId('product_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('If Product is the purchasement');
+            $table->foreignId('service_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('If Service is the purchasement');
            
             $table->float('standart_price', 8, 2)->unsigned()->nullable()->comment('Price without discounts or sale offers during purchasement moment from this supplier');
             $table->float('price_paid', 8, 2)->unsigned()->comment('Ammount of money payed or planned to be paid at the end of acquisition');

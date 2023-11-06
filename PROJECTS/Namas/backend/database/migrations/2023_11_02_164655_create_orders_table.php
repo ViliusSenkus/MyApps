@@ -17,7 +17,7 @@ return new class extends Migration
              $table->id();
              $table->date('purchasement_date')->comment('Date of initial payment');
              $table->enum('payment_method', ['cash', 'card', 'bank transfer'])->comment('select one of possible methods (cash, card or bank transfer)');
-             $table->integer('discount')->nullable()->comment('Discount in percentages given to whole order, if wasn\'t applied to separate items');
+             $table->integer('discount')->default(0)->comment('Discount in percentages given to whole order, if wasn\'t applied to separate items');
              //list of documents of order:
              $table->string('offer_doc', 255)->nullable()->comment('Link to išankstinio apmokėjimo sąskaita faktūra');
              $table->string('purchase_doc', 255)->nullable()->comment('Link to pilnas vienkartinis atsiskaitymas');
@@ -27,7 +27,7 @@ return new class extends Migration
              //end of documents
              $table->string('other_docs', 255)->nullable()->comment('Links to other docs, or e-shop order description and payments.');
              $table->text('comments')->nullable()->comment('comments on payment method or documents');
-             $table->enum('status', ['planned', 'initiated', 'finished', 'canceled', 'first paiment maid', 'second paiment maid'])->default('finished');
+             $table->enum('status', ['planned', 'initiated', 'finished', 'canceled', 'first paiment maid', 'second paiment maid'])->default('finished')->comment('select one of possible status: planned, initiated, finished, canceled, first paiment maid, second paiment maid');
              $table->timestamps();
              $table->softDeletes()->invisible();
          });

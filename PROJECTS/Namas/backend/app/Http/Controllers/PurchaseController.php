@@ -10,33 +10,18 @@ class PurchaseController extends Controller
 
    public function index()
    {
-      return Purchase::all();
+      try {
+         return Purchase::all();
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
    }
 
    public function store(Request $request)
    {
       try {
-         $purchase = new Purchase();
-
-         $purchase->supplier_id = $request->supplier_id;
-         $purchase->building_phase_id = $request->building_phase_id;
-         $purchase->application_sub_scope_id = $request->application_sub_scope_id;
-         $purchase->space_id = $request->space_id;
-         $purchase->type = $request->type;
-         $purchase->product_id = $request->product_id;
-         $purchase->service_id = $request->service_id;
-         $purchase->standart_price = $request->standart_price;
-         $purchase->price_paid = $request->price_paid;
-         $purchase->quantity = $request->quantity;
-         $purchase->documents = $request->documents;
-         $purchase->discount_enabler = $request->discount_enabler;
-         $purchase->link = $request->link;
-         $purchase->description = $request->description;
-
-         $purchase->save();
-
-         return response('Purchase ' . $request->name . ' added successfully', 201);
-         //return is usefull for testing. Later messege will be returned after creating full acquisition.
+         Purchase::create($request->all());
+         return response('Purchase for ' . $request->price_paid . ' EUR added successfully', 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
@@ -44,26 +29,41 @@ class PurchaseController extends Controller
 
    public function show(Purchase $purchase)
    {
-      return Purchase::find($purchase);
+      try {
+         return Purchase::find($purchase);
+      } catch (\Exception $e) {
+         return response('Server error -faux pas - ' . $e, 500);
+      }
    }
 
    public function update(Request $request, Purchase $purchase)
    {
-      //
+      try {
+         $old = $purchase->price_paid;
+         $purchase->update($request->all());
+         return response('Purchase for ' . $old . ' EUR successfully changed to ' . $purchase->price_paid, 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
    }
 
 
    public function destroy(Purchase $purchase)
    {
-      Purchase::destroy($purchase);
-      return response('purchase of ' . $purchase . ' deleted', 200);
+      try {
+         $purchase->delete();
+         return response('purchase for ' . $purchase->price_paid . ' deleted successfully', 200);
+      } catch (\Exception $e) {
+         return response('Server error -faux pas - ' . $e, 500);
+      }
    }
 
-   // mano funkcija naudojama vietoje defaultinės show
-   // public function getByid($id){
-   //   try {
-   //     return Purchase::find($id);
-   //   } catch(\Exception $e) {
-   //     return response('Nepavyko gauti produkto duomenų', 500);
-   //   }
+   public function full($id)
+   {
+      try {
+         return Purchase::find($id)->load('order')->load('supplier')->load('buildingPhase')->load('applicationSubScope')->load('space')->load('product')->load('service');
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
+   }
 }

@@ -29,13 +29,19 @@ class SupplierController extends Controller
 
    public function update(Request $request, Supplier $supplier)
    {
-      //
+      try {
+         $old = $supplier->name;
+         $supplier->update($request->all());
+         return response('Supplier ' . $old . ' successfully changed to ' . $supplier->name , 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
    }
 
    public function destroy(Supplier $supplier)
    {
       try {
-         Supplier::destroy($supplier);
+         $supplier->delete();
          return response('Supplier ' . $supplier->name . ' deleted successfully', 500);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);

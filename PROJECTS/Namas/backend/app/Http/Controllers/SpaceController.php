@@ -37,12 +37,19 @@ class SpaceController extends Controller
 
    public function update(Request $request, Space $space)
    {
+      try {
+         $old = $space->name;
+         $space->update($request->all());
+         return response('Space ' . $old . ' successfully changed to ' . $space->name , 201);
+      } catch (\Exception $e) {
+         return response('Server error - faux pas - ' . $e, 500);
+      }
    }
 
    public function destroy(Space $space)
    {
       try {
-         Space::destroy($space);
+         $space->delete();
          return response('Space ' . $space->name . ' deleted successfully');
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
