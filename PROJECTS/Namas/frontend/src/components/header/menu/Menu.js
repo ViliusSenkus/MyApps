@@ -7,16 +7,31 @@ function Menu() {
     <nav>
       <ul>
         <li>
-          <Link to="/">pirkimų lentelė</Link>
+          <Link to="/entrie/purchase">Įsigyjimai</Link>
         </li>
         <li>
-          <Link to="/new">naujas pirkimas</Link>
+          <Link to="/entrie/product">Produktai</Link>
         </li>
         <li>
-          <Link to="/products">produktų sąrašas</Link>
+          <Link to="/entrie/service">Paslaugos</Link>
         </li>
         <li>
-          <Link to="/products/new">naujas produktas</Link>
+          <Link to="/entrie/order">Užsakymai</Link>
+        </li>
+        <li>
+          <Link to="/entrie/supplier">Tiekėjai</Link>
+        </li>
+        <li>
+          <Link to="/entrie/space">Patalpos</Link>
+        </li>
+        <li>
+          <Link to="/entrie/phase">Statybų fazės</Link>
+        </li>
+        <li>
+          <Link to="/entrie/scope">Įsigyjimų pritaikymo vietos</Link>
+        </li>
+        <li>
+          <Link to="/entrie/manufacturer">Gamintojai</Link>
         </li>
       </ul>
     </nav>
