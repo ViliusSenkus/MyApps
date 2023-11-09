@@ -1,17 +1,16 @@
 import Menu from "./menu/Menu";
-import './header.css';
 import { Link } from "react-router-dom";
 
 function Header() {
    return (
       <>
-         <div class="menu">
+         <div className="container">
             <div>
                <h2>User name </h2>
                <h4>Object address, City</h4>
             </div>
 
-            <nav>
+            <nav className="menu">
                <ul>
                   <li>
                      <Link to="/">Statistic</Link>

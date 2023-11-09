@@ -3,8 +3,6 @@ import axios from 'axios';
 import { useContext } from 'react';
 import MainContext from '../../MainContext';
 
-import './ProductNew.css';
-
 import Loader from '../../components/generalComponents/Loader';
 
 function ProductNew() {

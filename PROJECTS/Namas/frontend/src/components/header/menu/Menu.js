@@ -1,10 +1,8 @@
-import './menu.css'
-
 import { Link } from 'react-router-dom';
 
 function Menu() {
   return (
-    <nav>
+    <nav className='container'>
       <ul>
         <li>
           <Link to="/entrie/purchase">Įsigyjimai</Link>

@@ -1,5 +1,4 @@
 import {useContext, useState, useEffect } from 'react';
-import './ProductList.css';
 import axios from 'axios';
 
 import MainContext from '../../MainContext';

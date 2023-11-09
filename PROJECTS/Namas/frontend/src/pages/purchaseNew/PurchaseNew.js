@@ -3,8 +3,6 @@ import axios from 'axios';
 import { useContext } from 'react';
 import MainContext from '../../MainContext';
 
-import './PurchaseNew.css';
-
 function PurchaseNew() {
 
   const {setLoader} = useContext(MainContext);

@@ -42,8 +42,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Statistic />} />
             <Route path="/entrie" element={<Entrie />} >
-              <Route path="/entrie/space" element={<Spaces />} />
-              <Route path="/entrie/supplier" element={<Supplier />} />
+              <Route path="/entrie/space" element={<Spaces className="container" />} />
+              <Route path="/entrie/supplier" element={<Supplier className="container" />} />
               <Route path="/entrie/*" element={<E404 />} />
             </Route>
             {/* <Route path="/" element={<PurchaseList />} />
