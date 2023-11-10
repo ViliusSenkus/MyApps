@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 
 import MainContext from "../MainContext";
 
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
+import Head from "../components/head/Head";
+import Foot from "../components/foot/Foot";
 import Loader from "../components/generalComponents/Loader";
 
 
@@ -17,11 +17,11 @@ function MainLayout(props) {
       return(
             <>
                   <>                
-                  <Header />
+                  <Head />
                   <main>
                         {props.children}
                   </main>
-                  <Footer />
+                  <Foot />
                   {loader && <Loader />}
                   </>
             </>
