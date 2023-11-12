@@ -92,6 +92,19 @@ input[type="checkbox"] {
   color: blue;
   width: 40px;
 }
+.entrie-form-input,
+.entrie-form-label{
+  background-color: var(--box-color);
+  color: var(--main-font-color);
+}
+.entrie-form-input{
+  font-weight: 700;
+  border-bottom: 1px solid var(--separator-color);
+  border-radius: 0;
+}
+.entrie-form-label{
+  justify-content: right;
+}
 
 label {
   width: calc(var(--x)/3);
@@ -118,6 +131,13 @@ textarea {
   border-left: 0px;
 }
 
+.arrow-up{
+  transform: rotate(180deg);
+}
+.spread-box{
+  width: 20px;
+  filter:invert(1);
+}
 /* BUTTONS */
 button {
   margin: 5px;
@@ -177,7 +197,7 @@ td img {
 }
 
 .menu img{
-  width: 20px;
+  width: 30px;
   filter:drop-shadow(2px 2px 5px var(--separator-color));
 }
 

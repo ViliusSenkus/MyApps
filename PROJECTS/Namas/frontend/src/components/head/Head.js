@@ -1,4 +1,3 @@
-import Menu from "../dataPage/menu/Menu";
 import { Link } from "react-router-dom";
 
 function Head() {

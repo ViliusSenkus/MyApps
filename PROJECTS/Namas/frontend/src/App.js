@@ -7,34 +7,35 @@ import axios from "axios";
 import Statistic from "./pages/statistic/Statistic";
 import Entrie from "./pages/entrie/Entrie";
 import DataPages from "./pages/dataPages/DataPages";
-import PurchaseList from "./pages/purchaseList/PurchaseList";
-import PurchaseNew from "./pages/purchaseNew/PurchaseNew";
-import ProductList from "./pages/productList/ProductList";
-import ProductNew from "./pages/productNew/ProductNew";
 import E404 from "./pages/e404/E404";
 
-import MainContext from "./MainContext";
+import MainContext from "./functionall/MainContext";
 import MainLayout from "./layouts/MainLayout";
-import Spaces from "./components/dataPage/Spaces";
-import Supplier from "./components/dataPage/Supplier";
 
+import Spaces from "./pages/dataPages/components/Spaces";
+import Supplier from "./pages/dataPages/components/Supplier";
+import PurchaseList from "./pages/dataPages/components/PurchaseList";
+import ProductList from "./pages/dataPages/components/ProductList";
 
 
 //running useContext_hook
 
 function App() {
+  
+  // Declaring states for variables:
 
-  const [purchaseData, setPurchaseData] = useState([]);
+  // Common
   const [loader, setLoader] = useState(false);
-  const [productData, setProductData] = useState([]);
+
+  // New purchasement data. used at <Entrie> component and it's subcomponents
+  const [newSupplier, setNewSupplier] = useState([]);
 
   const contextValues = {
-    purchaseData,
-    setPurchaseData,
     loader,
     setLoader,
-    productData,
-    setProductData
+    // naujo pirkimo suvedimui naudojami kintamieji <entrie> komponenete
+    newSupplier,
+    setNewSupplier
   };
 
   return (
@@ -48,12 +49,14 @@ function App() {
             <Route path="/data" element={<DataPages /> } >
               <Route path="/data/space" element={<Spaces className="container" />} />
               <Route path="/data/supplier" element={<Supplier className="container" />} />
+              <Route path="/data/purchase" element={<PurchaseList />} />
+              <Route path="/data/product" element={<ProductList />} />
               <Route path="/data/*" element={<E404 />} />
             </Route>
-            {/* <Route path="/" element={<PurchaseList />} />
+            {/* 
             <Route path="/new/" element={<PurchaseNew />} />
-            <Route path="/products" element={<ProductList />} />
-            <Route path="/products/new" element={<ProductNew />} /> */}
+            <Route path="/products/new" element={<ProductNew />} />
+            */}
             <Route path="*" element={<E404 />} />
           </Routes>
         </MainLayout>

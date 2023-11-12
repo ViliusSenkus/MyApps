@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 
-import MainContext from "../MainContext";
+import MainContext from "../functionall/MainContext";
 
 import Head from "../components/head/Head";
 import Foot from "../components/foot/Foot";

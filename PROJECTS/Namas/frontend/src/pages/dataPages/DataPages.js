@@ -1,4 +1,4 @@
-import Menu from '../../components/dataPage/menu/Menu';
+import Menu from './components/menu/Menu';
 import { Outlet } from 'react-router-dom';
 
 function DataPages() {
