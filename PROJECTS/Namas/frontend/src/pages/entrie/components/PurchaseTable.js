@@ -1,8 +1,8 @@
-function Purchasetable(purchase) {
-console.log(purchase.purchase)
+function Purchasetable(props) {
+
   return (
     <>
-    {purchase.purchase.map(item =>
+    {props.purchase.map(item =>
         <tr key={item.id}>
           <input type='hidden' name="type" value={item.type} />
           <td>#</td>

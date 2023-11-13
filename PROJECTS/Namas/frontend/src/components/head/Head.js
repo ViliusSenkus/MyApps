@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 function Head() {
    return (
       <header>
+         <img id="logo" src="/img/OIG.jpg" alt="logo" />
          <div>
-            <h2>User name </h2>
-            <h4>Object address, City</h4>
+               <h2>User name </h2>
+               <h4>Object address, City</h4>
          </div>
          <nav className="menu">
             <ul>

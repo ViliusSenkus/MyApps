@@ -3,12 +3,18 @@ import { Outlet } from 'react-router-dom';
 
 function DataPages() {
 
-      return(
-            <div>
-                  <Menu />
-                  <Outlet />
-            </div>
-      )
+  return (
+    <>
+      <div className='full-row'>
+        <h4>Duomenys</h4>
+      </div>
+
+      <div>
+        <Menu />
+        <Outlet />
+      </div>
+    </>
+  )
 }
 
 export default DataPages;

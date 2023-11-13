@@ -13,22 +13,26 @@ function SupplierPart() {
   }
 
   return (
-    <><div>
-      <label className="entrie-form-label">
-        {showHideSuppliers ?
-          <img src="/img/icons/arrow.png" alt="spread or close selectables" onClick={spreadSuppliers} className='spread-box arrow-down' />
-          :
-          <img src="/img/icons/arrow.png" alt="spread or close selectables" onClick={spreadSuppliers} className='spread-box arrow-up' />
-        }
-        Tiekėjas:
-      </label>
-      <input type="text" className="entrie-form-input" name="order_discount" value={newSupplier} onChange={()=>{}} readOnly />
+    <>
+      <div className='two-col-grid'>
+        <label className="entrie-form-label">
+          Tiekėjas:
+        </label>
+        <div>
+          <input type="text" className="entrie-form-input" name="order_discount" value={newSupplier} onChange={() => { }} readOnly />
+          {showHideSuppliers ?
+            <img src="/img/icons/arrow.png" alt="spread or close selectables" onClick={spreadSuppliers} className='spread-box arrow-down' />
+            :
+            <img src="/img/icons/arrow.png" alt="spread or close selectables" onClick={spreadSuppliers} className='spread-box arrow-up' />
+          }
+        </div>
+      </div>
       <div>
 
       </div>
-    </div>
-
-      {!showHideSuppliers && <Supplier />}
+      <div className='full-grid-row'>
+        {!showHideSuppliers && <Supplier />}
+      </div>
     </>
   );
 }

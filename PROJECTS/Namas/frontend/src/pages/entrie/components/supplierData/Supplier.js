@@ -36,21 +36,20 @@ function Supplier() {
       {loader && <Loader />}
 
       {/* PAIEŠKOS LAUKELIS */}
-      <div className='menu'>
         <label>
-          <img src="/img/icons/search.png" alt='search' />
+          <img className="controll" src="/img/icons/search.png" alt='search' />
         </label>
-        <input type='text' name='search' />
-      </div>
+        <input style={{border: "1px solid white"}} type='text' name='search' />
+      
 
       {/* SĄRAŠAS (iki 5 vienetų + '+') */}
-      <div className='menu'>
         <ul>
           {items && items.map(item =>
-            <li key={item.id} onClick={() => addToForm(item.name)}>
+            <li key={item.id} onClick={() => addToForm(item.name)} 
+                style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width:"120px"}}>
               {item.name}
               <br />
-              <img src={item.logo} alt={item.name} />
+              <img style={{maxWidth: "80px", maxHeight: "20px"}} src={item.logo} alt={item.name} />
             </li>
           )
           }
@@ -60,7 +59,7 @@ function Supplier() {
             <img src="/img/icons/plus.png" alt='add new supplier' onClick={showForm} />
           </li>
         </ul>
-      </div>
+      
 
       {/* NAUJO PARDAVĖJO FORMA */}
       {showSupplierForm && <SupplierForm />}

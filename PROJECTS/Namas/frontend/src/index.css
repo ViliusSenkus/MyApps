@@ -14,7 +14,7 @@
   --left-color: #f0f0f0;
 
   /* sizes */
-  --font-size: 16px;
+  font-size: 16px;
   --x: 100vw;
   --y: 100vh;
 
@@ -37,17 +37,17 @@
 }
 
 /* GENERALL STYLING */
+html,
 body {
-  margin:0;
-  display: flex;
-  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
 }
 
-.container {
-  margin: 4px 0px;
-  padding: 4px 8px;
-  background: var(--box-color);
-  display: flex;
+#root {
+  /* all html body under js influence */
+  font-size: clamp(10px, 1rem, 26px);
+  padding: 10px;
 }
 
 h2,
@@ -56,63 +56,104 @@ h4 {
   padding: 0;
 }
 
+h2 {
+  font-size: clamp(32px, 5cqw, 60px);
+}
+
+h4 {
+  font-size: clamp(16px, 3cqw, 34px);
+}
+
 /* HEADER */
-
-header{
-  display:flex;
-  justify-content: space-between;
-  width: calc(var(--x)*0.9)
+header {
+  display: grid;
+  grid-template-columns: 1fr 5fr 3fr;
+  gap: clamp(5px, 5vw, 15px);
 }
 
-/* FOOTER */
-footer{
-  padding-top: 50px;
+#logo {
+  width: clamp(20px, 15vw, 50px);
+  align-self: center;
+  justify-self: baseline;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 5px var(--box-shadow-color))
 }
-/* FORMS STYLING  */
-form{
+
+/* MAIN */
+main {
+  padding-top: 10px;
+  margin: 0 auto;
+}
+
+/* Entrie */
+/* form  */
+form {
   background: var(--box-color);
-  max-width: calc(var(--x) - var(--x)/50);
-  margin: 4px auto;
+  /* width: calc(var(--x)-(var(--x)/3)); */
   padding: 4px;
 }
-input {
-  align-items: left;
-  width: calc(var(--x)/2);
-  background-color: var(--left-color);
-  border: 1px solid var(--box-color);
-  border-radius: 0 10px 10px 0;
-  padding: 5px;
-  border-left: 0px;
-}
-.inputField {
-  display: flex;
-  margin: 5px;
-}
-input[type="checkbox"] {
-  color: blue;
-  width: 40px;
-}
-.entrie-form-input,
-.entrie-form-label{
-  background-color: var(--box-color);
-  color: var(--main-font-color);
-}
-.entrie-form-input{
-  font-weight: 700;
-  border-bottom: 1px solid var(--separator-color);
-  border-radius: 0;
-}
-.entrie-form-label{
-  justify-content: right;
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  /* justify-content: center;
+  align-items: center; */
 }
 
-label {
-  width: calc(var(--x)/3);
-  background-color: var(--box-shadow-color);
+.full-grid-row {
+  grid-column: 1/-1;
+  justify-self: start;
+}
+
+form label {
+  justify-self: end;
+  /* width: calc(var(--x)/4); */
+  /* background-color: var(--box-shadow-color); */
   border: 1px solid var(--box-color);
   border-radius: 10px 0 0 10px;
   border-right: 0px;
   padding: 0px 5px;
+}
+
+form input,
+form select {
+  justify-self: start;
+  width: calc(var(--x)/5);
+  background-color: var(--box-color);
+  border: 1px solid var(--box-color);
+  border-radius: 0 10px 10px 0;
+  padding: 2px 5px;
+  border-left: 0px;
+  color: var(--main-font-color);
+}
+[type="date"]::-webkit-calendar-picker-indicator{
+  filter: invert(1);
+}
+
+.controll {
+  width: 24px;
+  filter: invert(1);
+}
+
+input[type="checkbox"] {
+  color: blue;
+  width: 40px;
+}
+
+/* .entrie-form-input,
+.entrie-form-label{
+  background-color: var(--box-color);
+  color: var(--main-font-color);
+} */
+.entrie-form-input {
+  font-weight: 700;
+  border-bottom: 1px solid var(--separator-color);
+  border-radius: 0;
+}
+
+.entrie-form-label {
+  justify-content: right;
 }
 
 .documentsGroup {
@@ -124,20 +165,22 @@ label {
 }
 
 textarea {
-  width: calc(var(--x)/2);
+  /* width: calc(var(--x)/2); */
   height: 50px;
   border-radius: 0 10px 10px 0;
   border: 1px solid var(--box-color);
   border-left: 0px;
 }
 
-.arrow-up{
+.arrow-up {
   transform: rotate(180deg);
 }
-.spread-box{
-  width: 20px;
-  filter:invert(1);
+
+.spread-box {
+  width: 10px;
+  filter: invert(1);
 }
+
 /* BUTTONS */
 button {
   margin: 5px;
@@ -147,24 +190,28 @@ button {
   background: var(--box-color);
   color: var(--main-font-color);
 }
+
 button:hover {
   background-color: var(--separator-color);
   cursor: pointer;
 }
+
 button:active {
   background-color: var(--reserve-color);
 }
-.delete-button{
-  color:var(--alert-color);
+
+.delete-button {
+  color: var(--alert-color);
 }
-.edit-button{
+
+.edit-button {
   color: var(--success-color);
 }
 
 /* TABLES */
 table {
-  text-wrap:wrap ;
-  width: 80vw;
+  text-wrap: wrap;
+  max-width: 90vw;
   border-collapse: collapse;
   margin: 0 auto;
 }
@@ -196,9 +243,9 @@ td img {
   align-items: center;
 }
 
-.menu img{
+.menu img {
   width: 30px;
-  filter:drop-shadow(2px 2px 5px var(--separator-color));
+  filter: drop-shadow(2px 2px 5px var(--separator-color));
 }
 
 ul {
@@ -223,4 +270,9 @@ li:hover {
 
 a {
   color: white;
+}
+
+/* FOOTER */
+footer {
+  padding-top: 50px;
 }

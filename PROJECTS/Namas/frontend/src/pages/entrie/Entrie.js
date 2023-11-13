@@ -6,7 +6,8 @@ import { Outlet } from 'react-router-dom';
 import OrderDocuments from './components/orderData/OrderDocuments';
 import ProductNew from './components/ProductNew';
 import PurchaseNew from './components/PurchaseNew';
-import OrderPart from './components/orderData/OrderPart';
+import OrderPart1 from './components/orderData/OrderPart1';
+import OrderPart2 from './components/orderData/OrderPart2';
 import SupplierPart from './components/supplierData/SupplierPart';
 import Purchasetable from './components/PurchaseTable';
 
@@ -28,14 +29,25 @@ function Entrie() {
   }
 
   return (
-    <div>
-      <h4>New order</h4>
-      <form>
-        <OrderPart />
+    <>
+      <h4>Naujas pirkimas</h4>
+      <form className='two-col-grid'>
+        <OrderPart1 />
         <SupplierPart />
+        <div onClick={handleAddProduct}>
+          <img className='controll' src="/img/icons/plus.png" alt="pridėti paslaugą" />
+          Pridėti produktą
+        </div>
+        <div onClick={handleAddService}>
+          <img className='controll' src="/img/icons/plus.png" alt="pridėti paslaugą" />
+          Pridėti paslaugą
+        </div>
+
+
+
 
         {/* pirkimo produktų ir paslaugų sąrašas */}
-        <table>
+        <table className='full-grid-row'>
           <thead>
             <tr>
               <th>#</th>
@@ -60,21 +72,10 @@ function Entrie() {
              */}
           </thead>
           <tbody>
-             {purchase && <Purchasetable purchase={purchase} /> }
-            <tr>
-              <td colSpan="100%">
-                <img src="/img/icons/plus.png" alt="pridėti paslaugą" onClick={handleAddProduct} />
-                Pridėti produktą
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="100%">
-                <img src="/img/icons/plus.png" alt="pridėti paslaugą" onClick={handleAddService} />
-                Pridėti paslaugą
-              </td>
-            </tr>
+            {purchase && <Purchasetable purchase={purchase} />}
           </tbody>
         </table>
+        <OrderPart2 />
       </form >
 
       {/* šiti turi būti modaliniame arba šoniniame lange */}
@@ -88,7 +89,9 @@ function Entrie() {
           <PurchaseNew />
         </div>
       }
-    </div>
+
+
+    </>
   )
 }
 
