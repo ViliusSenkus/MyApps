@@ -23,6 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Non standart Laravel routes
 
+Route::group(['prefix'=> 'supplier'], function () {
+    Route::get('/search/{value}', [SupplierController::class,'find']);
+    Route::get('/last', [SupplierController::class,'last']);
+});
+
 Route::get('/brand/{id}/manufacturer', [BrandController::class, 'withManufacturer']);
 Route::get('/brand/{id}/product', [BrandController::class, 'withProduct']);
 Route::get('/brand/{id}/full', [BrandController::class, 'full']);
@@ -56,8 +61,6 @@ Route::apiResource('/purchase', PurchaseController::class);
 Route::apiResource('/service', ServiceController::class);
 Route::apiResource('/space', SpaceController::class);
 Route::apiResource('/supplier', SupplierController::class);
-
- 
 
 
 

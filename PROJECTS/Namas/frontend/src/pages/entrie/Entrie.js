@@ -10,6 +10,7 @@ import OrderPart1 from './components/orderData/OrderPart1';
 import OrderPart2 from './components/orderData/OrderPart2';
 import SupplierPart from './components/supplierData/SupplierPart';
 import Purchasetable from './components/PurchaseTable';
+import EntrieContext from './EntrieContext';
 
 
 function Entrie() {
@@ -18,6 +19,12 @@ function Entrie() {
   const [purchase, setPurchase] = useState([]);
   const [productForm, setProductForm] = useState(false);
   const [serviceForm, setServiceForm] = useState(false);
+  const [showHideSuppliers, setShowHideSuppliers] = useState(false);
+
+  const contextValues = {
+    showHideSuppliers,
+    setShowHideSuppliers
+  };
 
   const handleAddProduct = () => {
     setProductForm(true);
@@ -29,7 +36,7 @@ function Entrie() {
   }
 
   return (
-    <>
+    <EntrieContext.Provider value={contextValues}>
       <h4>Naujas pirkimas</h4>
       <form className='two-col-grid'>
         <OrderPart1 />
@@ -78,6 +85,10 @@ function Entrie() {
         <OrderPart2 />
       </form >
 
+      <div className='full-grid-row'>
+        {showHideSuppliers && <Supplier />}
+      </div>
+
       {/* šiti turi būti modaliniame arba šoniniame lange */}
       {productForm &&
         <div>
@@ -91,7 +102,7 @@ function Entrie() {
       }
 
 
-    </>
+</EntrieContext.Provider >
   )
 }
 

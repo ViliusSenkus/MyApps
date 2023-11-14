@@ -4,16 +4,18 @@ import MainContext from "../../../../functionall/MainContext";
 import Loader from '../../../../components/generalComponents/Loader';
 import { Link } from "react-router-dom";
 import SupplierForm from './SupplierForm';
+import EntrieContext from '../../EntrieContext';
 function Supplier() {
 
   const { loader, setLoader, newSupplier, setNewSupplier } = useContext(MainContext);
 
   const [items, setItems] = useState([]);
   const [showSupplierForm, setShowSupplierForm] = useState(false);
+  const { setShowHideSuppliers } = useContext(EntrieContext);
 
   useEffect(() => {
     setLoader(true);
-    axios.get('/supplier')
+    axios.get('/supplier/last')
       .then(resp => setItems(resp.data))
       .catch(error => console.log('klaida sukeliant tiekėjų sąrašą', error))
       .finally(() => {
@@ -29,6 +31,17 @@ function Supplier() {
     //Formoje atvaizduoja pasirinktą tiekėją 
     setShowSupplierForm(false);
     setNewSupplier(name);
+    setShowHideSuppliers(false);
+  }
+
+  const handleSearch = () => {
+    let value = document.getElementById('supplierSerchModal').value
+    axios.get('supplier/search/' + value)
+      .then(resp => setItems(resp.data))
+      .catch(error => console.log('klaida ie6kant tiekėjų', error))
+      .finally(() => {
+        setLoader(false)
+      });
   }
 
   return (
@@ -36,34 +49,36 @@ function Supplier() {
       {loader && <Loader />}
 
       <div className="modal">
-      {/* PAIEŠKOS LAUKELIS */}
-        <label>
-          <img className="controll" style={{width:"15px"}} src="/img/icons/search.png" alt='search' />
-        </label>
-        <input style={{border: "1px solid white"}} type='text' name='search' />
-      
+        {/* PAIEŠKOS LAUKELIS */}
+        <div>
+          <label className="search" >
+            <img className="controll" src="/img/icons/search.png" alt='search' onClick={() => handleSearch()} />
+          </label>
+          <input id="supplierSerchModal" type='text' name='search' />
+        </div>
 
-      {/* SĄRAŠAS (iki 5 vienetų + '+') */}
-        <ul>
+
+        {/* SĄRAŠAS (iki 5 vienetų + '+') */}
+        <ul id="suppliers_modal_ul">
           {items && items.map(item =>
-            <li key={item.id} onClick={() => addToForm(item.name)} 
-                style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width:"120px"}}>
-              {item.name}
+            <li key={item.id} onClick={() => addToForm(item.name)}>
+              <img src={item.logo} alt={item.name} />
               <br />
-              <img style={{maxWidth: "80px", maxHeight: "20px"}} src={item.logo} alt={item.name} />
+              {item.name}
             </li>
           )
           }
           <li>
-            Naujas
+
+            <img className="modal-add" src="/img/icons/plus.png" alt='add new supplier' onClick={showForm} />
             <br />
-            <img src="/img/icons/plus.png" alt='add new supplier' onClick={showForm} />
+            Naujas
           </li>
         </ul>
-      
 
-      {/* NAUJO PARDAVĖJO FORMA */}
-      {showSupplierForm && <SupplierForm />}
+
+        {/* NAUJO PARDAVĖJO FORMA */}
+        {showSupplierForm && <SupplierForm />}
       </div>
     </>
   )

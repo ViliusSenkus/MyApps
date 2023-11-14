@@ -23,19 +23,19 @@ function SupplierForm() {
   return(
     <>
     <form onSubmit={handleSubmit}>
-      <h4>Naujas tiekėjas</h4>
-        <div className="inputField">
+      <h4 >Sukurti naują tiekėją</h4>
+        <div className="inputField supplier-modal-form">
           <label>Name</label>
           <input type="text" name="name" />
         </div>
-        <div className="inputField">
+        <div className="inputField supplier-modal-form">
           <label>Link to supplier logo or photo</label>
           <input type="text" name="logo" />
           <label className="end-lable menu">
             <img src="/img/icons/add-file.png" alt="add file" />
           </label>
         </div>
-        <div className="inputField">
+        <div className="inputField supplier-modal-form">
           <label>Link to official page</label>
           <input type="link" name="link" />
         </div>

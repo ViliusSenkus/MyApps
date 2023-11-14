@@ -57,11 +57,11 @@ h4 {
 }
 
 h2 {
-  font-size: clamp(32px, 5cqw, 60px);
+  font-size: clamp(32px, 5vw, 60px);
 }
 
 h4 {
-  font-size: clamp(16px, 3cqw, 34px);
+  font-size: clamp(16px, 3vw, 34px);
 }
 
 /* HEADER */
@@ -275,4 +275,46 @@ a {
 /* FOOTER */
 footer {
   padding-top: 50px;
+}
+
+.modal{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal input{
+  font-size: 1.2rem;
+}
+.search img{
+  width: 20px;
+  padding: 0 5px;
+}
+#suppliers_modal_ul{
+  margin: 0 auto;
+  padding-top: 15px;
+  width: 75vw;
+}
+#suppliers_modal_ul il{
+  display: flex;
+  flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 120px;
+}
+#suppliers_modal_ul img{
+max-width: 100px;
+max-height: 20px;
+}
+.modal-add{
+  filter:invert(1);
+}
+.supplier-modal-form{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+.supplier-modal-form input{
+border-bottom: 1px solid var(--main-font-color);
+border-radius: 0;
 }
