@@ -35,9 +35,10 @@ function Supplier() {
     <>
       {loader && <Loader />}
 
+      <div className="modal">
       {/* PAIEŠKOS LAUKELIS */}
         <label>
-          <img className="controll" src="/img/icons/search.png" alt='search' />
+          <img className="controll" style={{width:"15px"}} src="/img/icons/search.png" alt='search' />
         </label>
         <input style={{border: "1px solid white"}} type='text' name='search' />
       
@@ -63,7 +64,7 @@ function Supplier() {
 
       {/* NAUJO PARDAVĖJO FORMA */}
       {showSupplierForm && <SupplierForm />}
-
+      </div>
     </>
   )
 }

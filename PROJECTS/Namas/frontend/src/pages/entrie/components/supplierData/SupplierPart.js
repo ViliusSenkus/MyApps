@@ -1,6 +1,7 @@
 import Supplier from './Supplier';
 import { useContext, useState } from 'react';
 import MainContext from '../../../../functionall/MainContext';
+import "../../../../styles/modal.css";
 
 function SupplierPart() {
 
