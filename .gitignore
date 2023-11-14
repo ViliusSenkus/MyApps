@@ -11,3 +11,6 @@ PROJECTS/Namas/frontend/node_modules/.cache/default-development/13.pack
 PROJECTS/Namas/frontend/node_modules/.cache/default-development/15.pack
 PROJECTS/Namas/frontend/node_modules/.cache/default-development/index.pack
 PROJECTS/Namas/frontend/node_modules/.cache/default-development/index.pack.old
+*/node_modules
+PROJECTS/CVPage/node_modules
+
