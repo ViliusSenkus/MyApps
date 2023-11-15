@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import MainContext from '../../functionall/MainContext';
 import { Outlet } from 'react-router-dom';
 import OrderDocuments from './components/orderData/OrderDocuments';
-import ProductNew from './components/ProductNew';
+import ProductNewModal from './components/productData/ProductNewModal';
 import PurchaseNew from './components/PurchaseNew';
 import OrderPart1 from './components/orderData/OrderPart1';
 import OrderPart2 from './components/orderData/OrderPart2';
@@ -90,11 +90,10 @@ function Entrie() {
       </div>
 
       {/* šiti turi būti modaliniame arba šoniniame lange */}
-      {productForm &&
-        <div>
-          <ProductNew />
-        </div>
-      }
+      <div className='full-grid-row'>
+        {productForm && <ProductNewModal />}
+      </div>
+      
       {serviceForm &&
         <div>
           <PurchaseNew />

@@ -1,10 +1,12 @@
 import axios from "../../../../functionall/defaultURL";
 import { useContext } from "react";
 import MainContext from "../../../../functionall/MainContext";
+import EntrieContext from "../../EntrieContext";
 
 function SupplierForm() {
 
-  const { setLoader } = useContext(MainContext)
+  const { setLoader, setNewSupplier } = useContext(MainContext);
+  const { setShowHideSuppliers } = useContext(EntrieContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoader(true);
@@ -17,7 +19,11 @@ function SupplierForm() {
       .catch(error => {
         console.log(error);
       })
-      .finally(() => { setLoader(false) });
+      .finally(() => { 
+        setNewSupplier(data.get('name'));  // !!!jeigu nesigavo sukurti geriau rodyti klaida.
+        setShowHideSuppliers(false);
+        setLoader(false);
+       });
   }
 
   return(
