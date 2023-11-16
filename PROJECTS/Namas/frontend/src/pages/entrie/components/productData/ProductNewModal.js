@@ -10,6 +10,9 @@ function ProductNewModal() {
 
   const { loader, setLoader } = useContext(MainContext);
   const [showManufacturerForm, setShowManufacturerForm] = useState(false);
+  const [showHideManufacturers, setShowHideManufacturers] = useState(false);
+  const [newManufacturer, setNewManufacturer] = useState(false);
+  const [showBrandForm, setShowBrandForm] = useState(false);
   const [items, setItems] = useState([]);
 
   // const handleSubmit = (e) => {
@@ -37,6 +40,26 @@ function ProductNewModal() {
       }
       )
   }, [])
+
+  const showForm = (table) => {
+    switch(table){
+      case "manufacturer" :
+        setShowManufacturerForm(true);
+        break;
+      case "brand" :
+        setShowBrandForm(true);
+        break;
+      default: 
+        return
+    }
+    console.log('dabar turi b8ti rodoma', table, 'forma');
+  }
+  const addToForm = (table, name) => {
+    setShowManufacturerForm(false);
+    setNewManufacturer(name);
+    setShowHideManufacturers(false);
+    console.log('reikia prideti ', table, ' reikšmę į laukęlį vėlesniam perdavimui i lentelnę tikroje formoje')
+  }
 
   const autoSearch = (table) => {
     // funkcija pasileidžia kiekvieną kartą įvedus/ištrynus simbolį įvedant-ištrinant greitai gali kilti klaida, kadangi praėjus 300ms, value gali būti === ""
@@ -91,7 +114,7 @@ function ProductNewModal() {
           }
           <li>
 
-            <img className="modal-add" src="/img/icons/plus.png" alt='add new manufacturer' onClick={showForm('manufacturer')} />
+            <img className="modal-add" src="/img/icons/plus.png" alt='add new manufacturer' onClick={()=>showForm('manufacturer')} />
             <br />
             Naujas
           </li>
