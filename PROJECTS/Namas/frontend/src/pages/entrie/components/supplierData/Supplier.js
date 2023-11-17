@@ -76,7 +76,7 @@ function Supplier() {
 
 
         {/* SĄRAŠAS (iki 5 vienetų + '+') */}
-        <ul id="suppliers_modal_ul">
+        <ul className="modal_ul">
           {items && items.map(item =>
             <li key={item.id} onClick={() => addToForm(item.name)}>
               <img src={item.logo} alt={item.name} />

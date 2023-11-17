@@ -1,10 +1,11 @@
 import axios from 'axios';
-import ManufacturerForm from './ManufacturerForm';
-
 import { useContext, useEffect, useState } from 'react';
 import MainContext from '../../../../functionall/MainContext';
-
 import Loader from '../../../../components/generalComponents/Loader';
+
+import ManufacturerModal from './manufacturer/ManufacturerModal';
+import BrandModal from './brand/BrandModal';
+
 
 function ProductNewModal() {
 
@@ -42,14 +43,14 @@ function ProductNewModal() {
   }, [])
 
   const showForm = (table) => {
-    switch(table){
-      case "manufacturer" :
+    switch (table) {
+      case "manufacturer":
         setShowManufacturerForm(true);
         break;
-      case "brand" :
+      case "brand":
         setShowBrandForm(true);
         break;
-      default: 
+      default:
         return
     }
     console.log('dabar turi b8ti rodoma', table, 'forma');
@@ -61,70 +62,14 @@ function ProductNewModal() {
     console.log('reikia prideti ', table, ' reikšmę į laukęlį vėlesniam perdavimui i lentelnę tikroje formoje')
   }
 
-  const autoSearch = (table) => {
-    // funkcija pasileidžia kiekvieną kartą įvedus/ištrynus simbolį įvedant-ištrinant greitai gali kilti klaida, kadangi praėjus 300ms, value gali būti === ""
-    let value = document.getElementById('supplierSearchModal').value.trim();
-    if (value === ""){
-      setTimeout(()=>{
-        setLoader(true);
-        axios.get('/'+table+'/last')
-        .then(resp => setItems(resp.data))
-        .catch(error => console.log('klaida sukeliant tiekėjų sąrašą', error))
-        .finally(setLoader(false))
-      }, 1000)
-    }else{
-      setTimeout (handleSearch, 300); 
-    }
-  }
-      
-  const handleSearch = (table) => {
-    setLoader(true);
-    let value = document.getElementById(table+'SearchModal').value.trim()
-    axios.get(table+'/search/'+ value)
-      .then(resp => setItems(resp.data))
-      .catch(error => console.log('klaida ie6kant tiekėjų', error))
-      .finally(() => {
-        setLoader(false);
-      });
-  }
+
+
+
   return (
-    <>
-      {loader && <Loader />}
-
-      <div className="modal">
-        {/* PAIEŠKOS LAUKELIS */}
-        <div>
-          <label className="search" >
-            <img className="controll" src="/img/icons/search.png" alt='search' onClick={() => handleSearch('manufacturer')} />
-          </label>
-          <input id="manufacturerSearchModal"
-                type='text' name='search' onChange={()=>{autoSearch('manufacturer')}} />
-        </div>
-
-
-        {/* SĄRAŠAS (iki 5 vienetų + '+') */}
-        <ul id="manufacturer_modal_ul">
-          {items && items.map(item =>
-            <li key={item.id} onClick={() => addToForm('manufacturer', item.name)}>
-              <img src={item.logo} alt={item.name} />
-              <br />
-              {item.name}
-            </li>
-          )
-          }
-          <li>
-
-            <img className="modal-add" src="/img/icons/plus.png" alt='add new manufacturer' onClick={()=>showForm('manufacturer')} />
-            <br />
-            Naujas
-          </li>
-        </ul>
-
-
-        {/* NAUJO PARDAVĖJO FORMA */}
-        {showManufacturerForm && <ManufacturerForm />}
-      </div>
-    </>
+    <div className='modal'>
+      <ManufacturerModal>asd</ManufacturerModal>
+      <BrandModal />
+    </div>
     // <>
     //   
     //   <form onSubmit={handleSubmit}>

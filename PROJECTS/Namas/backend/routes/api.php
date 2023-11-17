@@ -23,24 +23,33 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Non standart Laravel routes
 
-Route::group(['prefix'=> 'supplier'], function () {
-    Route::get('/search/{value}', [SupplierController::class,'find']);
-    Route::get('/last', [SupplierController::class,'last']);
+Route::group(['prefix' => 'supplier'], function () {
+    Route::get('/search/{value}', [SupplierController::class, 'find']);
+    Route::get('/last', [SupplierController::class, 'last']);
 });
 
-Route::get('/brand/{id}/manufacturer', [BrandController::class, 'withManufacturer']);
-Route::get('/brand/{id}/product', [BrandController::class, 'withProduct']);
-Route::get('/brand/{id}/full', [BrandController::class, 'full']);
+Route::group(['prefix' => 'manufacturer'], function () {
+    Route::get('/search/{value}', [ManufacturerController::class, 'find']);
+    Route::get('/last', [ManufacturerController::class, 'last']);
+    Route::get('/{id}/brand', [ManufacturerController::class, 'withBrand']);
+    Route::get('/{id}/full', [ManufacturerController::class, 'full']);
+});
+Route::group(['prefix' => 'brand'], function () {
+    Route::get('/search/{value}', [BrandController::class, 'find']);
+    Route::get('/last', [BrandController::class, 'last']);
+    Route::get('/brand/{id}/manufacturer', [BrandController::class, 'withManufacturer']);
+    Route::get('/brand/{id}/product', [BrandController::class, 'withProduct']);
+    Route::get('/brand/{id}/full', [BrandController::class, 'full']);
+});
 
-Route::get('/manufacturer/{id}/brand', [ManufacturerController::class, 'withBrand']);
-Route::get('/manufacturer/{id}/full', [ManufacturerController::class, 'full']);
 
-Route::get('/product/{id}/purchase', [ProductController::class,'withPurchase']);
-Route::get('product/{id}/brand', [ProductController::class,'withBrand']);
-Route::get('product/{id}/fullbrand', [ProductController::class,'withFullBrand']);
-Route::get('product/{id}/full', [ProductController::class,'full']);
 
-Route::get('purchase/{id}/full', [PurchaseController::class,'full']);
+Route::get('/product/{id}/purchase', [ProductController::class, 'withPurchase']);
+Route::get('product/{id}/brand', [ProductController::class, 'withBrand']);
+Route::get('product/{id}/fullbrand', [ProductController::class, 'withFullBrand']);
+Route::get('product/{id}/full', [ProductController::class, 'full']);
+
+Route::get('purchase/{id}/full', [PurchaseController::class, 'full']);
 
 Route::get('/scope/{id}/subScope', [ApplicationScopeController::class, 'withSubScope']);
 Route::get('/subscope/{id}/scope', [ApplicationSubScopeController::class, 'withScope']);

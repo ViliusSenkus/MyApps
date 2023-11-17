@@ -83,4 +83,20 @@ class BrandController extends Controller
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
+
+   
+   public function find(String $value)
+   {
+      try{
+         return Brand::where('name', 'like', '%'.$value.'%')->where('name','!=','Kitas')->take(4)->get()->merge(Brand::where('name','Kitas')->get());
+      } catch (\Exception $e) {  
+         return response('paieška nepasileido'. $e, 500);
+      }
+   }
+   
+   public function last(){
+      $list = Brand::where('name','!=','Kitas')->get()->sortByDesc('created_at')->take(4);
+      $other = Brand::where('name','Kitas')->get();
+      return $list->merge($other);
+   }
 }

@@ -13,10 +13,22 @@
 
 - kontroleriuose prie updatinimo per if ar switch padaryti skirtinga returno tekstą, priklausomai nuo to kas buvo pakeista. Vėliau galima bus sumesti viską į vieną funkciją visiems kontroleriams (pvz. middleware ar kitoje klasėje).
 - prie building phase, spaces, appScope prideti galimybe matyti bunch of foto ar schemų ar pan.
-- fronte, prie pirkimo pridėti visų vienu kartu įsigytų produktų / paslaugų sąrašą:
-      - pridėti langą kuriame matysis visi sukrauti pirkiniai
-      - pridėti mygtukus (pridėti produktą, pridėti paslaugą)
-      - naujo produkto/paslaugos įvedimo laukelyje teikti automatizuotus pasiųlymus filtruojant jau esamus produktus arba siūlyti sukurti naują.
+
+# variables, context variables, states, functions
+ 
+ sąrašas kintamųjų naudojamų išskleidžiamiems pasirinkimo langams: 
+
+ | NAME | DESCRIPTION |
+ | --- | --- | 
+ |showHide... setShowHide...| identifikatorius išskleidimo rodyklės krypčiai ir pasirinkimo lango rodymui|
+ |new... setNew... | išsaugojimas formoje |
+ |... set...| papildomas kintamųjų išsaugojimas modalinio lango laukeliuose prieš perkeliant masyvą/objektą į formą |
+ |addToForm() | prideda įrašą (per setNew...) į formą |
+ |spread...() | funkcija parodanti pasirinkimo langą|
+ |showNewForm setShowNewForm| Bool nurodantis ar rodyti naujo ... formą |
+ |showFrom() | funkcija saveikauja su setShow...Form, atidaro formą naujo ... sukūrimui.|
+ | items | iš DB gautas atsakymas pasirinkimo formavimui |
+
 
 # Notes on DB
 

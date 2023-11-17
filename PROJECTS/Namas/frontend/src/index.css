@@ -290,12 +290,12 @@ footer {
   width: 20px;
   padding: 0 5px;
 }
-#suppliers_modal_ul{
+.modal_ul{
   margin: 0 auto;
   padding-top: 15px;
   width: 75vw;
 }
-#suppliers_modal_ul il{
+.modal_ul il{
   display: flex;
   flex-direction: column;
    justify-content: center;

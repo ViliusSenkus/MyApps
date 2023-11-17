@@ -90,7 +90,8 @@ function Entrie() {
       </div>
 
       {/* šiti turi būti modaliniame arba šoniniame lange */}
-      <div className='full-grid-row'>
+      {/* <div className='full-grid-row'> */}
+      <div>
         {productForm && <ProductNewModal />}
       </div>
       
