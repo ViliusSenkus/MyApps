@@ -9,9 +9,16 @@ function SelectorMain(props) {
 
   const [value, setValue] = useState("");
   const [showList, setShowList] = useState(false);
+  const [items, setItems] = useState([]);
+  const [showNewForm, setShowNewForm] = useState(false);
 
   const contextValues = {
-    setShowList
+    setShowList,
+    items,
+    setItems,
+    setValue,
+    showNewForm,
+    setShowNewForm
   }
 
   const name = props.name.charAt(0).toUpperCase() + (props.name.toLowerCase()).slice(1);
@@ -30,7 +37,6 @@ function SelectorMain(props) {
           {name}
         </label>
         <div>
-          {value}
           <input id={id} type="text" className="entrie-form-input" name="supplier_id" value={value} onChange={() => { }} disabled />
           {showList ?
             <img src="/img/icons/arrow.png" alt="close selectables" onClick={spread} className='spread-box arrow-up' />
@@ -39,7 +45,9 @@ function SelectorMain(props) {
           }
         </div>
       </div>
-      {showList && <SelectorModal name={props.name} /> }
+
+      {showList && <SelectorModal name={props.name} id={props.id} /> }
+
     </SelectorContext.Provider>
   )
 }

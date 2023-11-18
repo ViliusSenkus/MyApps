@@ -38,7 +38,10 @@ function Entrie() {
 
   return (
     <EntrieContext.Provider value={contextValues}>
-      <SelectorMain name='tiekėjas' />
+      <SelectorMain name='supplier' />
+      <SelectorMain name='manufacturer' />
+      <SelectorMain name='brand' />
+      <SelectorMain name='space' />
       <h4>Naujas pirkimas</h4>
       <form className='two-col-grid'>
         <OrderPart1 />
