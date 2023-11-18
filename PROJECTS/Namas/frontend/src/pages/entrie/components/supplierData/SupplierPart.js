@@ -21,7 +21,7 @@ function SupplierPart() {
           Tiekėjas:
         </label>
         <div>
-          <input type="text" className="entrie-form-input" name="order_discount" value={newSupplier} onChange={() => { }} readOnly />
+          <input type="text" className="entrie-form-input" name="supplier_id" value={newSupplier} onChange={() => { }} readOnly />
           {showHideSuppliers ?
             <img src="/img/icons/arrow.png" alt="spread or close selectables" onClick={spreadSuppliers} className='spread-box arrow-up' />
             :

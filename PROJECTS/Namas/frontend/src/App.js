@@ -17,7 +17,6 @@ import Supplier from "./pages/dataPages/components/Supplier";
 import PurchaseList from "./pages/dataPages/components/PurchaseList";
 import ProductList from "./pages/dataPages/components/ProductList";
 
-
 //running useContext_hook
 
 function App() {

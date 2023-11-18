@@ -302,7 +302,7 @@ footer {
    align-items: center;
    width: 120px;
 }
-#suppliers_modal_ul img{
+.modal_ul img{
 max-width: 100px;
 max-height: 20px;
 }

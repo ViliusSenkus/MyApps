@@ -11,6 +11,7 @@ import OrderPart2 from './components/orderData/OrderPart2';
 import SupplierPart from './components/supplierData/SupplierPart';
 import Purchasetable from './components/PurchaseTable';
 import EntrieContext from './EntrieContext';
+import SelectorMain from '../../components/entries/SelectorMain.js';
 
 
 function Entrie() {
@@ -37,6 +38,7 @@ function Entrie() {
 
   return (
     <EntrieContext.Provider value={contextValues}>
+      <SelectorMain name='tiekėjas' />
       <h4>Naujas pirkimas</h4>
       <form className='two-col-grid'>
         <OrderPart1 />
