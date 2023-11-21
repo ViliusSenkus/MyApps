@@ -19,8 +19,8 @@ class ManufacturerController extends Controller
    public function store(Request $request)
    {
       try {
-         Manufacturer::create($request->all());
-         return response('Manufacturer ' . $request->name . ' created successfully', 201);
+         $new=Manufacturer::create($request->all());
+         return response($new->id, 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
@@ -95,5 +95,14 @@ class ManufacturerController extends Controller
       $list = Manufacturer::where('name','!=','Kitas')->get()->sortByDesc('created_at')->take(4);
       $other = Manufacturer::where('name','Kitas')->get();
       return $list->merge($other);
+   }
+
+   public function findOne(String $value)
+   {
+      try {
+         return Manufacturer::where('name', 'like', $value)->get();
+      } catch (\Exception $e) {
+         return response ('gamintojas nerastas '. $e, 500);
+      }
    }
 }

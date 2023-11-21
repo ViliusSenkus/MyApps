@@ -33,6 +33,7 @@ Route::group(['prefix' => 'manufacturer'], function () {
     Route::get('/last', [ManufacturerController::class, 'last']);
     Route::get('/{id}/brand', [ManufacturerController::class, 'withBrand']);
     Route::get('/{id}/full', [ManufacturerController::class, 'full']);
+    Route::get('/name/{name}', [ManufacturerController::class, 'findOne']);
 });
 Route::group(['prefix' => 'brand'], function () {
     Route::get('/search/{value}', [BrandController::class, 'find']);

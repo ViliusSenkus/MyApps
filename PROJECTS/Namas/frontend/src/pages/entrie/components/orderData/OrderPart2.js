@@ -12,6 +12,13 @@ function OrderPart2() {
 
   return (
     <>
+    <label className="entrie-form-label">Mokėjimo būdas:</label>
+        <select className="entrie-form-input" name="order_payment_method">
+          <option value="cash">Cash</option>
+          <option value="card">Card</option>
+          <option value="bank transfer">Bank transfer</option>
+          <option value="cash">mixed</option>
+        </select>
         <label className="entrie-form-label">Nuolaida procentais visam pirkimui:</label>
         <input type="number" className="entrie-form-input" name="order_discount" />
         <label className="entrie-form-label full-grid-row">

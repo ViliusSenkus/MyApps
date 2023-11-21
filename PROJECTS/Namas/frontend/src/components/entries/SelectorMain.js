@@ -7,10 +7,20 @@ import SelectorModal from './SelectorModal';
 
 function SelectorMain(props) {
 
-  const [value, setValue] = useState("");
-  const [showList, setShowList] = useState(false);
-  const [items, setItems] = useState([]);
-  const [showNewForm, setShowNewForm] = useState(false);
+  /*
+   Compenent represents "spreadable" input field value of which is inputed automatically through further selections.
+   As well all variables states is registered here.
+   */
+
+  const [value, setValue] = useState(""); // selected value
+  const [showList, setShowList] = useState(false); //modal window
+  const [items, setItems] = useState([]);  // info from DB recived throug get request.
+  const [showNewForm, setShowNewForm] = useState(false); // new Form 
+  const [id, setId] = useState(""); //id of selected or newly created item in DB
+
+  // product dependable variables
+  const [manufacturer, setManufacturer] = useState("");  //selected manufacturer Id
+  const [brand, setBrand] = useState("") ;              //selected Brand Id
 
   const contextValues = {
     setShowList,
@@ -18,11 +28,15 @@ function SelectorMain(props) {
     setItems,
     setValue,
     showNewForm,
-    setShowNewForm
+    setShowNewForm,
+
+    // product related data sharing:
+    manufacturer, setManufacturer, brand, setBrand,
+    setId
   }
 
   const name = props.name.charAt(0).toUpperCase() + (props.name.toLowerCase()).slice(1);
-  const id = props.name.toLowerCase() + "Input";
+  const valueId = props.name.toLowerCase() + "Input";
 
 
   const spread = () => {
@@ -37,7 +51,7 @@ function SelectorMain(props) {
           {name}
         </label>
         <div>
-          <input id={id} type="text" className="entrie-form-input" name="supplier_id" value={value} onChange={() => { }} disabled />
+          <input id={valueId} type="text" className="entrie-form-input" name="supplier_id" value={value} itemId={id} onChange={() => { }} disabled />
           {showList ?
             <img src="/img/icons/arrow.png" alt="close selectables" onClick={spread} className='spread-box arrow-up' />
             :
