@@ -16,24 +16,38 @@ function SelectorItems(props) {
 
   useEffect(() => {
     setLoader(true);
-    if (props.name === "supplier"){
+    axios.post('/find/'+props.name, {"SupplierId":SupplierId, "ManufacturerId":ManufacturerId, "BrandId":BrandId} )
+    .then(resp => setItems(resp.data))
+    .catch(error => console.log("klaida selector Items axiose su perduodamu objektu", error))
+    .finally(setLoader(false));
+
+    // visų paskutinių penkių pasirinktinų kitnamųjų(items) ieŠkome per orderius / logika nukeliama į backą.
+    if (props.name === "supplier") {
       console.log('cia reikia per orderius ieskoti paskutiniu 5 unique supplieriu');
     };
-    if (props.name === "manufacturer"){
-      console.log('patekome i manufactureri, o suplierio ID', SupplierId)
+    if (props.name === "manufacturer") {
+      SupplierId != "" ? (
+        console.log('patekome i manufactureri, o suplierio ID', SupplierId))
+        :
+        (console.log('patekome i manufactureri, o suplierio ID nežinoma'));
     };
-    if (props.name === "brand"){
-      console.log('patekome i brand, o gamintojo ID', ManufacturerId)
+    if (props.name === "brand") {
+      ManufacturerId != "" ? (
+        console.log('patekome i brand, o gamintojo ID', ManufacturerId))
+        :
+        (
+          console.log('patekome i brand, o gamintojo ID nežinomas')
+        )
+        //vėliau galima pridėti paiešką pagal supplier.
     };
 
-    // čia reikia if'o priklausomai nuo itemId vertės atitinkamuose laukeliuose ir koks name naudojamas
-    axios.get('/' + props.name + '/last')
-      .then(resp => setItems(resp.data))
-      .catch(error => console.log('klaida sukeliant ' + props.name + ' sąrašą', error))
-      .finally(() => {
-        setLoader(false)
-      }
-      )
+    // axios.get('/' + props.name + '/last')
+    //   .then(resp => setItems(resp.data))
+    //   .catch(error => console.log('klaida sukeliant ' + props.name + ' sąrašą', error))
+    //   .finally(() => {
+    //     setLoader(false)
+    //   }
+    //   )
   }, [])
 
   const setSelection = (name, id) => {

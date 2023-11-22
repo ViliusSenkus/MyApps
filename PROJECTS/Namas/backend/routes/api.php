@@ -8,6 +8,7 @@ use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SelectionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SpaceController;
 use App\Http\Controllers\SupplierController;
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Non standart Laravel routes
+Route::post('/find/{name}', [SelectionController::class, 'getLastItems']);
 
 Route::group(['prefix' => 'supplier'], function () {
     Route::get('/search/{value}', [SupplierController::class, 'find']);
