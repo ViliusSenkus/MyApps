@@ -16,6 +16,7 @@ return new class extends Migration
 
              $table->id();
              $table->date('purchasement_date')->comment('Date of initial payment');
+             $table->foreignId('supplier_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('Shop, e-shop, company, person, etc. from where the purchase was made, or intended to be made');
              $table->enum('payment_method', ['cash', 'card', 'bank transfer'])->comment('select one of possible methods (cash, card or bank transfer)');
              $table->integer('discount')->default(0)->comment('Discount in percentages given to whole order, if wasn\'t applied to separate items');
              //list of documents of order:

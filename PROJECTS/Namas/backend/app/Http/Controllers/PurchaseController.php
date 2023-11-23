@@ -61,7 +61,7 @@ class PurchaseController extends Controller
    public function full($id)
    {
       try {
-         return Purchase::find($id)->load('order')->load('supplier')->load('buildingPhase')->load('applicationSubScope')->load('space')->load('product')->load('service');
+         return Purchase::find($id)->load('order')->load('buildingPhase')->load('applicationSubScope')->load('space')->load('product')->load('service');
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }

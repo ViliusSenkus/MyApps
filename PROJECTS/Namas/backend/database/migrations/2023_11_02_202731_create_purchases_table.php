@@ -19,7 +19,6 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('order_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
-            $table->foreignId('supplier_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('Shop, e-shop, company, person, etc. from where the purchase was made, or intended to be made');
             $table->foreignId('building_phase_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('Phase for which the purchase was made, or intended to be made');
             $table->foreignId('application_sub_scope_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('Building construction element for which the purchase was made, or intended to be made');
             $table->foreignId('space_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null')->comment('One or more rooms for which the purchase was made, or intended to be made');

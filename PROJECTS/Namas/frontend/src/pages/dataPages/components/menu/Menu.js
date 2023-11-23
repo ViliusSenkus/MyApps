@@ -5,6 +5,15 @@ function Menu() {
     <nav className='menu'>
       <ul>
         <li>
+          <Link to="/data/scope">Konstrukcinis elementas</Link>
+        </li>
+        <li>
+          <Link to="/data/subscope">Konstrukcinio Elemento dalis</Link>
+        </li>
+        <li>
+          <Link to="/data/phase">Statybų fazės</Link>
+        </li>
+        <li>
           <Link to="/data/purchase">Įsigyjimai</Link>
         </li>
         <li>
@@ -22,12 +31,7 @@ function Menu() {
         <li>
           <Link to="/data/space">Patalpos</Link>
         </li>
-        <li>
-          <Link to="/data/phase">Statybų fazės</Link>
-        </li>
-        <li>
-          <Link to="/data/scope">Įsigyjimų pritaikymo vietos</Link>
-        </li>
+
         <li>
           <Link to="/data/manufacturer">Gamintojai</Link>
         </li>

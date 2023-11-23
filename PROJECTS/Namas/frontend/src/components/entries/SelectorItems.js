@@ -21,26 +21,6 @@ function SelectorItems(props) {
     .catch(error => console.log("klaida selector Items axiose su perduodamu objektu", error))
     .finally(setLoader(false));
 
-    // visų paskutinių penkių pasirinktinų kitnamųjų(items) ieŠkome per orderius / logika nukeliama į backą.
-    if (props.name === "supplier") {
-      console.log('cia reikia per orderius ieskoti paskutiniu 5 unique supplieriu');
-    };
-    if (props.name === "manufacturer") {
-      SupplierId != "" ? (
-        console.log('patekome i manufactureri, o suplierio ID', SupplierId))
-        :
-        (console.log('patekome i manufactureri, o suplierio ID nežinoma'));
-    };
-    if (props.name === "brand") {
-      ManufacturerId != "" ? (
-        console.log('patekome i brand, o gamintojo ID', ManufacturerId))
-        :
-        (
-          console.log('patekome i brand, o gamintojo ID nežinomas')
-        )
-        //vėliau galima pridėti paiešką pagal supplier.
-    };
-
     // axios.get('/' + props.name + '/last')
     //   .then(resp => setItems(resp.data))
     //   .catch(error => console.log('klaida sukeliant ' + props.name + ' sąrašą', error))

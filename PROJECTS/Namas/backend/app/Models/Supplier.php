@@ -16,8 +16,8 @@ class Supplier extends Model
 
     protected $fillable = ['name', 'logo', 'link'];
 
-    public function purchase() : HasMany
+    public function oerder() : HasMany
     {
-        return $this->hasMany(Purchase::class);
+        return $this->hasMany(Order::class);
     }
 }

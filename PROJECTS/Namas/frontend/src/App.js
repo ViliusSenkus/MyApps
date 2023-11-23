@@ -16,6 +16,9 @@ import Spaces from "./pages/dataPages/components/Spaces";
 import Supplier from "./pages/dataPages/components/Supplier";
 import PurchaseList from "./pages/dataPages/components/PurchaseList";
 import ProductList from "./pages/dataPages/components/ProductList";
+import Scope from "./pages/dataPages/components/Scope";
+import SubScope from "./pages/dataPages/components/SubScope";
+import Phase from "./pages/dataPages/components/Phase";
 
 //running useContext_hook
 
@@ -46,6 +49,9 @@ function App() {
             <Route path="/" element={<Statistic />} />
             <Route path="/entrie" element={<Entrie />} />
             <Route path="/data" element={<DataPages /> } >
+              <Route path="/data/scope" element={<Scope className="container" />} />
+              <Route path="/data/subscope" element={<SubScope className="container" />} />
+              <Route path="/data/phase" element={<Phase className="container" />} />
               <Route path="/data/space" element={<Spaces className="container" />} />
               <Route path="/data/supplier" element={<Supplier className="container" />} />
               <Route path="/data/purchase" element={<PurchaseList />} />

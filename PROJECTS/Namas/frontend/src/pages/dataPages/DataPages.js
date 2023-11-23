@@ -1,7 +1,17 @@
+import { useState } from 'react';
 import Menu from './components/menu/Menu';
 import { Outlet } from 'react-router-dom';
+import DataContext from './context/DataContext';
+import Messege from './components/Messege';
 
 function DataPages() {
+
+  const [messege, setMessege] = useState("");
+  const [showMessege, setShowMessege] = useState(false);
+
+  const contextValues = {
+    messege, setMessege, showMessege, setShowMessege
+  }
 
   return (
     <>
@@ -10,8 +20,11 @@ function DataPages() {
       </div>
 
       <div>
-        <Menu />
-        <Outlet />
+        <DataContext.Provider value={contextValues}>
+          <Menu />
+          {messege && <Messege />}
+          <Outlet />
+        </DataContext.Provider>
       </div>
     </>
   )

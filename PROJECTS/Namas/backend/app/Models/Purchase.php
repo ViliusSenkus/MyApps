@@ -20,10 +20,6 @@ class Purchase extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function supplier() : BelongsTo
-    {
-        return $this->belongsTo(Supplier::class);
-    }
     public function buildingPhase() : BelongsTo
     {
         return $this->belongsTo(BuildingPhase::class);
