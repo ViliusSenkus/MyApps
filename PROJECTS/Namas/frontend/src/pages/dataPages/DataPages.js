@@ -22,7 +22,7 @@ function DataPages() {
       <div>
         <DataContext.Provider value={contextValues}>
           <Menu />
-          {messege && <Messege />}
+          {showMessege && <Messege />}
           <Outlet />
         </DataContext.Provider>
       </div>

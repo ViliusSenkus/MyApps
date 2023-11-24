@@ -1,24 +1,27 @@
 import axios from '../../../functionall/defaultURL';
 import { useContext, useEffect, useState } from 'react';
 import MainContext from '../../../functionall/MainContext';
+import DataContext from '../context/DataContext';
 import Loader from '../../../components/generalComponents/Loader';
 
 function Spaces() {
 
   const { loader, setLoader } = useContext(MainContext);
+  const {setMessege, showMessege, setShowMessege} = useContext(DataContext);
 
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState([]);
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     setLoader(true);
     axios.get('/space')
       .then(resp => setItems(resp.data))
-      .catch(error => console.log('klaida sukeliant tiekėjų sąrašą', error))
+      .catch(error => setMessege('klaida sukeliant space sąrašą', error))
       .finally(() => {
-        setLoader(false)
+        setLoader(false);
       }
       )
-  }, [])
+  }, [refresh])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,17 +33,42 @@ function Spaces() {
 
     axios.post('/space', data)
       .then(resp => {
-        console.log(resp.data);
+       setMessege(resp.data);
       })
       .catch(error => {
-        console.log(error);
+       setMessege(error);
       })
-      .finally(() => { setLoader(false) });
+      .finally(() => { 
+        setRefresh(!refresh);
+        setLoader(false) });
   }
+
+  
+  const handleEdit = (id) => {
+    setMessege('bandymas redaguoti elementą');
+  }
+
+  const handleDelete = (id) => {
+    setLoader(true);
+    axios.delete(`/space/${id}`)
+      .then(resp => {
+        setMessege('ištrinta sėkmingai', resp.data);
+        setShowMessege(!showMessege);
+      })
+      .catch(error => {
+        setShowMessege('Klaida', error);
+        setShowMessege(true);
+      })
+      .finally(() => {
+        setRefresh(!refresh);
+        setLoader(false);
+      });
+  }
+
   return (
     <>
       {loader && <Loader />}
-      <div className="container">
+      <div className="container" >
       <table>
         <thead>
           <td>#</td>
@@ -50,13 +78,13 @@ function Spaces() {
         </thead>
         <tbody>
           {items && items.map(item =>
-            <tr>
+            <tr key={item.id} contenteditable="true">
               <td>{item.id}</td>
               <td>{item.name}</td>
               <td>{item.description}</td>
               <td>
-                <button className='edit-button'>Edit</button>
-                <button className='delete-button'>Delete</button>
+                <button className='edit-button' onClick={()=>handleEdit(item.id)}>Edit</button>
+                <button className='delete-button' onClick={() => handleDelete(item.id)}>Delete</button>
               </td>
             </tr>)
           }

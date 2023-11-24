@@ -3,8 +3,9 @@ import { useContext, useEffect, useState } from 'react';
 import MainContext from '../../../functionall/MainContext';
 import DataContext from '../context/DataContext';
 import Loader from '../../../components/generalComponents/Loader';
+import { Link } from 'react-router-dom';
 
-function Phase() {
+function Manufacturer() {
 
   const { loader, setLoader } = useContext(MainContext);
   const { setMessege, showMessege, setShowMessege } = useContext(DataContext);
@@ -14,9 +15,9 @@ function Phase() {
 
   useEffect(() => {
     setLoader(true);
-    axios.get('/phase')
+    axios.get('/manufacturer')
       .then(resp => setItems(resp.data))
-      .catch(error => setMessege('klaida sukeliant phase sąrašą', error))
+      .catch(error => setMessege('klaida sukeliant manufacturer sąrašą', error))
       .finally(() => {
         setLoader(false);
       }
@@ -31,18 +32,21 @@ function Phase() {
 
     const data = new FormData(e.target);
 
-    axios.post('/phase', data)
+    axios.post('/manufacturer', data)
       .then(resp => {
-        setMessege(resp.data);
+        setMessege('sukurta sėkmingai' + resp.data);
+        setShowMessege(true);
       })
       .catch(error => {
         setMessege(error);
+        setShowMessege(true);
       })
       .finally(() => {
         setRefresh(!refresh);
-        setLoader(false)
+        setLoader(false);
       });
   }
+
 
   const handleEdit = (id) => {
     setMessege('bandymas redaguoti elementą');
@@ -50,7 +54,7 @@ function Phase() {
 
   const handleDelete = (id) => {
     setLoader(true);
-    axios.delete(`/phase/${id}`)
+    axios.delete(`/manufacturer/${id}`)
       .then(resp => {
         setMessege('ištrinta sėkmingai', resp.data);
         setShowMessege(!showMessege);
@@ -73,7 +77,9 @@ function Phase() {
           <thead>
             <td>#</td>
             <td>Name</td>
+            <td>Logo</td>
             <td>Description</td>
+            <td>WebAddress</td>
             <td>Actions</td>
           </thead>
           <tbody>
@@ -81,7 +87,15 @@ function Phase() {
               <tr key={item.id} contenteditable="true">
                 <td>{item.id}</td>
                 <td>{item.name}</td>
+                <td>
+                  <img src={item.logo} alt={item.name} />
+                </td>
                 <td>{item.description}</td>
+                <td>
+                  <Link to={item.link}>
+                    Web puslpapis
+                  </Link>
+                </td>
                 <td>
                   <button className='edit-button' onClick={() => handleEdit(item.id)}>Edit</button>
                   <button className='delete-button' onClick={() => handleDelete(item.id)}>Delete</button>
@@ -97,6 +111,14 @@ function Phase() {
           <input type="text" name="name" />
         </div>
         <div className="inputField">
+          <label>Link to logo</label>
+          <input type="text" name="logo" />
+        </div>
+        <div className="inputField">
+          <label>Link to manufacturer web page</label>
+          <input type="text" name="link" />
+        </div>
+        <div className="inputField">
           <label>Description</label>
           <input type="text" name="description" />
         </div>
@@ -106,4 +128,4 @@ function Phase() {
   )
 }
 
-export default Phase;
+export default Manufacturer;

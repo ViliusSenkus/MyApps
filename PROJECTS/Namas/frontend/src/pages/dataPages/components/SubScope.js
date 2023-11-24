@@ -7,7 +7,7 @@ import Loader from '../../../components/generalComponents/Loader';
 function SubScope() {
 
   const { loader, setLoader } = useContext(MainContext);
-  const {setMessege} = useContext(DataContext);
+  const {setMessege, showMessege, setShowMessege} = useContext(DataContext);
 
   const [items, setItems] = useState([]);
   const [refresh, setRefresh] = useState(true);
@@ -53,9 +53,22 @@ function SubScope() {
   const handleEdit = (id) => {
     setMessege('bandymas redaguoti elementą');
   }
-  const handleDelete = (e) => {
-    e.preventDefault();
-    setMessege('bandymas ištrinti elementą');
+
+  const handleDelete = (id) => {
+    setLoader(true);
+    axios.delete(`/subscope/${id}`)
+      .then(resp => {
+        setMessege('ištrinta sėkmingai', resp.data);
+        setShowMessege(!showMessege);
+      })
+      .catch(error => {
+        setShowMessege('Klaida', error);
+        setShowMessege(true);
+      })
+      .finally(() => {
+        setRefresh(!refresh);
+        setLoader(false);
+      });
   }
 
   return (
@@ -79,7 +92,7 @@ function SubScope() {
               <td>{item.description}</td>
               <td>
                 <button className='edit-button' onClick={()=>handleEdit(item.id)}>Edit</button>
-                <button className='delete-button' onClick={handleDelete}>Delete</button>
+                <button className='delete-button' onClick={() => handleDelete(item.id)}>Delete</button>
               </td>
             </tr>)
           }

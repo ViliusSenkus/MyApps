@@ -12,7 +12,6 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
 
             $table->id();
-            $table->string('name')->comment('Generall naming of product, NOT related to brand or manufacturer. Ex.: cement, insulation wool, pipe, etc.');
             $table->text('description')->nullable()->comment('Generall information related to this product of this brand but independently from package or other similar specific factors');
             $table->foreignId('brand_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->string('package_type')->comment('ex: bucket, box, unpacked, etc.');

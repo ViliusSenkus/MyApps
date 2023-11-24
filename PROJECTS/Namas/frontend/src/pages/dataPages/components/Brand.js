@@ -3,8 +3,9 @@ import { useContext, useEffect, useState } from 'react';
 import MainContext from '../../../functionall/MainContext';
 import DataContext from '../context/DataContext';
 import Loader from '../../../components/generalComponents/Loader';
+import { Link } from 'react-router-dom';
 
-function Phase() {
+function Brand() {
 
   const { loader, setLoader } = useContext(MainContext);
   const { setMessege, showMessege, setShowMessege } = useContext(DataContext);
@@ -12,15 +13,21 @@ function Phase() {
   const [items, setItems] = useState([]);
   const [refresh, setRefresh] = useState(true);
 
+  const [manufacturers, setManufacturers] = useState([]);
+
   useEffect(() => {
     setLoader(true);
-    axios.get('/phase')
+    axios.get('/brand')
       .then(resp => setItems(resp.data))
-      .catch(error => setMessege('klaida sukeliant phase sąrašą', error))
+      .catch(error => setMessege('klaida sukeliant brand sąrašą', error))
       .finally(() => {
-        setLoader(false);
+        axios.get('/manufacturer')
+          .then(resp => setManufacturers(resp.data))
+          .catch(error => setManufacturers([]))
+          .finally(setLoader(false));
       }
       )
+
   }, [refresh])
 
   const handleSubmit = (e) => {
@@ -31,7 +38,7 @@ function Phase() {
 
     const data = new FormData(e.target);
 
-    axios.post('/phase', data)
+    axios.post('/brand', data)
       .then(resp => {
         setMessege(resp.data);
       })
@@ -44,13 +51,13 @@ function Phase() {
       });
   }
 
+
   const handleEdit = (id) => {
     setMessege('bandymas redaguoti elementą');
   }
-
   const handleDelete = (id) => {
     setLoader(true);
-    axios.delete(`/phase/${id}`)
+    axios.delete(`/brand/${id}`)
       .then(resp => {
         setMessege('ištrinta sėkmingai', resp.data);
         setShowMessege(!showMessege);
@@ -72,6 +79,7 @@ function Phase() {
         <table>
           <thead>
             <td>#</td>
+            <td>Manufacturer</td>
             <td>Name</td>
             <td>Description</td>
             <td>Actions</td>
@@ -80,8 +88,15 @@ function Phase() {
             {items && items.map(item =>
               <tr key={item.id} contenteditable="true">
                 <td>{item.id}</td>
-                <td>{item.name}</td>
+                <td>{item.manufacturer_id}</td>
                 <td>{item.description}</td>
+                <td>
+                  <img src={item.logo} alt={item.name} />
+                  <br />
+                  {item.logo}
+                </td>
+                <td>
+                  <Link to={item.link} >{item.link}</Link></td>
                 <td>
                   <button className='edit-button' onClick={() => handleEdit(item.id)}>Edit</button>
                   <button className='delete-button' onClick={() => handleDelete(item.id)}>Delete</button>
@@ -92,9 +107,24 @@ function Phase() {
         </table>
       </div>
       <form onSubmit={handleSubmit}>
+        <label>Manufacturer</label>
+        <select name="manufacturer_id">
+          {manufacturers && manufacturers.map(manufacturer =>
+            <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
+          )
+          }
+        </select>
         <div className="inputField">
-          <label>Name</label>
+          <label>Brand Name</label>
           <input type="text" name="name" />
+        </div>
+        <div className="inputField">
+          <label>Brand Logo</label>
+          <input type="text" name="logo" />
+        </div>
+        <div className="inputField">
+          <label>Brand official Web page</label>
+          <input type="text" name="link" />
         </div>
         <div className="inputField">
           <label>Description</label>
@@ -106,4 +136,4 @@ function Phase() {
   )
 }
 
-export default Phase;
+export default Brand;

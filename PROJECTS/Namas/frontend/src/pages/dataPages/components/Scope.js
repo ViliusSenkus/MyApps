@@ -7,7 +7,7 @@ import Loader from '../../../components/generalComponents/Loader';
 function Scope() {
 
   const { loader, setLoader } = useContext(MainContext);
-  const {setMessege} = useContext(DataContext);
+  const {setMessege, showMessege, setShowMessege} = useContext(DataContext);
 
   const [items, setItems] = useState([]);
   const [refresh, setRefresh] = useState(true);
@@ -47,9 +47,22 @@ function Scope() {
   const handleEdit = (id) => {
     setMessege('bandymas redaguoti elementą');
   }
-  const handleDelete = (e) => {
-    e.preventDefault();
-    setMessege('bandymas ištrinti elementą');
+
+  const handleDelete = (id) => {
+    setLoader(true);
+    axios.delete(`/scope/${id}`)
+      .then(resp => {
+        setMessege('ištrinta sėkmingai', resp.data);
+        setShowMessege(!showMessege);
+      })
+      .catch(error => {
+        setShowMessege('Klaida', error);
+        setShowMessege(true);
+      })
+      .finally(() => {
+        setRefresh(!refresh);
+        setLoader(false);
+      });
   }
 
   return (
@@ -71,7 +84,7 @@ function Scope() {
               <td>{item.description}</td>
               <td>
                 <button className='edit-button' onClick={()=>handleEdit(item.id)}>Edit</button>
-                <button className='delete-button' onClick={handleDelete}>Delete</button>
+                <button className='delete-button' onClick={() => handleDelete(item.id)}>Delete</button>
               </td>
             </tr>)
           }

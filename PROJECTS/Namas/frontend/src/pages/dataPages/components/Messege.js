@@ -3,7 +3,7 @@ import DataContext from "../context/DataContext";
 
 function Messege() {
 
-  const {messege, showMessege, setShowMessege } = useContext(DataContext);
+  const {messege, setShowMessege } = useContext(DataContext);
   
   const handleClose = () => setShowMessege(false);
 

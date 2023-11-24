@@ -23,7 +23,7 @@ class PurchaseController extends Controller
          Purchase::create($request->all());
          return response('Purchase for ' . $request->price_paid . ' EUR added successfully', 201);
       } catch (\Exception $e) {
-         return response('Server error - faux pas - ' . $e, 500);
+         return 'Server error - faux pas - ';
       }
    }
 

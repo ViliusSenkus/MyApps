@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('spaces', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique()->comment('name of room, or part of the yard, etc.');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes()->invisible();
         });

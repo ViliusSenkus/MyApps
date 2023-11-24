@@ -14,7 +14,16 @@ function Menu() {
           <Link to="/data/phase">Statybų fazės</Link>
         </li>
         <li>
-          <Link to="/data/purchase">Įsigyjimai</Link>
+          <Link to="/data/space">Patalpos/Erdvės</Link>
+        </li>
+        <li>
+          <Link to="/data/supplier">Tiekėjai</Link>
+        </li>
+        <li>
+          <Link to="/data/manufacturer">Gamintojai</Link>
+        </li>
+        <li>
+          <Link to="/data/brand">Produkto serija/brandas</Link>
         </li>
         <li>
           <Link to="/data/product">Produktai</Link>
@@ -26,15 +35,13 @@ function Menu() {
           <Link to="/data/order">Užsakymai</Link>
         </li>
         <li>
-          <Link to="/data/supplier">Tiekėjai</Link>
-        </li>
-        <li>
-          <Link to="/data/space">Patalpos</Link>
+          <Link to="/data/purchase">Įsigyjimai</Link>
         </li>
 
-        <li>
-          <Link to="/data/manufacturer">Gamintojai</Link>
-        </li>
+
+
+
+
       </ul>
     </nav>
   )
