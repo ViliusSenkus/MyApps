@@ -5,7 +5,7 @@ function Head() {
       <header>
          <img id="logo" src="/img/OIG.jpg" alt="logo" />
          <div>
-               <h2>User name </h2>
+               <h2>User name</h2>
                <h4>Object address, City</h4>
          </div>
          <nav className="menu">

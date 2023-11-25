@@ -5,23 +5,23 @@ import MainContext from "./functionall/MainContext";
 import MainLayout from "./layouts/MainLayout";
 
 // importing pages:
-import Statistic from "./pages/statistic/Statistic";
-import Entrie from "./pages/entrie/Entrie";
-import DataPages from "./pages/dataPages/DataPages";
-import E404 from "./pages/e404/E404";
+import Statistic from "./pages/Statistic";
+import Entrie from "./pages/Entrie";
+import DataPages from "./pages/DataPages";
+import E404 from "./pages/E404";
 
 //'data' page components needed for routing
-import Scope from "./pages/dataPages/components/Scope";
-import SubScope from "./pages/dataPages/components/SubScope";
-import Phase from "./pages/dataPages/components/Phase";
-import Spaces from "./pages/dataPages/components/Spaces";
-import Supplier from "./pages/dataPages/components/Supplier";
-import Purchase from "./pages/dataPages/components/Purchase";
-import Manufacturer from "./pages/dataPages/components/Manufacturer";
-import Brand from "./pages/dataPages/components/Brand";
-import Product from "./pages/dataPages/components/Product";
-import Service from "./pages/dataPages/components/Service";
-import Order from "./pages/dataPages/components/Order";
+import Scope from "./components/dataPage/Scope";
+import SubScope from "./components/dataPage/SubScope";
+import Phase from "./components/dataPage/Phase";
+import Spaces from "./components/dataPage/Spaces";
+import Supplier from "./components/dataPage/Supplier";
+import Purchase from "./components/dataPage/Purchase";
+import Manufacturer from "./components/dataPage/Manufacturer";
+import Brand from "./components/dataPage/Brand";
+import Product from "./components/dataPage/Product";
+import Service from "./components/dataPage/Service";
+import Order from "./components/dataPage/Order";
 
 
 //running useContext_hook
@@ -66,10 +66,6 @@ function App() {
               <Route path="/data/purchase" element={<Purchase className="container" />} />
               <Route path="/data/*" element={<E404 />} />
             </Route>
-            {/* 
-            <Route path="/new/" element={<PurchaseNew />} />
-            <Route path="/products/new" element={<ProductNew />} />
-            */}
             <Route path="*" element={<E404 />} />
           </Routes>
         </MainLayout>

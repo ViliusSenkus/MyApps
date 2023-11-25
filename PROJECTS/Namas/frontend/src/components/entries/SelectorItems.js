@@ -47,7 +47,9 @@ function SelectorItems(props) {
     <ul className="modal_ul">
       {items && items.map(item =>
         <li key={item.id} onClick={() => setSelection(item.name, item.id)}>
-          <img src={item.logo} alt={item.name} />
+          {item.logo && <img src={item.logo} alt={item.name} />}
+          {item.photo && <img src={item.photo} alt={item.name} />}
+          {item.picture && <img src={item.picture} alt={item.name} />}
           <br />
           {item.name}
         </li>

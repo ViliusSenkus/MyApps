@@ -127,7 +127,8 @@ form select {
   border-left: 0px;
   color: var(--main-font-color);
 }
-[type="date"]::-webkit-calendar-picker-indicator{
+
+[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
 
@@ -277,44 +278,69 @@ footer {
   padding-top: 50px;
 }
 
-.modal{
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.9);
+  margin: 0 auto;
+  /* 15% from the top and centered */
+  text-align: center;
+
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
 }
-.modal input{
+
+.modal input {
   font-size: 1.2rem;
 }
-.search img{
+
+.search img {
   width: 20px;
   padding: 0 5px;
 }
-.modal_ul{
+
+.modal_ul {
   margin: 0 auto;
   padding-top: 15px;
   width: 75vw;
 }
-.modal_ul il{
+
+.modal_ul il {
   display: flex;
   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   width: 120px;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
 }
-.modal_ul img{
-max-width: 100px;
-max-height: 20px;
+
+.modal_ul img {
+  max-width: 100px;
+  max-height: 20px;
 }
-.modal-add{
-  filter:invert(1);
+
+.modal-add {
+  filter: invert(1);
 }
-.supplier-modal-form{
-  display:grid;
+
+.supplier-modal-form {
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
 }
-.supplier-modal-form input{
-border-bottom: 1px solid var(--main-font-color);
-border-radius: 0;
+
+.supplier-modal-form input {
+  border-bottom: 1px solid var(--main-font-color);
+  border-radius: 0;
+}
+
+.clicable{
+  cursor: pointer;
 }
