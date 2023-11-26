@@ -75,33 +75,56 @@ class SelectionController extends Controller
       // } else {
       switch ($name) {
          case 'supplier':
-            $data = Order::select('supplier_id')->where('supplier_id', '!=', 'null')->distinct()->take(4)->get();
+            $data = Order::select('supplier_id')->whereNotNull('supplier_id')->distinct()->take(4)->get();
             $selection = [];
             foreach ($data as $object) {
-               array_push($selection, Supplier::find($object->supplier_id));
+               array_push($selection, Supplier::select('id', 'name', 'logo')->find($object->supplier_id));
             }
             return $selection;
+
          case 'manufacturer':
-            $data = Order::where('supplier_id', $request->SupplierId)->get();
-            $objects = [];
-            foreach ($data as $order) {
-               $element = Purchase::where("order_id", $order->id)->get();
-               if (sizeof($element) >= 1){
-               array_push($objects, $element[0]);
-               }
+            $orders = Order::select('id')->where('supplier_id', $request->SupplierId)->distinct()->pluck('id');
+            $products = Purchase::select('product_id')->whereIn('order_id', $orders)->whereNotNull('product_id')->distinct()->pluck('product_id');
+            $brands = Product::select('brand_id')->whereIn('id', $products)->distinct()->pluck('brand_id');
+            $manufacturers = [];
+            foreach ($brands as $brand) {
+               $objektas = new BrandController();
+               $gamintojas = $objektas->withManufacturer($brand);
+               array_push($manufacturers, $gamintojas->manufacturer);
             }
-            $products = [];
-            foreach ($objects as $product){
-               array_push($products, Product::where('id', $product->product_id));
-            }
-            $list = Manufacturer::where('name', '!=', 'Kitas')->get()->sortByDesc('created_at')->take(4);
-            $other = Manufacturer::where('name', 'Kitas')->get();
-            return $products;
-            return $list->merge($other);
+            return $manufacturers;
+         // case 'manufacturer':
+         //    // susirenkam užsakymų id pagal pasirinktos parduotuvės Id.  
+         //    $orders = Order::select('id')->where('supplier_id', $request->SupplierId)->distinct()->get();
+         //    //gražinamas objektas, ne masyvas [{"id":1},{"id":4},...] - užsakymų id.
+
+         //    // kuriam masyvą su produktų id, kurie atitinka užsakymų id purchase lentelėje.
+         //    $products = [];
+         //    foreach ($orders as $order) {
+         //       $element = Purchase::select('product_id')->where("order_id", $order->id)->whereNotNull('product_id')->distinct()->get();
+         //       //atkiras elementas kuriamas, kad returne negauti masyvo masyve.
+         //       array_push($products, $element[0]);
+         //    }
+         //    // gražinamas objektas [{"product_id": 7},{"product_id": 4},...}] - produktų id.
+
+         //    $brands = [];
+         //    foreach ($products as $product) {
+         //       $element = Product::select('brand_id')->where('id', $product->product_id)->distinct()->get();
+         //       if (!in_array($element[0], $brands)) {
+         //          array_push($brands, $element[0]);
+         //       }
+         //    }
+
+         //    $manufacturers = [];
+         //    foreach ($brands as $brand) {
+         //       $objektas = new BrandController();
+         //       $gamintojas = $objektas->withManufacturer($brand->brand_id);
+         //       array_push($manufacturers, $gamintojas->manufacturer);
+         //    }
+         //    return $manufacturers;
+
          case 'brand':
-            $list = Brand::where('name', '!=', 'Kitas')->get()->sortByDesc('created_at')->take(4);
-            $other = Brand::where('name', 'Kitas')->get();
-            return $list->merge($other);
+            return Manufacturer::withBrand($request->ManufacturerId);
          case 'product':
             $list = Product::where('name', '!=', 'Kitas')->get()->sortByDesc('created_at')->take(4);
             $other = Product::where('name', 'Kitas')->get();

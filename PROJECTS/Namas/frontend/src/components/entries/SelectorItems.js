@@ -11,10 +11,12 @@ function SelectorItems(props) {
   const { setLoader } = useContext(MainContext);
 
   const SupplierId = document.getElementById('supplierInput').getAttribute('itemId');
+// Manufacturer ir Brand reikšmes galima nuskaityti, tik jeigu atidarytas produkto laukas.
   const ManufacturerId = document.getElementById('manufacturerInput').getAttribute('itemId');
   const BrandId = document.getElementById('brandInput').getAttribute('itemId');
-
+  
   useEffect(() => {
+    console.log('supplierID = ' , SupplierId);
     setLoader(true);
     axios.post('/find/'+props.name, {"SupplierId":SupplierId, "ManufacturerId":ManufacturerId, "BrandId":BrandId} )
     .then(resp => setItems(resp.data))

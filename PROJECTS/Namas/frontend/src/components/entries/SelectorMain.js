@@ -51,7 +51,7 @@ function SelectorMain(props) {
           {name}
         </label>
         <div>
-          <input id={valueId} type="text" className="entrie-form-input" name="supplier_id" value={value} itemId={id} onChange={() => { }} disabled />
+          <input id={valueId} type="text" className="entrie-form-input" name="supplier_id" value={value} itemID={id} disabled />
           {showList ?
             <img src="/img/icons/arrow.png" alt="close selectables" onClick={spread} className='spread-box arrow-up' />
             :
