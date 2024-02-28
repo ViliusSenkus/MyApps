@@ -1,18 +1,16 @@
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
 # Myapps
-##  repositorium aim
 
-Repositorium is a collection of self training projects. Usually it's tutorial based or self iniciated project. No aim to create any final comercial product, just to train an gain experience in different methods, techniques and technologies.
+Here one can find collection of self training projects. Usually it's tutorial based or self iniciated projects without aim to create final comercial product.
 
-### Access granted to:
-- Me and anyone.
+##  Aim
+
+ Train an gain experience in different methods, techniques and technologies.
 
 ### List of projects within:
 - e-shop prototypes [Laravel, React]
 - web-apps to help in learning process [Laravel, React]
 - Node tutorial tasks
-- CV page
-- MIL project (personnell management app)
 - Purchasement tracking app
 - Testing folder for short-term not confident training
 
@@ -26,12 +24,6 @@ Repositorium is a collection of self training projects. Usually it's tutorial ba
 
 + [My works](public/index.html)
 
-### Ideas
-Here is a list of product to commit in this repositorium:
-1. Personal CV page.
-2. My hobby page.
-3. Some game apps
-
 ### NOTE!!!
 
-DB of laravel.parduotuve is also used among other apps (here -  laravel.internetinė-parduotuve and Projects.shop)
+DB of laravel.parduotuve is also used among other apps (here -  laravel.internetine-parduotuve and Projects.shop)
