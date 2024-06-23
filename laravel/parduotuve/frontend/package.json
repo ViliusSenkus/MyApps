@@ -16,7 +16,8 @@
     "react-script": "^2.0.5",
     "react-scripts": "^5.0.1",
     "resolve-url-loader": "^5.0.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "ws":">=8.17.1"
   },
   "scripts": {
     "start": "react-scripts start",
