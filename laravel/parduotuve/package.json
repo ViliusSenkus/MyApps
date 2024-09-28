@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "react-scripts": "^5.0.1",
-    "ws": "^8.17.1"
-  }
-}
