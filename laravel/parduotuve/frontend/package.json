@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^14.6.1",
     "axios": "^1.8.4",
     "cookie": "^1.0.2",
-    "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.0",
@@ -43,7 +42,7 @@
     ]
   },
   "resolutions": {
-    "postcss": "8.4.47",
+    "postcss": "8.5.3",
     "@babel/runtime": "^7.26.10",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^13.4.0",
