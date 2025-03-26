@@ -43,7 +43,11 @@
   },
   "resolutions": {
     "postcss": "8.4.47",
-    "@babel/runtime": "^7.26.10"
+    "@babel/runtime": "^7.26.10",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-class-properties": "^7.25.9",
