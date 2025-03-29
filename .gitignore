@@ -14,5 +14,6 @@ PROJECTS/Namas/frontend/node_modules/.cache/default-development/index.pack.old
 */node_modules
 PROJECTS/CVPage/node_modules
 /node_modules
-/node_modules/**
+**/node_modules/
+node_modules/
 
