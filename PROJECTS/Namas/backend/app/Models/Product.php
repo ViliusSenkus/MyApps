@@ -8,6 +8,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Product keeps the detailed information of a product including packaging options, colors, chemical constitution and other data.
+ * @package App\Models
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property int $brand_id
+ * @property string $package_type
+ * @property string $measurement_units
+ * @property float $ammount_in_unit
+ * @property string $measurement_units2
+ * @property float $ammount_in_unit2
+ * @property string|null $picture
+ **/
+
 class Product extends Model
 {
     use HasFactory;

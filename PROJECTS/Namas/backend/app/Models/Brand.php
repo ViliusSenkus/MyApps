@@ -8,6 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Brand keeps information about the brand or series of a product
+ * @package App\Models
+ * @property int $id
+ * @property string $name
+ * @property int $manufacturer_id
+ * @property string $description
+ * @property string $logo
+ * @property string $link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ */
+
 class Brand extends Model
 {
     use HasFactory;

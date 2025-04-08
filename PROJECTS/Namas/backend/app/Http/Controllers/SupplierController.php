@@ -16,7 +16,7 @@ class SupplierController extends Controller
    {
       try {
          Supplier::create($request->all());
-         return response('Suplier ' . $request->name . ' created successfully', 201);
+         return response('Supplier ' . $request->name . ' created successfully', 201);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
