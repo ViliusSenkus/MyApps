@@ -61,15 +61,38 @@ class BrandController extends Controller
    {
 
       try {
-         return Brand::find($id)->load('manufacturer');
+         // return Brand::find($id)->load('manufacturer'); 
+         /*
+         * Lazy Loading: Pirma užkrauna Brand, tada atskirai užkrauna manufacturer
+         * Generuoja SQL užklausas atskirai:
+         * 
+         * SELECT * FROM brands WHERE id = ?
+         * -- Tada, kai bandoma pasiekti manufacturer:
+         * SELECT * FROM manufacturers WHERE id = ?
+         * 
+         * Naudingas kai jau turime Brand objektą ir tik tada nusprendžiame, kad reikia manufacturer
+         * Mažiau efektyvus kai dirbame su kolekcijomis
+         */
+         return Brand::with('manufacturer')->find($id);
+         /*
+         * Eager Loading: Pirma užkrauna Brand ir manufacturer kartu
+         * Generuoja SQL užklausas kartu:
+         * 
+         * SELECT * FROM brands WHERE id = ?
+         * SELECT * FROM manufacturers WHERE id IN (?)
+         * 
+         * Naudingas kai dirbame su kolekcijomis
+         * Efektyvesnis kai reikia daug susijusių duomenų
+         */
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
    }
+
    public function withProduct($id)
    {
       try {
-         return Brand::with('product')->get()->find($id);
+         return Brand::with('products')->find($id);
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
@@ -78,7 +101,43 @@ class BrandController extends Controller
    public function full($id)
    {
       try {
-         return Brand::with('product')->get()->find($id)->load('manufacturer');
+         // return Brand::with('products')->get()->find($id)->load('manufacturer');
+         return Brand::with(['products', 'brand.manufacturer'])->find($id);
+      // EXAMPLE OF returning JSON
+      //    {
+      //       "id": 1,
+      //       "name": "Samsung",
+      //       "manufacturer_id": 5,
+      //       "created_at": "2025-04-10T10:00:00.000000Z",
+      //       "updated_at": "2025-04-10T10:00:00.000000Z",
+      //       "products": [
+      //           {
+      //               "id": 1,
+      //               "name": "Galaxy S21",
+      //               "brand_id": 1,
+      //               "price": 899.99,
+      //               "created_at": "2025-04-10T10:00:00.000000Z",
+      //               "updated_at": "2025-04-10T10:00:00.000000Z"
+      //           },
+      //           {
+      //               "id": 2,
+      //               "name": "Galaxy Tab S7",
+      //               "brand_id": 1,
+      //               "price": 649.99,
+      //               "created_at": "2025-04-10T10:00:00.000000Z",
+      //               "updated_at": "2025-04-10T10:00:00.000000Z"
+      //           }
+      //       ],
+      //       "brand": {
+      //           "manufacturer": {
+      //               "id": 5,
+      //               "name": "Samsung Electronics",
+      //               "country": "South Korea",
+      //               "created_at": "2025-04-10T10:00:00.000000Z",
+      //               "updated_at": "2025-04-10T10:00:00.000000Z"
+      //           }
+      //       }
+      //   }
       } catch (\Exception $e) {
          return response('Server error - faux pas - ' . $e, 500);
       }
