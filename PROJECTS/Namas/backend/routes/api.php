@@ -45,12 +45,25 @@ Route::group(['prefix' => 'brand'], function () {
     Route::get('/brand/{id}/full', [BrandController::class, 'full']);
 });
 
+Route::prefix('product')->group(function () {
+    // Base CRUD routes
+    Route::apiResource('/', ProductController::class);
 
-
-Route::get('/product/{id}/purchase', [ProductController::class, 'withPurchase']);
-Route::get('product/{id}/brand', [ProductController::class, 'withBrand']);
-Route::get('product/{id}/fullbrand', [ProductController::class, 'withFullBrand']);
-Route::get('product/{id}/full', [ProductController::class, 'full']);
+    // Basic relationships
+    Route::get('/{id}/purchase', [ProductController::class, 'withPurchase']);
+    Route::get('/{id}/brand', [ProductController::class, 'withBrand']);
+    Route::get('/{id}/spaces', [ProductController::class, 'withSpaces']);
+    Route::get('/{id}/suppliers', [ProductController::class, 'withSuppliers']);
+    Route::get('/{id}/order', [ProductController::class, 'withOrder']);
+    
+    // Combined relationships
+    Route::get('/{id}/brand-manufacturer', [ProductController::class, 'withBrandAndManufacturer']);
+    Route::get('/{id}/purchase-order', [ProductController::class, 'withPurchaseAndOrder']);
+    Route::get('/{id}/spaces-suppliers', [ProductController::class, 'withSuppliersAndSpaces']);
+    
+    // Full details
+    Route::get('/{id}/full-details', [ProductController::class, 'withFullDetails']);
+});
 
 Route::get('purchase/{id}/full', [PurchaseController::class, 'full']);
 
