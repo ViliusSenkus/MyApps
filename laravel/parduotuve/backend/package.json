@@ -6,7 +6,7 @@
     },
     "devDependencies": {
         "laravel-vite-plugin": "^1.2.0",
-        "vite": "^6.2.6"
+        "vite": "^6.3.5"
     },
     "packages": [],
     "notify-batch": "https://packagist.org/downloads/",
